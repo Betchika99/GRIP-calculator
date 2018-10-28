@@ -67,7 +67,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Фон</string>
            </property>
           </widget>
          </item>
@@ -88,7 +88,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Модель</string>
            </property>
           </widget>
          </item>
@@ -109,7 +109,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Размер кадра</string>
            </property>
           </widget>
          </item>
@@ -130,7 +130,7 @@
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Фокусное расстояние</string>
            </property>
           </widget>
          </item>
@@ -154,7 +154,7 @@
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Диафрагма</string>
            </property>
           </widget>
          </item>
@@ -178,7 +178,7 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Расстояние до модели (м)</string>
            </property>
           </widget>
          </item>
@@ -202,7 +202,7 @@
          <item>
           <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>TextLabel</string>
+            <string>Расстояние до фона (м)</string>
            </property>
           </widget>
          </item>
