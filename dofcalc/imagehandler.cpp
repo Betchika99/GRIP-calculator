@@ -13,7 +13,7 @@ bool ImageHandler::loadFromFile(QString filemask)
     images.resize(files.count());
     for (int i=0; i < files.count(); i++)
     {
-        bool res = images[i].load( QDir::toNativeSeparators(fi.path()+'/'+files[i]) );
+        bool res = images[i].load( QDir::toNativeSeparators(fi.path()+'/'+files[i]));
         if (!res)
         {
             clean();

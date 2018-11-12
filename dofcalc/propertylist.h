@@ -47,6 +47,8 @@ public:
     void setCrop(double value);
     double getCrop() { return crop; }
 
+
+
     void setDistanceModel(double value);
     double getDistanceModel() { return distanceModel; }
 

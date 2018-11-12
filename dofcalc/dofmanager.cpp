@@ -21,12 +21,12 @@ QStringList DOFManager::getBackgroundsList()
 
 int DOFManager::getBackgroundIndex()
 {
-    return 0;
+    return pl.getCurrentBackgroundIndex();
 }
 
 void DOFManager::setBackgroundIndex(int index)
 {
-
+    return pl.setCurrentBackgroundIndex(index);
 }
 
 QStringList DOFManager::getModelsList()
@@ -40,12 +40,12 @@ QStringList DOFManager::getModelsList()
 
 int DOFManager::getModelIndex()
 {
-    return 0;
+    return pl.getCurrentModelIndex();
 }
 
 void DOFManager::setModelIndex(int index)
 {
-
+    return pl.setCurrentModelIndex(index);
 }
 
 QStringList DOFManager::getSensorsList()
@@ -57,7 +57,7 @@ QStringList DOFManager::getSensorsList()
     return list;
 }
 
-int DOFManager::getSensorIndex()
+int DOFManager::getSensorIndex()    //in pl
 {
     return 0;
 }
@@ -69,50 +69,79 @@ void DOFManager::setSensorIndex(int index)
 
 double DOFManager::getCropFactor()
 {
-    return 1;
+    return pl.getCrop();
 }
 
 void DOFManager::setCropFactor(double crop)
 {
-
+    return pl.setCrop(crop);
 }
 
-double DOFManager::getDistance()
+double DOFManager::getBackgroundDistance()
 {
-    return pl.getDistanceModel();   //todo
+    return pl.getDistanceBackgroud();
+}
+void DOFManager::setBackgroundDistance(double value)
+{
+    return pl.setDistanceBackgroud(value);
 }
 
-void DOFManager::setDistance(double value)
+
+double DOFManager::getModelDistance()
 {
-    pl.setDistanceModel(value);
+    return pl.getDistanceModel();
+}
+void DOFManager::setModelDistance(double value)
+{
+    return pl.setDistanceModel(value);
 }
 
 double DOFManager::getFocalLength()
 {
-    return 10;
+    return pl.getFocalLenght();
 }
 
 void DOFManager::setFocalLength(double value)
 {
-
+    return pl.setFocalLenght(value);
 }
 
-QStringList DOFManager::getAperturesList()
+//QStringList DOFManager::getAperturesList()
+//{
+//    QStringList list;
+//    list.append("F/1.0");
+//    list.append("F/1.4");
+//    list.append("F/1.6");
+//    return list;
+//}
+
+double DOFManager::getAperture()
 {
-    QStringList list;
-    list.append("F/1.0");
-    list.append("F/1.4");
-    list.append("F/1.6");
-    return list;
+    return pl.getDiaphragm();
 }
 
-int DOFManager::getApertureIndex()
+void DOFManager::setAperture(double value)
 {
-    return 0;
+    return pl.setDiaphragm(value);
 }
 
-void DOFManager::setApertureIndex(int index)
+double DOFManager::getGRIP()
 {
+    return ml.FindGRIP(&pl);
+}
 
+double DOFManager::getHyperFocal()
+{
+    return ml.FindHyperFocal(&pl);
+}
+
+double DOFManager::getNearestPointOfSharpness()
+{
+    return ml.FindNearestPointOfSharpness(&pl);
+}
+
+double DOFManager::getFarestPointOfSharpness()
+{
+    return ml.FindFarestPointOfSharpness(&pl);
 }
 
