@@ -9,8 +9,8 @@ PropertyList::PropertyList()
     QFileInfo fi(QApplication::applicationFilePath());
     settingsFile = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/" + fi.baseName() + ".settings");
     imagesPath =  QDir::toNativeSeparators(QApplication::applicationDirPath() + "/images/");
-    models = scanPath(imagesPath, "*.model.*.png");
-    backgrounds = scanPath(imagesPath, "*.background.png");
+    models = scanPath(imagesPath, "*.model.*.png");     //load list of models
+    backgrounds = scanPath(imagesPath, "*.background.png");     //load list of backgrounds
     if (!loadFromFile(settingsFile)) setDefault();
 }
 

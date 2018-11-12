@@ -4,12 +4,18 @@
 #include "propertylist.h"
 #include "imagehandler.h"
 
+<<<<<<< HEAD
 template<class T>
+=======
+>>>>>>> Updated dofManager part
 class MathLibrary {
 public:
     MathLibrary();
     ~MathLibrary();
+<<<<<<< HEAD
     bool CheckerNull(const T &object);
+=======
+>>>>>>> Updated dofManager part
     double FindCrop(PropertyList *values);
     double FindHyperFocal(PropertyList *values);
     double FindNearestPointOfSharpness(PropertyList *values);
