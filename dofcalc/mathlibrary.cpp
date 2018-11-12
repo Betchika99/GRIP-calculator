@@ -1,24 +1,18 @@
 #include "mathlibrary.h"
-<<<<<<< HEAD
-<<<<<<< HEAD
 const int ERROR = -1;
 
-template<class T>
-MathLibrary<T>::MathLibrary() {}
+MathLibrary::MathLibrary() {}
 
-template<class T>
-MathLibrary<T>::~MathLibrary() {}
+MathLibrary::~MathLibrary() {}
 
-template<class T>
-bool MathLibrary<T>::CheckerNull(const T &object) {
+bool MathLibrary::CheckerNull(const PropertyList *object) {
     if (object == nullptr)
             return false;
     return true;
 }
 
-template<class T>
-double MathLibrary<T>::FindCrop(PropertyList *values) {
-    if (this->CheckerNull()) {
+double MathLibrary::FindCrop(PropertyList *values) {
+    if (this->CheckerNull(values)) {
         double crop = values->getCrop();
         double c = 0.03/crop;
         return c;
@@ -26,9 +20,8 @@ double MathLibrary<T>::FindCrop(PropertyList *values) {
     return ERROR;
 }
 
-template<class T>
-double MathLibrary<T>::FindHyperFocal(PropertyList *values) {
-    if (this->CheckerNull()) {
+double MathLibrary::FindHyperFocal(PropertyList *values) {
+    if (this->CheckerNull(values)) {
         double f = values->getFocalLenght();
         double c = this->FindCrop(values);
         double d = values->getDiaphragm();
@@ -38,9 +31,8 @@ double MathLibrary<T>::FindHyperFocal(PropertyList *values) {
     return ERROR;
 }
 
-template<class T>
-double MathLibrary<T>::FindNearestPointOfSharpness(PropertyList *values) {
-    if (this->CheckerNull()) {
+double MathLibrary::FindNearestPointOfSharpness(PropertyList *values) {
+    if (this->CheckerNull(values)) {
         double s0 = values->getDistanceModel();
         double f = values->getFocalLenght();
         double d = values->getDiaphragm();
@@ -51,9 +43,8 @@ double MathLibrary<T>::FindNearestPointOfSharpness(PropertyList *values) {
     return ERROR;
 }
 
-template<class T>
-double MathLibrary<T>::FindFarestPointOfSharpness(PropertyList *values) {
-    if (this->CheckerNull()) {
+double MathLibrary::FindFarestPointOfSharpness(PropertyList *values) {
+    if (this->CheckerNull(values)) {
         double s0 = values->getDistanceModel();
         double f = values->getFocalLenght();
         double d = values->getDiaphragm();
@@ -64,9 +55,8 @@ double MathLibrary<T>::FindFarestPointOfSharpness(PropertyList *values) {
     return ERROR;
 }
 
-template<class T>
-double MathLibrary<T>::FindGRIP(PropertyList *values) {
-    if (this->CheckerNull()) {
+double MathLibrary::FindGRIP(PropertyList *values) {
+    if (this->CheckerNull(values)) {
         double dF = this->FindFarestPointOfSharpness(values);
         double dN = this->FindNearestPointOfSharpness(values);
         return (dF - dN);
@@ -74,60 +64,6 @@ double MathLibrary<T>::FindGRIP(PropertyList *values) {
     return ERROR;
 }
 
-template<class T>
-void MathLibrary<T>::Scale(PropertyList *values, ImageHandler* image) {}
-
-template<class T>
-void MathLibrary<T>::Blur(PropertyList *values, ImageHandler* image) {}
-=======
-=======
->>>>>>> Updated Manager part
-
-MathLibrary::MathLibrary() {}
-
-MathLibrary::~MathLibrary() {}
-
-double MathLibrary::FindCrop(PropertyList *values) {
-    double crop = values->getCrop();
-    double c = 0.03/crop;
-    return c;
-}
-
-double MathLibrary::FindHyperFocal(PropertyList *values) {
-    double f = values->getFocalLenght();
-    double c = this->FindCrop(values);
-    double d = values->getDiaphragm();
-    double h = f*f/(c*d);
-    return h;
-}
-
-double MathLibrary::FindNearestPointOfSharpness(PropertyList *values) {
-    double s0 = values->getDistanceModel();
-    double f = values->getFocalLenght();
-    double d = values->getDiaphragm();
-    double c = this->FindCrop(values);
-    double dN = (s0 * f * f)/(f * f + (f/d * c) * (s0 - f));
-    return dN;
-}
-
-double MathLibrary::FindFarestPointOfSharpness(PropertyList *values) {
-    double s0 = values->getDistanceModel();
-    double f = values->getFocalLenght();
-    double d = values->getDiaphragm();
-    double c = this->FindCrop(values);
-    double dF = (s0 * f * f)/(f * f - (f/d * c) * (s0 - f));
-    return dF;
-}
-
-double MathLibrary::FindGRIP(PropertyList *values) {
-    double dF = this->FindFarestPointOfSharpness(values);
-    double dN = this->FindNearestPointOfSharpness(values);
-    return -(dF - dN);
-}
-
 void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {}
+
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {}
-<<<<<<< HEAD
->>>>>>> Updated dofManager part
-=======
->>>>>>> Updated Manager part
