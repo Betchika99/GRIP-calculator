@@ -3,13 +3,11 @@
 
 #include <QStringList>
 #include "propertylist.h"
-//#include "mathlib.h"  //as an object
+#include "mathlibrary.h"
 
 class DOFManager
 {
 
-private:
-    PropertyList pl;
 public:
     DOFManager();
     ~DOFManager();
@@ -26,18 +24,32 @@ public:
     QStringList getSensorsList();
     int  getSensorIndex();
     void setSensorIndex(int index);
+
     double getCropFactor();
     void setCropFactor(double crop);
 
-    double getDistance();
-    void setDistance(double value);
+    double getBackgroundDistance();
+    void setBackgroundDistance(double value);
+
+    double getModelDistance();
+    void setModelDistance(double value);
 
     double getFocalLength();
     void setFocalLength(double value);
 
-    QStringList getAperturesList();
-    int  getApertureIndex();
-    void setApertureIndex(int index);
+    double getAperture();
+    void setAperture(double Value);
+
+
+    double getGRIP();
+    double getHyperFocal();
+    double getNearestPointOfSharpness();
+    double getFarestPointOfSharpness();
+
+
+private:
+    PropertyList pl;
+    MathLibrary ml;
 
 };
 
