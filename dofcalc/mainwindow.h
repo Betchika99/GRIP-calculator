@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -28,7 +27,7 @@ private slots:
     void on_spin_crop_valueChanged(double arg1);
 
 
-    void on_slider_distance_sliderMoved(int position);   
+    void on_slider_distance_sliderMoved(int position);
 
     void on_spin_distance_valueChanged(double arg1);
 
@@ -93,7 +92,7 @@ private slots:
     void on_spin_crop_valueChanged(double arg1);
 
 
-    void on_slider_distance_sliderMoved(int position);   
+    void on_slider_distance_sliderMoved(int position);
 
     void on_spin_distance_valueChanged(double arg1);
 
@@ -128,4 +127,3 @@ private:
 };
 
 #endif // MAINWINDOW_H
->>>>>>> Updated Manager part

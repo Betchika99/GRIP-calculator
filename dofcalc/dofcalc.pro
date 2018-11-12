@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #-------------------------------------------------
 #
 # Project created by QtCreator 2018-10-22T06:26:54
@@ -96,4 +95,3 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
->>>>>>> Updated dofManager part

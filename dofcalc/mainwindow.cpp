@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDir>
@@ -313,5 +312,3 @@ void MainWindow::updateImage()  //todo
     ui->table_dof->setItem(0,2, new QTableWidgetItem(QString::number(dof->getFarestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,3, new QTableWidgetItem(QString::number(dof->getHyperFocal(), 'f', 2)));
 }
-
->>>>>>> Updated Manager part
