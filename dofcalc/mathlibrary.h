@@ -4,12 +4,11 @@
 #include "propertylist.h"
 #include "imagehandler.h"
 
-template<class T>
 class MathLibrary {
 public:
     MathLibrary();
     ~MathLibrary();
-    bool CheckerNull(const T &object);
+    bool CheckerNull(const PropertyList *object);
     double FindCrop(PropertyList *values);
     double FindHyperFocal(PropertyList *values);
     double FindNearestPointOfSharpness(PropertyList *values);
