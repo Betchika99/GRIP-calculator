@@ -27,17 +27,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    dofmanager.cpp \
-    propertylist.cpp \
-    imagehandler.cpp \
-    mathlibrary.cpp
+        dofmanager.cpp \
+        propertylist.cpp \
+        imagehandler.cpp \
+        mathlibrary.cpp
 
 HEADERS += \
         mainwindow.h \
-    dofmanager.h \
-    propertylist.h \
-    imagehandler.h \
-    mathlibrary.h
+        dofmanager.h \
+        propertylist.h \
+        imagehandler.h \
+        mathlibrary.h
 
 FORMS += \
         mainwindow.ui
