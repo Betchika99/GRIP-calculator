@@ -1,5 +1,6 @@
 #include "mathlibrary.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 const int ERROR = -1;
 
 template<class T>
@@ -79,6 +80,8 @@ void MathLibrary<T>::Scale(PropertyList *values, ImageHandler* image) {}
 template<class T>
 void MathLibrary<T>::Blur(PropertyList *values, ImageHandler* image) {}
 =======
+=======
+>>>>>>> Updated Manager part
 
 MathLibrary::MathLibrary() {}
 
@@ -124,4 +127,7 @@ double MathLibrary::FindGRIP(PropertyList *values) {
 
 void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {}
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {}
+<<<<<<< HEAD
 >>>>>>> Updated dofManager part
+=======
+>>>>>>> Updated Manager part
