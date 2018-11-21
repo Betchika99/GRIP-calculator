@@ -43,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->image->installEventFilter(this);
 
     PropertyList pl;    //todo
-    ImageHandler ih;    //todo
-    ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
+    //ImageHandler ih;    //todo
+    //ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
 }
 
 MainWindow::~MainWindow()
