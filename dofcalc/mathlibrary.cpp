@@ -66,4 +66,24 @@ double MathLibrary::FindGRIP(PropertyList *values) {
 
 void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {}
 
-void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {}
+void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
+    if (this->CheckerNull(image)) {
+        QImage img = image->getLayer(0);
+        QPixmap pm;
+      //  pm.fromImage(img);
+        pm.convertFromImage(img);
+
+        qreal blurFactor = 30; // add blur factor expression to calculate
+
+        QT_BEGIN_NAMESPACE
+          extern Q_WIDGETS_EXPORT void qt_blurImage( QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0 );
+        QT_END_NAMESPACE
+        pm.fill( Qt::transparent );
+        {
+            QPainter painter( &pm );
+            qt_blurImage( &painter, img, blurFactor, true, false );
+        }
+ //       img = pm.toImage();
+ //       image->images[0] = img;
+    }
+}
