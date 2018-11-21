@@ -65,7 +65,7 @@ public:
     void setCurrentModelIndex(int value);
     int getCurrentModelIndex() { return currentModelIndex; }
 
-    QStringList getBackgrounds() { return backgrounds; }
+    QStringList getBackgrounds();
     void setCurrentBackgroundIndex(int value);
     int getCurrentBackgroundIndex() { return currentBackgroundIndex; }
 

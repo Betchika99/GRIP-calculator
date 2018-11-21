@@ -161,10 +161,27 @@ void MainWindow::updateImage()  //todo
     default:
         break;
     }
-    QPixmap model(modelPath);
 
-    QString backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
+
+    int backgroundIndex = dof->getBackgroundIndex();
+    QString backgroundPath;
+    switch (backgroundIndex) {
+    case 0:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background1.png");
+        break;
+    case 1:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
+        break;
+    case 2:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background3.png");
+        break;
+    default:
+        break;
+    }
+
+    QPixmap model(modelPath);
     QPixmap background(backgroundPath);
+
 
     QPainter img;
     img.begin(&background);
