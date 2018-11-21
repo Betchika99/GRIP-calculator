@@ -118,6 +118,14 @@ void PropertyList::setOrientation(Orientation value)
     orientation = value;
 }
 
+QStringList PropertyList::getModels()
+{
+    models.append("Model 1");
+    models.append("Model 2");
+    models.append("Model 3");
+    return models;
+}
+
 void PropertyList::setCurrentModelIndex(int value)
 {
     if (models.count() == 0) currentModelIndex = -1;

@@ -61,7 +61,7 @@ public:
     void setOrientation(Orientation value);
     Orientation getOrientation() { return orientation; }
 
-    QStringList getModels() { return models; }
+    QStringList getModels();
     void setCurrentModelIndex(int value);
     int getCurrentModelIndex() { return currentModelIndex; }
 
