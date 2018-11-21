@@ -5,4 +5,9 @@ build-GRIPCalculator-Desktop_Qt_5_8_0_clang_64bit-Debug/
 build-dofcalc-Desktop_Qt_5_11_2_clang_64bit-Debug/
 dofcalc/test
 dofcalc/debug
+
+GRIPServer/GRIPServer.pro
+GRIPServer/GRIPServer.pro.user
+
 build-dofcalc-Desktop_Qt_5_11_2_MinGW_32bit-Debug
+

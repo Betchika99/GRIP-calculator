@@ -1,14 +1,18 @@
 #ifndef MATHLIBRARY_H
 #define MATHLIBRARY_H
 
+#include "ui_mainwindow.h"
 #include "propertylist.h"
 #include "imagehandler.h"
+
+#include <QPainter>
+#include <QPixmap>
 
 class MathLibrary {
 public:
     MathLibrary();
     ~MathLibrary();
-    bool CheckerNull(const PropertyList *object);
+    template<class T> bool CheckerNull(const T *object);
     double FindCrop(PropertyList *values);
     double FindHyperFocal(PropertyList *values);
     double FindNearestPointOfSharpness(PropertyList *values);
