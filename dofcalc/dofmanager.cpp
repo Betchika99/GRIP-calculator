@@ -162,3 +162,8 @@ double DOFManager::getFarestPointOfSharpness()
     return ml.FindFarestPointOfSharpness(&pl);
 }
 
+void DOFManager::Blur()
+{
+    ml.Blur(&pl, &ih);
+}
+

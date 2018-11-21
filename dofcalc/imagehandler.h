@@ -11,17 +11,16 @@ using std::pair;
 
 class ImageHandler
 {
-
 public:
     ImageHandler();
     //bool loadFromFile(QString filemask);
     //void clean() { images.clear(); }
-    //int layersCount() { return images.count(); }
-    QImage getImage(size_t index) { return images[index].first; } //математика работает с ним же
-    void setImage(QImage img, size_t index) { images[index].second = img; }
+    int imagesCount() { return images.size(); }
+    QImage getImageOrigin(size_t index) { return images[index].first; } //математика работает с ним же
+    void setImageResult(QImage img, size_t index) { images[index].second = img; }
+     QImage getImageResult(size_t index) { return images[index].second; }
 
 private:
-
     vector< pair<QImage,QImage> > images;
 
 //    class Con //подкласс
