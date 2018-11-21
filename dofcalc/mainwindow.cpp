@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDir>
+#include <QPainter>
+#include <QPixmap>
 #include "propertylist.h"   //todo
 #include "imagehandler.h"   //todo
 
@@ -144,11 +146,33 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)   //todo
 
 void MainWindow::updateImage()  //todo
 {
-    QString sample = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/test.png");
-    QPixmap pm(sample);
+    int modelIndex = dof->getModelIndex();
+    QString modelPath;
+    switch (modelIndex) {
+    case 0:
+        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model1.png");
+        break;
+    case 1:
+        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model2.png");
+        break;
+    case 2:
+        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model3.png");
+        break;
+    default:
+        break;
+    }
+    QPixmap model(modelPath);
 
-    ui->image->setPixmap(pm.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    //happens something strange with format!!!
+    QString backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
+    QPixmap background(backgroundPath);
+
+    QPainter img;
+    img.begin(&background);
+    img.drawPixmap(background.width()/2,10,model.scaled(background.width()/2,background.height()-50));
+    img.end();
+    ui->image->setPixmap(background.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    //incorrect numbers!!!
     ui->table_dof->setItem(0,0, new QTableWidgetItem(QString::number(dof->getGRIP(), 'f', 2)));
     ui->table_dof->setItem(0,1, new QTableWidgetItem(QString::number(dof->getNearestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,2, new QTableWidgetItem(QString::number(dof->getFarestPointOfSharpness(), 'f', 2)));

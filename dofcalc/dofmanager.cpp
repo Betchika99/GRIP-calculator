@@ -14,8 +14,8 @@ QStringList DOFManager::getBackgroundsList()
 {
     QStringList list;
     list.append("Background 1");
-    list.append("Background 2");
-    list.append("Background 3");
+//    list.append("Background 2");
+//    list.append("Background 3");
     return list;
 }
 
@@ -31,11 +31,7 @@ void DOFManager::setBackgroundIndex(int index)
 
 QStringList DOFManager::getModelsList()
 {
-    QStringList list;
-    list.append("Model 1");
-    list.append("Model 2");
-    list.append("Model 3");
-    return list;
+    return pl.getModels();
 }
 
 int DOFManager::getModelIndex()
@@ -59,12 +55,37 @@ QStringList DOFManager::getSensorsList()
 
 int DOFManager::getSensorIndex()    //in pl
 {
-    return 0;
+//    switch (index) {
+//    case 0:
+
+//        break;
+//    case 1:
+
+//        break;
+//    case 2:
+
+//        break;
+//    default:
+//        break;
+//    }
+//    return 0;
 }
 
 void DOFManager::setSensorIndex(int index)
 {
-
+//    switch (index) {
+//    case 0:
+//        pl.setCrop();
+//        break;
+//    case 1:
+//        pl.setCrop();
+//        break;
+//    case 2:
+//        pl.setCrop();
+//        break;
+//    default:
+//        break;
+//    }
 }
 
 double DOFManager::getCropFactor()
