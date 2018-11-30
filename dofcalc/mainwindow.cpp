@@ -3,8 +3,6 @@
 #include <QDir>
 #include <QPainter>
 #include <QPixmap>
-#include "propertylist.h"   //todo
-#include "imagehandler.h"   //todo
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -42,9 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->image->installEventFilter(this);
 
-    PropertyList pl;    //todo
-    ImageHandler ih;    //todo
-    ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
+//    PropertyList pl;    //todo
+//    ImageHandler ih;    //todo
+//    //ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
 }
 
 MainWindow::~MainWindow()
@@ -161,20 +159,43 @@ void MainWindow::updateImage()  //todo
     default:
         break;
     }
-    QPixmap model(modelPath);
 
-    QString backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
-    QPixmap background(backgroundPath);
+
+    int backgroundIndex = dof->getBackgroundIndex();
+    QString backgroundPath;
+    switch (backgroundIndex) {
+    case 0:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background1.png");
+        break;
+    case 1:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
+        break;
+    case 2:
+        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background3.png");
+        break;
+    default:
+        break;
+    }
+
+    dof->Blur();
+    QPixmap model(modelPath);
+    QPixmap background;
+    background.convertFromImage(dof->getResultImage());
+
+
 
     QPainter img;
     img.begin(&background);
     img.drawPixmap(background.width()/2,10,model.scaled(background.width()/2,background.height()-50));
     img.end();
-    ui->image->setPixmap(background.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 
     //incorrect numbers!!!
     ui->table_dof->setItem(0,0, new QTableWidgetItem(QString::number(dof->getGRIP(), 'f', 2)));
     ui->table_dof->setItem(0,1, new QTableWidgetItem(QString::number(dof->getNearestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,2, new QTableWidgetItem(QString::number(dof->getFarestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,3, new QTableWidgetItem(QString::number(dof->getHyperFocal(), 'f', 2)));
+
+    ui->image->setPixmap(background.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }

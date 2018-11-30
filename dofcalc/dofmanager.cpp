@@ -12,11 +12,7 @@ DOFManager::~DOFManager()
 
 QStringList DOFManager::getBackgroundsList()
 {
-    QStringList list;
-    list.append("Background 1");
-//    list.append("Background 2");
-//    list.append("Background 3");
-    return list;
+    return pl.getBackgrounds();
 }
 
 int DOFManager::getBackgroundIndex()
@@ -164,5 +160,10 @@ double DOFManager::getNearestPointOfSharpness()
 double DOFManager::getFarestPointOfSharpness()
 {
     return ml.FindFarestPointOfSharpness(&pl);
+}
+
+void DOFManager::Blur()
+{
+    ml.Blur(&pl, &ih);
 }
 

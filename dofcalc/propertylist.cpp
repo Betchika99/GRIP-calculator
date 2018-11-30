@@ -132,6 +132,14 @@ void PropertyList::setCurrentModelIndex(int value)
     else currentModelIndex = setRange(value, 0, models.count()-1);
 }
 
+QStringList PropertyList::getBackgrounds()
+{
+    backgrounds.append("Background 1");
+//    backgrounds.append("Background 2");
+//    backgrounds.append("Background 3");
+    return backgrounds;
+}
+
 void PropertyList::setCurrentBackgroundIndex(int value)
 {
     if (backgrounds.count() == 0) currentBackgroundIndex = -1;

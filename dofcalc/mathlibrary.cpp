@@ -69,9 +69,9 @@ void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {}
 
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
     if (this->CheckerNull(image)) {
-        QImage img = image->getLayer(0);
+        QImage img = image->getImage(2);
         QPixmap pm;
-      //  pm.fromImage(img);
+        pm.fromImage(img);
         pm.convertFromImage(img);
 
         qreal blurFactor = 30; // add blur factor expression to calculate
@@ -84,7 +84,7 @@ void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
             QPainter painter( &pm );
             qt_blurImage( &painter, img, blurFactor, true, false );
         }
- //       img = pm.toImage();
- //       image->images[0] = img;
+        img = pm.toImage();
+        image->setImage(img, 2);
     }
 }
