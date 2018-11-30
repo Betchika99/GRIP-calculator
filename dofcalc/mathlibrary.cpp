@@ -77,6 +77,7 @@ void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {
 }
 
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
+
     if (this->CheckerNull(image)) {
         QImage img = image->getImageOrigin(2);
         QPixmap pm;
