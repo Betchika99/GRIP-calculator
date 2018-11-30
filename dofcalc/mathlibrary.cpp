@@ -65,16 +65,24 @@ double MathLibrary::FindGRIP(PropertyList *values) {
     return ERROR;
 }
 
-void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {}
+void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {
+    QImage img = image->getImageOrigin(2);
+    QPixmap pm;
+    pm.convertFromImage(img);
+    double scaleFactor = values->getDistanceModel() / 10.0; // use another variant for scale
+    QSize realImageSize = img.size();
+    pm = pm.scaled(scaleFactor * realImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    img = pm.toImage();
+    image->setImageResult(img, 2);
+}
 
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
     if (this->CheckerNull(image)) {
-        QImage img = image->getImage(2);
+        QImage img = image->getImageOrigin(2);
         QPixmap pm;
-        pm.fromImage(img);
         pm.convertFromImage(img);
 
-        qreal blurFactor = 30; // add blur factor expression to calculate
+        qreal blurFactor = values->getDiaphragm() / values->getFocalLenght(); // add blur factor expression to calculate
 
         QT_BEGIN_NAMESPACE
           extern Q_WIDGETS_EXPORT void qt_blurImage( QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0 );
@@ -85,6 +93,6 @@ void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
             qt_blurImage( &painter, img, blurFactor, true, false );
         }
         img = pm.toImage();
-        image->setImage(img, 2);
+        image->setImageResult(img, 2);
     }
 }
