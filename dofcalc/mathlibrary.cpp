@@ -5,7 +5,8 @@ MathLibrary::MathLibrary() {}
 
 MathLibrary::~MathLibrary() {}
 
-bool MathLibrary::CheckerNull(const PropertyList *object) {
+template<class T>
+bool MathLibrary::CheckerNull(const T *object) {
     if (object == nullptr)
             return false;
     return true;
