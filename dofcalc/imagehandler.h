@@ -3,20 +3,26 @@
 #include <QVector>
 #include <QImage>
 
+#include <vector>
+
+using std::vector;
+using std::pair;
+
 
 class ImageHandler
 {
 public:
-    ImageHandler() {}
-
-public:
-    bool loadFromFile(QString filemask);
-    void clean() { images.clear(); }
-    int layersCount() { return images.count(); }
-    QImage& getLayer(int index) { return images[index]; } //математика работает с ним же
+    ImageHandler();
+    void UpdateImages(int indexModel, int indexBack);
+    //bool loadFromFile(QString filemask);
+    //void clean() { images.clear(); }
+    int imagesCount() { return images.size(); }
+    QImage getImageOrigin(int index) { return images[index].first; } //математика работает с ним же
+    void setImageResult(QImage img, int index) { images[index].second = img; }
+     QImage getImageResult(size_t index) { return images[index].second; }
 
 private:
-    QVector<QImage> images;
+    vector< pair<QImage,QImage> > images;
 
 //    class Con //подкласс
 };

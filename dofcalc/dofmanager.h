@@ -4,6 +4,7 @@
 #include <QStringList>
 #include "propertylist.h"
 #include "mathlibrary.h"
+#include "imagehandler.h"
 
 class DOFManager
 {
@@ -40,16 +41,24 @@ public:
     double getAperture();
     void setAperture(double Value);
 
+    QImage getResultImage(int index) {return ih.getImageResult(index);}
+
+
 
     double getGRIP();
     double getHyperFocal();
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
+    void Blur();
+    void Scale();
+    void UpdateImages(int indexModel, int indexBack) { ih.UpdateImages(indexModel, indexBack); }
+
 
 private:
     PropertyList pl;
     MathLibrary ml;
+    ImageHandler ih;
 
 };
 

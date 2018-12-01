@@ -3,8 +3,6 @@
 #include <QDir>
 #include <QPainter>
 #include <QPixmap>
-#include "propertylist.h"   //todo
-#include "imagehandler.h"   //todo
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dof = new DOFManager();
 
     ui->setupUi(this);
-
+    dof->setModelIndex(0);
+    dof->setBackgroundIndex(0);
     //Setting defaul
     ui->combo_background->addItems(dof->getBackgroundsList());
     ui->combo_background->setCurrentIndex(dof->getBackgroundIndex());
@@ -42,9 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->image->installEventFilter(this);
 
-    PropertyList pl;    //todo
-    ImageHandler ih;    //todo
-    ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
+//    PropertyList pl;    //todo
+//    ImageHandler ih;    //todo
+//    //ih.loadFromFile("/Users/e_dobryanskaya/Downloads/test.model.*.png");
 }
 
 MainWindow::~MainWindow()
@@ -147,34 +146,59 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)   //todo
 void MainWindow::updateImage()  //todo
 {
     int modelIndex = dof->getModelIndex();
-    QString modelPath;
-    switch (modelIndex) {
-    case 0:
-        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model1.png");
-        break;
-    case 1:
-        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model2.png");
-        break;
-    case 2:
-        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model3.png");
-        break;
-    default:
-        break;
-    }
-    QPixmap model(modelPath);
+//    QString modelPath;
+//    switch (modelIndex) {
+//    case 0:
+//        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model1.png");
+//        break;
+//    case 1:
+//        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model2.png");
+//        break;
+//    case 2:
+//        modelPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model3.png");
+//        break;
+//    default:
+//        break;
+//    }
 
-    QString backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
-    QPixmap background(backgroundPath);
 
+    int backgroundIndex = dof->getBackgroundIndex();
+//    QString backgroundPath;
+//    switch (backgroundIndex) {
+//    case 0:
+//        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background1.png");
+//        break;
+//    case 1:
+//        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background2.png");
+//        break;
+//    case 2:
+//        backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background3.png");
+//        break;
+//    default:
+//        break;
+//    }
+    dof->UpdateImages(modelIndex, backgroundIndex);
+    dof->Blur();
+    dof->Scale();
+    QPixmap model;
+    QPixmap background;
+    model.convertFromImage(dof->getResultImage(1));
+    background.convertFromImage(dof->getResultImage(2));
+
+
+    int pos = model.height() > background.height() ? 10 : -10;
     QPainter img;
     img.begin(&background);
-    img.drawPixmap(background.width()/2,10,model.scaled(background.width()/2,background.height()-50));
+    img.drawPixmap(10,pos,model, 0, 0, pos, pos);
     img.end();
-    ui->image->setPixmap(background.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 
     //incorrect numbers!!!
     ui->table_dof->setItem(0,0, new QTableWidgetItem(QString::number(dof->getGRIP(), 'f', 2)));
     ui->table_dof->setItem(0,1, new QTableWidgetItem(QString::number(dof->getNearestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,2, new QTableWidgetItem(QString::number(dof->getFarestPointOfSharpness(), 'f', 2)));
     ui->table_dof->setItem(0,3, new QTableWidgetItem(QString::number(dof->getHyperFocal(), 'f', 2)));
+
+    ui->image->setPixmap(background);
+
 }
