@@ -13,11 +13,12 @@ class ImageHandler
 {
 public:
     ImageHandler();
+    void UpdateImages(int indexModel, int indexBack);
     //bool loadFromFile(QString filemask);
     //void clean() { images.clear(); }
     int imagesCount() { return images.size(); }
-    QImage getImageOrigin(size_t index) { return images[index].first; } //математика работает с ним же
-    void setImageResult(QImage img, size_t index) { images[index].second = img; }
+    QImage getImageOrigin(int index) { return images[index].first; } //математика работает с ним же
+    void setImageResult(QImage img, int index) { images[index].second = img; }
      QImage getImageResult(size_t index) { return images[index].second; }
 
 private:

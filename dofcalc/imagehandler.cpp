@@ -20,6 +20,24 @@ ImageHandler::ImageHandler()
     images[2].first = background.toImage();
 }
 
+void ImageHandler::UpdateImages(int indexModel, int indexBack)
+{
+    QString tempModel = QString::number(indexModel+1);
+    QString tempBack = QString::number(indexBack+1);
+    //QString modelFacePath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model1.png");
+    QString modelBodyPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Model"+tempModel+".png");
+    QString backgroundPath = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/Background"+tempBack+".png");
+
+    QPixmap model(modelBodyPath);
+    QPixmap background(backgroundPath);
+
+    images.resize(3);
+
+    images[0].first = model.toImage();
+    images[1].first = model.toImage();
+    images[2].first = background.toImage();
+}
+
 //bool ImageHandler::loadFromFile(QString filemask)
 //{
 //    clean();

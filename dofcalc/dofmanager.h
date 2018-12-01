@@ -41,7 +41,7 @@ public:
     double getAperture();
     void setAperture(double Value);
 
-    QImage getResultImage() {return ih.getImageResult(2);}
+    QImage getResultImage(int index) {return ih.getImageResult(index);}
 
 
 
@@ -51,6 +51,8 @@ public:
     double getFarestPointOfSharpness();
 
     void Blur();
+    void Scale();
+    void UpdateImages(int indexModel, int indexBack) { ih.UpdateImages(indexModel, indexBack); }
 
 
 private:

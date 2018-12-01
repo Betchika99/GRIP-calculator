@@ -167,3 +167,8 @@ void DOFManager::Blur()
     ml.Blur(&pl, &ih);
 }
 
+void DOFManager::Scale()
+{
+    ml.Scale(&pl, &ih);
+}
+

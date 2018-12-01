@@ -128,22 +128,24 @@ QStringList PropertyList::getModels()
 
 void PropertyList::setCurrentModelIndex(int value)
 {
-    if (models.count() == 0) currentModelIndex = -1;
-    else currentModelIndex = setRange(value, 0, models.count()-1);
+//    if (models.count() == 0) currentModelIndex = -1;
+//    else currentModelIndex = setRange(value, 0, models.count()-1);
+    currentModelIndex = value;
 }
 
 QStringList PropertyList::getBackgrounds()
 {
     backgrounds.append("Background 1");
-//    backgrounds.append("Background 2");
-//    backgrounds.append("Background 3");
+    backgrounds.append("Background 2");
+    backgrounds.append("Background 3");
     return backgrounds;
 }
 
 void PropertyList::setCurrentBackgroundIndex(int value)
 {
-    if (backgrounds.count() == 0) currentBackgroundIndex = -1;
-    else currentBackgroundIndex = setRange(value, 0, backgrounds.count()-1);
+//    if (backgrounds.count() == 0) currentBackgroundIndex = -1;
+//    else currentBackgroundIndex = setRange(value, 0, backgrounds.count()-1);
+    currentBackgroundIndex = value;
 }
 
 void PropertyList::setDefault()

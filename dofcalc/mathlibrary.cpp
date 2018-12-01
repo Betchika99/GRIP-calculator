@@ -66,14 +66,14 @@ double MathLibrary::FindGRIP(PropertyList *values) {
 }
 
 void MathLibrary::Scale(PropertyList *values, ImageHandler* image) {
-    QImage img = image->getImageOrigin(2);
+    QImage img = image->getImageOrigin(1);
     QPixmap pm;
     pm.convertFromImage(img);
     double scaleFactor = values->getDistanceModel() / 10.0; // use another variant for scale
     QSize realImageSize = img.size();
     pm = pm.scaled(scaleFactor * realImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     img = pm.toImage();
-    image->setImageResult(img, 2);
+    image->setImageResult(img, 1);
 }
 
 void MathLibrary::Blur(PropertyList *values, ImageHandler* image) {
