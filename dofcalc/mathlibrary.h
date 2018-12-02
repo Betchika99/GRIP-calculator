@@ -18,8 +18,8 @@ public:
     double FindNearestPointOfSharpness(PropertyList *values);
     double FindFarestPointOfSharpness(PropertyList *values);
     double FindGRIP(PropertyList *values);
-    void Scale(PropertyList *values, ImageHandler* image);
-    void Blur(PropertyList *values, ImageHandler* image);
+    void Scale(PropertyList *values, ImageHandler& ih);
+    void Blur(PropertyList *values, ImageHandler& ih);
 };
 
 #endif // MATHLIBRARY_H
