@@ -41,22 +41,23 @@ public:
     double getAperture();
     void setAperture(double Value);
 
-    QImage getResultImage() {return ih.getImageResult(2);}
-
-
 
     double getGRIP();
     double getHyperFocal();
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
-    void Blur();
-
+//    void Blur();
+//    void Scale();
+    Image getResultImage() {return result.gluedImage();}
+    void UpdateImages(int modelIndex, int backgroundIndex) { origin.UpdateImages(modelIndex, backgroundIndex); }
+    void PerformImageProcessing();
 
 private:
     PropertyList pl;
     MathLibrary ml;
-    ImageHandler ih;
+    ImageHandler origin;
+    ImageHandler result;
 
 };
 
