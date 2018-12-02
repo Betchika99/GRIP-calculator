@@ -37,7 +37,8 @@ HEADERS += \
         dofmanager.h \
         propertylist.h \
         imagehandler.h \
-        mathlibrary.h
+        mathlibrary.h \
+    image.h
 
 FORMS += \
         mainwindow.ui

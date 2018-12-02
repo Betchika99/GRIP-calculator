@@ -162,13 +162,20 @@ double DOFManager::getFarestPointOfSharpness()
     return ml.FindFarestPointOfSharpness(&pl);
 }
 
-void DOFManager::Blur()
+void DOFManager::PerformImageProcessing()
 {
-    ml.Blur(&pl, &ih);
+    result = origin;
+    ml.Blur(&pl, result);
+    ml.Scale(&pl, result);
 }
 
-void DOFManager::Scale()
-{
-    ml.Scale(&pl, &ih);
-}
+//void DOFManager::Blur()
+//{
+//    ml.Blur(&pl, origin, result);
+//}
+
+//void DOFManager::Scale()
+//{
+//    ml.Scale(&pl, origin, result);
+//}
 
