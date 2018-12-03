@@ -79,7 +79,7 @@ void MathLibrary::Blur(PropertyList *values, ImageHandler& ih) {
     
     if (this->CheckerNull(values) && ih.isValid())  {
         Image& backgroud = ih.background();
-        qreal blurFactor = values->getDiaphragm() / values->getFocalLenght(); // add blur factor expression to calculate
+        qreal blurFactor = (values->getDiaphragm() / values->getFocalLenght()) + (values->getDistanceBackgroud() / values->getDistanceModel()) / 1000; // add blur factor expression to calculate
         
         QT_BEGIN_NAMESPACE
         extern Q_WIDGETS_EXPORT void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed = 0 );
