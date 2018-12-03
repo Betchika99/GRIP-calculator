@@ -18,9 +18,11 @@ private:
     Orientation orientation;
     QStringList models;
     QStringList backgrounds;
+    QStringList crops;
 
     int currentModelIndex;
     int currentBackgroundIndex;
+    int currentCropIndex;
 
     QString settingsFile;
     QString imagesPath;
@@ -46,6 +48,9 @@ public:
 
     void setCrop(double value);
     double getCrop() { return crop; }
+    void setCurrentCropIndex(int value);
+    int getCurrentCropIndex() { return currentCropIndex; }
+    QStringList getCrops();
 
 
 
