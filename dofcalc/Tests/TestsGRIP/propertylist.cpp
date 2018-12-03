@@ -87,6 +87,19 @@ void PropertyList::setCrop(double value)
     crop = setRange(value, 0.1, 16.0);
 }
 
+void PropertyList::setCurrentCropIndex(int value)
+{
+    currentCropIndex = value;
+}
+
+QStringList PropertyList::getCrops()
+{
+    crops.append("Full Frame");
+    crops.append("APC-C");
+    crops.append("Four Thirds");
+    return crops;
+}
+
 void PropertyList::setDistanceModel(double value)
 {
     if (value > getDistanceBackgroud()) value = getDistanceBackgroud();
