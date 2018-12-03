@@ -96,6 +96,19 @@ void PropertyList::setCrop(double value)
     crop = setRange(value, 0.1, 16.0);
 }
 
+void PropertyList::setCurrentCropIndex(int value)
+{
+    currentCropIndex = value;
+}
+
+QStringList PropertyList::getCrops()
+{
+    crops.append("Full Frame");
+    crops.append("APC-C");
+    crops.append("Four Thirds");
+    return crops;
+}
+
 void PropertyList::setDistanceModel(double value)
 {
     if (value > getDistanceBackgroud()) value = getDistanceBackgroud();
@@ -120,9 +133,9 @@ void PropertyList::setOrientation(Orientation value)
 
 QStringList PropertyList::getModels()
 {
-    models.append("Model 1");
-    models.append("Model 2");
-    models.append("Model 3");
+    models.append("Катя");
+    models.append("Лиза");
+    models.append("Виталя");
     return models;
 }
 
@@ -135,9 +148,9 @@ void PropertyList::setCurrentModelIndex(int value)
 
 QStringList PropertyList::getBackgrounds()
 {
-    backgrounds.append("Background 1");
-    backgrounds.append("Background 2");
-    backgrounds.append("Background 3");
+    backgrounds.append("Какая-то улица");
+    backgrounds.append("Красная площадь");
+    backgrounds.append("Офис Mail.ru");
     return backgrounds;
 }
 
