@@ -15,10 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     dof->setModelIndex(0);
     dof->setBackgroundIndex(0);
+    dof->setSensorIndex(0);
 
     dof->UpdateImages(dof->getModelIndex(), dof->getBackgroundIndex());
 
-
+    //ВРЕМЕННО при отсутсвующем классе стратегии
+    ui->combo_strategy->addItem("Портретная съемка");
     //Setting default
     ui->combo_background->addItems(dof->getBackgroundsList());
     ui->combo_background->setCurrentIndex(dof->getBackgroundIndex());
