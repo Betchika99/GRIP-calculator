@@ -19,11 +19,11 @@ SOURCES += \
     gtest/src/gtest-printers.cc \
     gtest/src/gtest-test-part.cc \
     gtest/src/gtest-typed-test.cc \
-    gtest/src/gtest.cc
+    gtest/src/gtest.cc \
 
 HEADERS += \
     ../../dofmanager.h \
     ../../image.h \
     ../../imagehandler.h \
     ../../mathlibrary.h \
-    ../../propertylist.h
+    ../../propertylist.h \
