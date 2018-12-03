@@ -29,7 +29,7 @@ Image ImageHandler::gluedImage(int shiftX)
     if (modelHeight > backgroundHeight)
     {
         pos.setX(backgroundWidth/3 + shiftX);
-        pos.setY(backgroundHeight/2);
+        pos.setY(backgroundHeight - modelHeight);
     }
     else
     {
