@@ -37,7 +37,8 @@ int DOFManager::getModelIndex()
 
 void DOFManager::setModelIndex(int index)
 {
-    return pl.setCurrentModelIndex(index);
+    pl.setCurrentModelIndex(index);
+    UpdateImages();
 }
 
 QStringList DOFManager::getSensorsList()
@@ -45,9 +46,9 @@ QStringList DOFManager::getSensorsList()
     return pl.getCrops();
 }
 
-int DOFManager::getSensorIndex()    //in pl
+int DOFManager::getSensorIndex()
 {
-    return  pl.getCurrentCropIndex();
+    return pl.getCurrentCropIndex();
 }
 
 void DOFManager::setSensorIndex(int index)
@@ -65,13 +66,29 @@ void DOFManager::setCropFactor(double crop)
     return pl.setCrop(crop);
 }
 
+QStringList DOFManager::getStrategyList()
+{
+    return pl.getStrategies();
+}
+
+int DOFManager::getStrategyIndex()
+{
+    return pl.getCurrentStrategyIndex();
+}
+
+void DOFManager::setStrategyIndex(int index)
+{
+    pl.setCurrentStrategyIndex(index);
+}
+
 double DOFManager::getBackgroundDistance()
 {
     return pl.getDistanceBackgroud();
 }
 void DOFManager::setBackgroundDistance(double value)
 {
-    return pl.setDistanceBackgroud(value);
+    pl.setDistanceBackgroud(value);
+    UpdateImages();
 }
 
 
@@ -131,6 +148,13 @@ double DOFManager::getNearestPointOfSharpness()
 double DOFManager::getFarestPointOfSharpness()
 {
     return ml.FindFarestPointOfSharpness(&pl);
+}
+
+void DOFManager::UpdateImages()
+{
+   QString fileNameModel = pl.getCurrentStrategyModelFileName();
+   QString fileNameBackground = pl.getCurrentStrategyBackgroundFileName();
+   origin.UpdateImages(fileNameModel, fileNameBackground);
 }
 
 void DOFManager::PerformImageProcessing()

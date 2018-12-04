@@ -13,38 +13,16 @@ MainWindow::MainWindow(QWidget *parent) :
     dof = new DOFManager();
 
     ui->setupUi(this);
+    dof->setStrategyIndex(0);
     dof->setModelIndex(0);
     dof->setBackgroundIndex(0);
     dof->setSensorIndex(0);
 
-    dof->UpdateImages(dof->getModelIndex(), dof->getBackgroundIndex());
+//    dof->UpdateImages();
 
-    //ВРЕМЕННО при отсутсвующем классе стратегии
-    ui->combo_strategy->addItem("Портретная съемка");
+
     //Setting default
-    ui->combo_background->addItems(dof->getBackgroundsList());
-    ui->combo_background->setCurrentIndex(dof->getBackgroundIndex());
-
-    ui->combo_model->addItems(dof->getModelsList());
-    ui->combo_model->setCurrentIndex(dof->getModelIndex());
-
-    ui->combo_sensor->addItems(dof->getSensorsList());
-    ui->combo_sensor->setCurrentIndex(dof->getSensorIndex());
-
-    ui->spin_crop->setValue(dof->getCropFactor());
-
-    ui->slider_distance->setValue(static_cast<int>(dof->getModelDistance()));
-    ui->spin_distance->setValue(dof->getModelDistance());
-
-    ui->slider_focallen->setValue(static_cast<int>(dof->getFocalLength()));
-    ui->spin_focallen->setValue(dof->getFocalLength());
-
-    ui->slider_aperture->setValue(static_cast<int>(dof->getAperture()));
-    ui->spin_aperture->setValue(dof->getAperture());
-
-    ui->slider_backgroun_distance->setValue(static_cast<int>(dof->getBackgroundDistance()));
-    ui->spin_backgrond_distance->setValue(dof->getBackgroundDistance());
-
+    UpdateUI();
     ui->image->installEventFilter(this);
 
 //    PropertyList pl;    //todo
@@ -61,14 +39,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_combo_background_currentIndexChanged(int index)
 {
     dof->setBackgroundIndex(index);
-    dof->UpdateImages(dof->getModelIndex(), dof->getBackgroundIndex());
     updateImage();
 }
 
 void MainWindow::on_combo_model_currentIndexChanged(int index)
 {
     dof->setModelIndex(index);
-    dof->UpdateImages(dof->getModelIndex(), dof->getBackgroundIndex());
     updateImage();
 }
 
@@ -162,5 +138,46 @@ void MainWindow::updateImage()  //todo
     ui->table_dof->setItem(0,3, new QTableWidgetItem(QString::number(dof->getHyperFocal(), 'f', 2)));
 
     ui->image->setPixmap(dof->getResultImage().scale(ui->image->size()).asQPixmap());   //можно класс Image переписать с использование неявного преобразования типа
+
+}
+
+void MainWindow::on_combo_strategy_currentIndexChanged(int index)
+{
+    dof->setStrategyIndex(index);
+    UpdateUI();
+}
+
+void MainWindow::UpdateUI()
+{
+//    ui->combo_background->clear();
+//    ui->combo_model->clear();
+//    ui->combo_sensor->clear();
+//    ui->combo_strategy->clear();
+    //Setting default
+    ui->combo_background->addItems(dof->getBackgroundsList());
+    ui->combo_background->setCurrentIndex(dof->getBackgroundIndex());
+
+    ui->combo_model->addItems(dof->getModelsList());
+    ui->combo_model->setCurrentIndex(dof->getModelIndex());
+
+    ui->combo_sensor->addItems(dof->getSensorsList());
+    ui->combo_sensor->setCurrentIndex(dof->getSensorIndex());
+
+    ui->combo_strategy->addItems(dof->getStrategyList());
+    ui->combo_strategy->setCurrentIndex(dof->getStrategyIndex());
+
+    ui->spin_crop->setValue(dof->getCropFactor());
+
+    ui->slider_distance->setValue(static_cast<int>(dof->getModelDistance()));
+    ui->spin_distance->setValue(dof->getModelDistance());
+
+    ui->slider_focallen->setValue(static_cast<int>(dof->getFocalLength()));
+    ui->spin_focallen->setValue(dof->getFocalLength());
+
+    ui->slider_aperture->setValue(static_cast<int>(dof->getAperture()));
+    ui->spin_aperture->setValue(dof->getAperture());
+
+    ui->slider_backgroun_distance->setValue(static_cast<int>(dof->getBackgroundDistance()));
+    ui->spin_backgrond_distance->setValue(dof->getBackgroundDistance());
 
 }

@@ -49,12 +49,16 @@ private slots:
 
     void on_spin_aperture_valueChanged(double arg1);
 
+    void on_combo_strategy_currentIndexChanged(int index);
+
+
 private:
     Ui::MainWindow *ui;
     DOFManager *dof;
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
+    void UpdateUI();
 
 private:
     void updateImage();

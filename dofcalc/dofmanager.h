@@ -26,6 +26,10 @@ public:
     int  getSensorIndex();
     void setSensorIndex(int index);
 
+    QStringList getStrategyList();
+    int  getStrategyIndex();
+    void setStrategyIndex(int index);
+
     double getCropFactor();
     void setCropFactor(double crop);
 
@@ -47,10 +51,8 @@ public:
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
-//    void Blur();
-//    void Scale();
     Image getResultImage() {return result.gluedImage();}
-    void UpdateImages(int modelIndex, int backgroundIndex) { origin.UpdateImages(modelIndex, backgroundIndex); }
+    void UpdateImages();
     void PerformImageProcessing();
 
 private:
