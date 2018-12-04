@@ -42,46 +42,17 @@ void DOFManager::setModelIndex(int index)
 
 QStringList DOFManager::getSensorsList()
 {
-    QStringList list;
-    list.append("Full Frame");
-    list.append("APC-C");
-    list.append("Four Thirds");
-    return list;
+    return pl.getCrops();
 }
 
 int DOFManager::getSensorIndex()    //in pl
 {
-//    switch (index) {
-//    case 0:
-
-//        break;
-//    case 1:
-
-//        break;
-//    case 2:
-
-//        break;
-//    default:
-//        break;
-//    }
-//    return 0;
+    return  pl.getCurrentCropIndex();
 }
 
 void DOFManager::setSensorIndex(int index)
 {
-//    switch (index) {
-//    case 0:
-//        pl.setCrop();
-//        break;
-//    case 1:
-//        pl.setCrop();
-//        break;
-//    case 2:
-//        pl.setCrop();
-//        break;
-//    default:
-//        break;
-//    }
+    pl.setCurrentCropIndex(index);
 }
 
 double DOFManager::getCropFactor()
@@ -162,13 +133,20 @@ double DOFManager::getFarestPointOfSharpness()
     return ml.FindFarestPointOfSharpness(&pl);
 }
 
-void DOFManager::Blur()
+void DOFManager::PerformImageProcessing()
 {
-    ml.Blur(&pl, &ih);
+    result = origin;
+    ml.Blur(&pl, result);
+    ml.Scale(&pl, result);
 }
 
-void DOFManager::Scale()
-{
-    ml.Scale(&pl, &ih);
-}
+//void DOFManager::Blur()
+//{
+//    ml.Blur(&pl, origin, result);
+//}
+
+//void DOFManager::Scale()
+//{
+//    ml.Scale(&pl, origin, result);
+//}
 

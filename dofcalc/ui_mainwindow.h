@@ -53,12 +53,14 @@ public:
     QLabel *label_background_meters;
     QDoubleSpinBox *spin_aperture;
     QLabel *diafragm_letter;
+    QComboBox *combo_strategy;
+    QLabel *label_strategy;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(795, 518);
+        MainWindow->resize(901, 586);
         MainWindow->setMinimumSize(QSize(686, 434));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -121,7 +123,7 @@ public:
         frame_control->setFrameShadow(QFrame::Plain);
         slider_focallen = new QSlider(frame_control);
         slider_focallen->setObjectName(QStringLiteral("slider_focallen"));
-        slider_focallen->setGeometry(QRect(10, 238, 140, 19));
+        slider_focallen->setGeometry(QRect(10, 378, 140, 19));
         slider_focallen->setLayoutDirection(Qt::LeftToRight);
         slider_focallen->setMinimum(1);
         slider_focallen->setMaximum(1000);
@@ -134,14 +136,14 @@ public:
         slider_focallen->setTickInterval(70);
         slider_distance = new QSlider(frame_control);
         slider_distance->setObjectName(QStringLiteral("slider_distance"));
-        slider_distance->setGeometry(QRect(10, 188, 140, 19));
+        slider_distance->setGeometry(QRect(10, 258, 140, 19));
         slider_distance->setMinimum(1);
         slider_distance->setMaximum(50);
         slider_distance->setOrientation(Qt::Horizontal);
         slider_distance->setTickPosition(QSlider::NoTicks);
         spin_distance = new QDoubleSpinBox(frame_control);
         spin_distance->setObjectName(QStringLiteral("spin_distance"));
-        spin_distance->setGeometry(QRect(189, 180, 81, 22));
+        spin_distance->setGeometry(QRect(189, 250, 81, 22));
         spin_distance->setDecimals(1);
         spin_distance->setMinimum(1);
         spin_distance->setMaximum(50);
@@ -151,16 +153,16 @@ public:
         label_background->setGeometry(QRect(10, 8, 81, 16));
         label_crop = new QLabel(frame_control);
         label_crop->setObjectName(QStringLiteral("label_crop"));
-        label_crop->setGeometry(QRect(161, 110, 70, 13));
+        label_crop->setGeometry(QRect(161, 173, 70, 13));
         label_focallen = new QLabel(frame_control);
         label_focallen->setObjectName(QStringLiteral("label_focallen"));
-        label_focallen->setGeometry(QRect(10, 218, 141, 16));
+        label_focallen->setGeometry(QRect(10, 350, 141, 16));
         label_aperture = new QLabel(frame_control);
         label_aperture->setObjectName(QStringLiteral("label_aperture"));
-        label_aperture->setGeometry(QRect(10, 330, 171, 16));
+        label_aperture->setGeometry(QRect(10, 400, 171, 16));
         slider_aperture = new QSlider(frame_control);
         slider_aperture->setObjectName(QStringLiteral("slider_aperture"));
-        slider_aperture->setGeometry(QRect(10, 360, 171, 19));
+        slider_aperture->setGeometry(QRect(10, 430, 171, 19));
         slider_aperture->setToolTipDuration(-1);
         slider_aperture->setMinimum(0);
         slider_aperture->setMaximum(32);
@@ -173,12 +175,12 @@ public:
         combo_model->setGeometry(QRect(10, 78, 220, 22));
         spin_crop = new QDoubleSpinBox(frame_control);
         spin_crop->setObjectName(QStringLiteral("spin_crop"));
-        spin_crop->setGeometry(QRect(160, 128, 70, 22));
+        spin_crop->setGeometry(QRect(160, 191, 70, 22));
         spin_crop->setMinimum(0.1);
         spin_crop->setSingleStep(0.1);
         spin_focallen = new QDoubleSpinBox(frame_control);
         spin_focallen->setObjectName(QStringLiteral("spin_focallen"));
-        spin_focallen->setGeometry(QRect(189, 240, 81, 22));
+        spin_focallen->setGeometry(QRect(189, 380, 81, 22));
         spin_focallen->setDecimals(1);
         spin_focallen->setMinimum(1);
         spin_focallen->setMaximum(1000);
@@ -187,19 +189,19 @@ public:
         label_model->setGeometry(QRect(10, 58, 71, 16));
         combo_sensor = new QComboBox(frame_control);
         combo_sensor->setObjectName(QStringLiteral("combo_sensor"));
-        combo_sensor->setGeometry(QRect(10, 128, 140, 22));
+        combo_sensor->setGeometry(QRect(10, 191, 140, 22));
         label_sensor = new QLabel(frame_control);
         label_sensor->setObjectName(QStringLiteral("label_sensor"));
-        label_sensor->setGeometry(QRect(10, 108, 91, 16));
+        label_sensor->setGeometry(QRect(10, 171, 91, 16));
         label_distance = new QLabel(frame_control);
         label_distance->setObjectName(QStringLiteral("label_distance"));
-        label_distance->setGeometry(QRect(10, 168, 141, 16));
+        label_distance->setGeometry(QRect(10, 238, 141, 10));
         combo_background = new QComboBox(frame_control);
         combo_background->setObjectName(QStringLiteral("combo_background"));
         combo_background->setGeometry(QRect(10, 28, 220, 22));
         slider_backgroun_distance = new QSlider(frame_control);
         slider_backgroun_distance->setObjectName(QStringLiteral("slider_backgroun_distance"));
-        slider_backgroun_distance->setGeometry(QRect(10, 300, 141, 22));
+        slider_backgroun_distance->setGeometry(QRect(10, 310, 141, 22));
         slider_backgroun_distance->setMinimum(1);
         slider_backgroun_distance->setMaximum(500);
         slider_backgroun_distance->setSingleStep(1);
@@ -207,7 +209,7 @@ public:
         slider_backgroun_distance->setOrientation(Qt::Horizontal);
         spin_backgrond_distance = new QDoubleSpinBox(frame_control);
         spin_backgrond_distance->setObjectName(QStringLiteral("spin_backgrond_distance"));
-        spin_backgrond_distance->setGeometry(QRect(190, 300, 81, 22));
+        spin_backgrond_distance->setGeometry(QRect(190, 310, 81, 22));
         spin_backgrond_distance->setDecimals(2);
         spin_backgrond_distance->setMinimum(1);
         spin_backgrond_distance->setMaximum(500);
@@ -215,10 +217,10 @@ public:
         spin_backgrond_distance->setValue(1);
         label_background_meters = new QLabel(frame_control);
         label_background_meters->setObjectName(QStringLiteral("label_background_meters"));
-        label_background_meters->setGeometry(QRect(10, 270, 181, 16));
+        label_background_meters->setGeometry(QRect(10, 290, 181, 16));
         spin_aperture = new QDoubleSpinBox(frame_control);
         spin_aperture->setObjectName(QStringLiteral("spin_aperture"));
-        spin_aperture->setGeometry(QRect(210, 360, 62, 22));
+        spin_aperture->setGeometry(QRect(210, 430, 62, 22));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -230,7 +232,13 @@ public:
         spin_aperture->setSingleStep(0.4);
         diafragm_letter = new QLabel(frame_control);
         diafragm_letter->setObjectName(QStringLiteral("diafragm_letter"));
-        diafragm_letter->setGeometry(QRect(198, 363, 31, 16));
+        diafragm_letter->setGeometry(QRect(198, 433, 31, 16));
+        combo_strategy = new QComboBox(frame_control);
+        combo_strategy->setObjectName(QStringLiteral("combo_strategy"));
+        combo_strategy->setGeometry(QRect(10, 130, 220, 22));
+        label_strategy = new QLabel(frame_control);
+        label_strategy->setObjectName(QStringLiteral("label_strategy"));
+        label_strategy->setGeometry(QRect(10, 110, 91, 16));
 
         gridLayout->addWidget(frame_control, 0, 1, 1, 1);
 
@@ -274,6 +282,7 @@ public:
         spin_backgrond_distance->setSuffix(QApplication::translate("MainWindow", " \320\274", nullptr));
         label_background_meters->setText(QApplication::translate("MainWindow", "\320\240\320\260\321\201\321\201\321\202\320\276\321\217\320\275\320\270\320\265 \320\264\320\276 \321\204\320\276\320\275\320\260", nullptr));
         diafragm_letter->setText(QApplication::translate("MainWindow", "f/", nullptr));
+        label_strategy->setText(QApplication::translate("MainWindow", "\320\240\320\265\320\266\320\270\320\274 \321\201\321\212\320\265\320\274\320\272\320\270", nullptr));
     } // retranslateUi
 
 };

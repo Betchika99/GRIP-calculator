@@ -1,28 +1,27 @@
 #ifndef IMAGEHANDLER_H
 #define IMAGEHANDLER_H
-#include <QVector>
-#include <QImage>
+#include "image.h"
 
 #include <vector>
 
 using std::vector;
-using std::pair;
-
 
 class ImageHandler
 {
 public:
     ImageHandler();
+    ImageHandler(const ImageHandler& source) { images = source.images; }
+    unsigned int layersCount() { return images.size(); }
+//    Image getImage(unsigned int index) { return images[index]; } //математика работает с ним же
+//    void setImage(Image img, unsigned  int index) { images[index] = img; }
+    Image gluedImage(int shiftX = 0);
+    Image& model() { return images[1]; }
+    Image& background() { return images[0]; }
+    bool isValid() { return model().isValid() && background().isValid(); }
     void UpdateImages(int indexModel, int indexBack);
-    //bool loadFromFile(QString filemask);
-    //void clean() { images.clear(); }
-    int imagesCount() { return images.size(); }
-    QImage getImageOrigin(int index) { return images[index].first; } //математика работает с ним же
-    void setImageResult(QImage img, int index) { images[index].second = img; }
-     QImage getImageResult(size_t index) { return images[index].second; }
 
 private:
-    vector< pair<QImage,QImage> > images;
+    vector<Image> images;
 
 //    class Con //подкласс
 };
