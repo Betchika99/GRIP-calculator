@@ -6,7 +6,17 @@
 #include <signal.h>
 
 
+#include <bsoncxx/json.hpp>
+#include <bsoncxx/builder/stream/document.hpp>
+#include <mongocxx/client.hpp>
+#include <mongocxx/stdx.hpp>
+#include <mongocxx/uri.hpp>
+#include <mongocxx/instance.hpp>
+
 int main() {
+
+
+
     uint16_t port = 12345;
     const char *address = "0.0.0.0";
     struct event_base *ev_base = event_init();

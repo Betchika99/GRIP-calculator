@@ -25,10 +25,10 @@ all_params json_to_params_struct(json_t *requestJSON){
   if(!json_is_real(json_object_get(input, "focus_destination"))) fprintf(stderr, "ERROR: focus_destination is not a double\n");
   if(!json_is_real(json_object_get(input, "destination_to_background"))) fprintf(stderr, "ERROR: destination_to_background is not a double\n");
   if(!json_is_real(json_object_get(input, "aperture"))) fprintf(stderr, "ERROR: aperture is not a double\n");
-  if(!json_is_real(json_object_get(input, "depth"))) fprintf(stderr, "ERROR: depth is not a double\n");
-  if(!json_is_real(json_object_get(input, "front_GRIP"))) fprintf(stderr, "ERROR: front_GRIP is not a double\n");
-  if(!json_is_real(json_object_get(input, "back_GRIP"))) fprintf(stderr, "ERROR: back_GRIP is not a double\n");
-  if(!json_is_real(json_object_get(input, "hyperfocal_distance"))) fprintf(stderr, "ERROR: hyperfocal_distance is not a double\n");
+  if(!json_is_real(json_object_get(output, "depth"))) fprintf(stderr, "ERROR: depth is not a double\n");
+  if(!json_is_real(json_object_get(output, "front_GRIP"))) fprintf(stderr, "ERROR: front_GRIP is not a double\n");
+  if(!json_is_real(json_object_get(output, "back_GRIP"))) fprintf(stderr, "ERROR: back_GRIP is not a double\n");
+  if(!json_is_real(json_object_get(output, "hyperfocal_distance"))) fprintf(stderr, "ERROR: hyperfocal_distance is not a double\n");
 
   params_set.background_id = json_integer_value(json_object_get(input, "background_id"));
   params_set.model_id = json_integer_value(json_object_get(input, "model_id"));
