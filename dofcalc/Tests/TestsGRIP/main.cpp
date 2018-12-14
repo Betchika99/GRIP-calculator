@@ -25,7 +25,7 @@ class ManagerTest : public AbstractTest {
 public:
     virtual ~ManagerTest() {}
     virtual void SetUp();
-    virtual void TearDown(){}
+    virtual void TearDown();
     PropertyList *pl;
     ImageHandler *ih;
     DOFManager *dm;
@@ -49,7 +49,12 @@ void ManagerTest::SetUp() {
     pl = new PropertyList;
     ih = new ImageHandler;
     dm = new DOFManager;
+}
 
+void ManagerTest::TearDown() {
+    delete pl;
+    delete ih;
+    delete dm;
 }
 
 TEST_F(MathTest, CalculateTrueCrop) {
