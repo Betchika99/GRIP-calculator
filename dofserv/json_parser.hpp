@@ -1,24 +1,24 @@
+
 #ifndef JSON_PARSER_H
 #define JSON_PARSER_H
 #include <jansson.h>
-#include <string.h>
+#include <string>
 
 struct all_params{
-    char* email;
+    std::string email;
     int background_id;
     int model_id;
     int format_id;
-    float crop_factor;
-    float destination_to_model;
-    float focus_destination;
-    float destination_to_background;
-    float aperture;
+    double crop_factor;
+    double destination_to_model;
+    double focus_destination;
+    double destination_to_background;
+    double aperture;
 
-    float depth;
-    float front_GRIP;
-    float back_GRIP;
-    float hyperfocal_distance;
-
+    double depth;
+    double front_GRIP;
+    double back_GRIP;
+    double hyperfocal_distance;
 
 
     all_params():
@@ -38,14 +38,12 @@ struct all_params{
 };
 
 struct user{
-    char* email;
-    char* password;
-    user(char* mail, size_t email_size, char* pass, size_t password_size)
+    std::string email;
+    std::string password;
+    user(std::string mail, std::string pass)
     {
-        email = new char[email_size];
-        strcpy(email, mail);
-        password = new char[password_size];
-        strcpy(password, pass);
+        email = mail;
+        password = pass;
     }
 };
 
