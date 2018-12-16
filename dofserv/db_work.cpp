@@ -55,6 +55,61 @@ bool db_sign_in(user current_user){
 
 }
 
+json_t *return_strategies(){
+  json_t *array  = json_array();
+
+  mongocxx::collection coll = db["strategies"];
+
+  mongocxx::cursor cursor = coll.find({});
+  for(auto doc : cursor) {
+    json_t *element = json_object();
+
+
+    bsoncxx::document::element strategy_name_elem = doc["strategy_name"];
+    json_object_set_new( element, "strategy_name", json_string( strategy_name_elem.get_utf8().value.to_string().c_str() ) );
+    bsoncxx::document::element background_name_elem = doc["background_name_default"];
+    json_object_set_new( element, "background_name_default", json_string( background_name_elem.get_utf8().value.to_string().c_str() ) );
+    bsoncxx::document::element model_name_elem = doc["model_name_default"];
+    json_object_set_new( element, "model_name_default", json_string( model_name_elem.get_utf8().value.to_string().c_str() ) );
+
+    bsoncxx::document::element crop_factor_min_elem = doc["crop_factor_min"];
+    json_object_set_new( element, "crop_factor_min", json_real( crop_factor_min_elem.get_double() ) );
+    bsoncxx::document::element destination_to_model_min_elem = doc["destination_to_model_min"];
+    json_object_set_new( element, "destination_to_model_min", json_real( destination_to_model_min_elem.get_double() ) );
+    bsoncxx::document::element focus_destination_min_elem = doc["focus_destination_min"];
+    json_object_set_new( element, "focus_destination_min", json_real( focus_destination_min_elem.get_double() ) );
+    bsoncxx::document::element destination_to_background_min_elem = doc["destination_to_background_min"];
+    json_object_set_new( element, "destination_to_background_min", json_real( destination_to_background_min_elem.get_double() ) );
+    bsoncxx::document::element aperture_min_elem = doc["aperture_min"];
+    json_object_set_new( element, "aperture_min", json_real( aperture_min_elem.get_double() ) );
+
+    bsoncxx::document::element crop_factor_max_elem = doc["crop_factor_max"];
+    json_object_set_new( element, "crop_factor_max", json_real( crop_factor_max_elem.get_double() ) );
+    bsoncxx::document::element destination_to_model_max_elem = doc["destination_to_model_max"];
+    json_object_set_new( element, "destination_to_model_max", json_real( destination_to_model_max_elem.get_double() ) );
+    bsoncxx::document::element focus_destination_max_elem = doc["focus_destination_max"];
+    json_object_set_new( element, "focus_destination_max", json_real( focus_destination_max_elem.get_double() ) );
+    bsoncxx::document::element destination_to_background_max_elem = doc["destination_to_background_max"];
+    json_object_set_new( element, "destination_to_background_max", json_real( destination_to_background_max_elem.get_double() ) );
+    bsoncxx::document::element aperture_max_elem = doc["aperture_max"];
+    json_object_set_new( element, "aperture_max", json_real( aperture_max_elem.get_double() ) );
+
+    bsoncxx::document::element crop_factor_default_elem = doc["crop_factor_default"];
+    json_object_set_new( element, "crop_factor_default", json_real( crop_factor_default_elem.get_double() ) );
+    bsoncxx::document::element destination_to_model_default_elem = doc["destination_to_model_default"];
+    json_object_set_new( element, "destination_to_model_default", json_real( destination_to_model_default_elem.get_double() ) );
+    bsoncxx::document::element focus_destination_default_elem = doc["focus_destination_default"];
+    json_object_set_new( element, "focus_destination_default", json_real( focus_destination_default_elem.get_double() ) );
+    bsoncxx::document::element destination_to_background_default_elem = doc["destination_to_background_default"];
+    json_object_set_new( element, "destination_to_background_default", json_real( destination_to_background_default_elem.get_double() ) );
+    bsoncxx::document::element aperture_default_elem = doc["aperture_default"];
+    json_object_set_new( element, "aperture_default", json_real( aperture_default_elem.get_double() ) );
+
+    json_array_append_new(array, element );
+  }
+  return array;
+}
+
 json_t *return_models(std::string strategy_name){
   json_t *array  = json_array();
 
@@ -214,19 +269,19 @@ json_t *return_favourites(user current_user){
     bsoncxx::document::element strategy_name_elem = doc["strategy_name"];
     json_object_set_new( element, "strategy_name", json_string( strategy_name_elem.get_utf8().value.to_string().c_str() ) );
     bsoncxx::document::element background_name_elem = doc["background_name"];
-    json_object_set_new( element, "background_name", json_string( strategy_name_elem.get_utf8().value.to_string().c_str() ) );
+    json_object_set_new( element, "background_name", json_string( background_name_elem.get_utf8().value.to_string().c_str() ) );
     bsoncxx::document::element model_name_elem = doc["model_name"];
-    json_object_set_new( element, "model_name", json_string( strategy_name_elem.get_utf8().value.to_string().c_str() ) );
+    json_object_set_new( element, "model_name", json_string( model_name_elem.get_utf8().value.to_string().c_str() ) );
     bsoncxx::document::element crop_factor_elem = doc["crop_factor"];
-    json_object_set_new( element, "crop_factor", json_real( strategy_name_elem.get_double() ) );
+    json_object_set_new( element, "crop_factor", json_real( crop_factor_elem.get_double() ) );
     bsoncxx::document::element destination_to_model_elem = doc["destination_to_model"];
-    json_object_set_new( element, "destination_to_model", json_real( strategy_name_elem.get_double() ) );
+    json_object_set_new( element, "destination_to_model", json_real( destination_to_model_elem.get_double() ) );
     bsoncxx::document::element focus_destination_elem = doc["focus_destination"];
-    json_object_set_new( element, "focus_destination", json_real( strategy_name_elem.get_double() ) );
+    json_object_set_new( element, "focus_destination", json_real( focus_destination_elem.get_double() ) );
     bsoncxx::document::element destination_to_background_elem = doc["destination_to_background"];
-    json_object_set_new( element, "destination_to_background", json_real( strategy_name_elem.get_double() ) );
+    json_object_set_new( element, "destination_to_background", json_real( destination_to_background_elem.get_double() ) );
     bsoncxx::document::element aperture_elem = doc["aperture"];
-    json_object_set_new( element, "aperture", json_real( strategy_name_elem.get_double() ) );
+    json_object_set_new( element, "aperture", json_real( aperture_elem.get_double() ) );
 
 
     json_array_append_new(array, element );
@@ -234,7 +289,7 @@ json_t *return_favourites(user current_user){
   return array;
 }
 
-bool dfdb(user current_user, std::string favourite_name){
+bool delete_favourite_from_db(user current_user, std::string favourite_name){
     mongocxx::collection coll = db["users"];
     bsoncxx::stdx::optional<bsoncxx::document::value> maybe_result = coll.find_one(document{} << "name" << favourite_name << finalize);
     if(maybe_result) {
@@ -284,26 +339,3 @@ bool set_favourite(user current_user, all_params params, std::string favourite_n
 
 
 }
-
-
-
-// bool delete_favourite_from_db(user current_user, std::string favourite_name){
-//   // mongocxx::collection coll = db["users"];
-//   // bsoncxx::stdx::optional<bsoncxx::document::value> maybe_result = coll.find_one(document{} << "name" << favourite_name << finalize);
-//   // if(maybe_result) {
-//   //   bsoncxx::document::view view = maybe_result->view();
-//   //   bsoncxx::document::element pass_element = view["password"];
-//   //   std::string password = pass_element.get_utf8().value.to_string();
-//   //   if (current_user.password == password) {
-//   //     coll = db["favourites"];
-//   //     coll.delete_one(document{} << "name" << favourite_name << finalize);
-//   //     return true;
-//   //   } else {
-//   //     return false;
-//   //   }
-//   // } else {
-//   //
-//   //   return false;
-//   // }
-//   return true;
-// }

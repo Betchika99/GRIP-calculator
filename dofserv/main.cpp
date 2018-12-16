@@ -27,6 +27,7 @@ int main() {
     printf("Succesfully started on %s port %d\n", address, port);
 
     evhttp_set_cb(server, "/sign_in", sign_in, NULL);
+    evhttp_set_cb(server, "/strategies", strategies_list, NULL);
     evhttp_set_cb(server, "/images_list", images_list, NULL);
     evhttp_set_cb(server, "/background_image", get_background_image, NULL);
     evhttp_set_cb(server, "/model_image", get_model_image, NULL);

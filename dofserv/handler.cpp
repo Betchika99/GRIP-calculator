@@ -22,9 +22,8 @@ using bsoncxx::builder::stream::open_array;
 using bsoncxx::builder::stream::open_document;
 
 
-#define BOUNDARY "xXPubSubXx"
 #define HEADER_BUFFER_SIZE 1024
-
+#define HTTP_FORBIDDEN 500
 
 void unspecified_URL(struct evhttp_request *request, void *arg){
 
@@ -84,6 +83,48 @@ void images_list(struct evhttp_request *request, void *arg){
 
   evbuffer_free(buffer);
 
+}
+
+void strategies_list(struct evhttp_request *request, void *arg){
+  struct evkeyvalq uri_params;
+  printf ("Request from: %s:%d URI: %s\n", request->remote_host, request->remote_port, request->uri);
+  evhttp_parse_query (request->uri, &uri_params);
+
+  struct event_base *base = (struct event_base *)arg;
+  struct evbuffer *requestBuffer = evhttp_request_get_input_buffer(request);
+  size_t requestLen = evbuffer_get_length(requestBuffer);
+  char *requestDataBuffer = (char *)malloc(sizeof(char) * requestLen);
+  evbuffer_copyout(requestBuffer, requestDataBuffer, requestLen);
+
+  json_error_t error;
+
+  json_t *requestJSON = json_loadb(requestDataBuffer, requestLen, 0, &error);
+
+  if (requestJSON != NULL){
+    char *requestDataString = json_dumps(requestJSON, JSON_INDENT(4));
+    printf("%s\n", requestDataString);
+  }
+
+  json_t *root = json_object();
+
+  json_t *strategies = return_strategies();
+
+  json_object_set_new(root, "strategies", strategies);
+
+  char *responseData = json_dumps(root, JSON_INDENT(3));
+  int responseLen = strlen(responseData);
+  char responseHeader[HEADER_BUFFER_SIZE];
+  snprintf(responseHeader, HEADER_BUFFER_SIZE, "%d", (int)responseLen);
+  json_decref(root);
+
+  struct evbuffer *buffer = evbuffer_new();
+  evhttp_add_header(request->output_headers, "Content-Type", "application/json");
+  evhttp_add_header(request->output_headers, "Content-Length", responseHeader);
+  evbuffer_add(buffer, responseData, responseLen);
+
+  evhttp_send_reply(request, 200, "OK", buffer);
+
+  evbuffer_free(buffer);
 }
 
 void get_background_image(struct evhttp_request *request, void *arg){
@@ -289,10 +330,9 @@ void set_last_user_params(struct evhttp_request *request, void *arg){
   user current_user = json_to_user_struct(requestJSON);
   all_params parameters = json_to_params_struct(requestJSON);
   if(set_last_params(current_user, parameters)){
-    //написать вернуть 200OK
-
+    evhttp_send_reply(request, 200, "OK", NULL);
   } else {
-    //вернуть не 200 ok
+    evhttp_send_reply(request, HTTP_FORBIDDEN, "OK", NULL);
   }
 
 
@@ -322,10 +362,10 @@ void set_to_favorites(struct evhttp_request *request, void *arg){
   all_params parameters = json_to_params_struct(requestJSON);
 
   if(set_favourite(current_user, parameters, favourite_name)){
-    //написать вернуть 200OK
+    evhttp_send_reply(request, 200, "OK", NULL);
 
   } else {
-    //вернуть не 200 ok
+    evhttp_send_reply(request, HTTP_FORBIDDEN, "OK", NULL);
   }
 
   free(requestDataBuffer);
@@ -396,10 +436,10 @@ void sign_in(struct evhttp_request *request, void *arg){
 
   user current_user = json_to_user_struct(requestJSON);
   if (db_sign_in(current_user)) {
-    //написать вернуть 200OK
+    evhttp_send_reply(request, 200, "OK", NULL);
 
   } else {
-    //вернуть не 200 ok
+    evhttp_send_reply(request, HTTP_FORBIDDEN, "OK", NULL);
   }
 
 
@@ -431,9 +471,13 @@ void delete_favourite(struct evhttp_request *request, void *arg){
   user current_user = json_to_user_struct(requestJSON);
 
 
-  dfdb(current_user, favourite_name);
+  if (delete_favourite_from_db(current_user, favourite_name)){
+    evhttp_send_reply(request, 200, "OK", NULL);
+  } else {
+    evhttp_send_reply(request, HTTP_FORBIDDEN, "OK", NULL);
 
-  // delete_favourite_from_db(current_user, favourite_name) ;
+  }
+
 
 
 

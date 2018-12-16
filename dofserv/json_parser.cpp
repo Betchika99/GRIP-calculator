@@ -56,7 +56,7 @@ user json_to_user_struct(json_t *input_JSON){
   user new_user = user(std::string(json_string_value(json_object_get(input_JSON, "email"))),std::string(json_string_value(json_object_get(input_JSON, "password"))));
   return new_user;
 }
-
+ 
 all_params json_to_params_struct(json_t *requestJSON){
   json_t *input = json_object_get(requestJSON, "input_params");
 

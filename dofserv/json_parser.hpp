@@ -15,16 +15,59 @@ struct all_params{
     double aperture;
 
 
-    all_params(std::string name_of_strategy):
-        background_name("Background1Name"),
-        model_name("Model1Name"),
-        crop_factor(1.0),
-        destination_to_model(1.0),
-        focus_destination(24.0),
-        destination_to_background(500.0),
-        aperture(8.0)
+    all_params(std::string name_of_strategy)
     {
-      strategy_name = name_of_strategy;
+
+
+       if (name_of_strategy == "Portrait"){
+          strategy_name = name_of_strategy;
+          background_name = "Background1Name";
+          model_name = "Model1Name";
+          crop_factor = 1.0;
+          destination_to_model = 1.0;
+          focus_destination = 24.0;
+          destination_to_background = 500.0;
+          aperture = 8.0;
+       } else if (name_of_strategy == "Macro"){
+         strategy_name = name_of_strategy;
+         background_name = "Background1Name";
+         model_name = "Model1Name";
+         crop_factor = 1.0;
+         destination_to_model = 1.0;
+         focus_destination = 24.0;
+         destination_to_background = 500.0;
+         aperture = 8.0;
+       } else if (name_of_strategy == "CloseUp"){
+         strategy_name = name_of_strategy;
+         background_name = "Background1Name";
+         model_name = "Model1Name";
+         crop_factor = 1.0;
+         destination_to_model = 1.0;
+         focus_destination = 24.0;
+         destination_to_background = 500.0;
+         aperture = 8.0;
+       } else if (name_of_strategy == "Landscape"){
+         strategy_name = name_of_strategy;
+         background_name = "Background1Name";
+         model_name = "Model1Name";
+         crop_factor = 1.0;
+         destination_to_model = 1.0;
+         focus_destination = 24.0;
+         destination_to_background = 500.0;
+         aperture = 8.0;
+       } else {
+         strategy_name = "Portrait";
+         background_name = "Background1Name";
+         model_name = "Model1Name";
+         crop_factor = 1.0;
+         destination_to_model = 1.0;
+         focus_destination = 24.0;
+         destination_to_background = 500.0;
+         aperture = 8.0;
+       }
+
+
+
     }
 };
 
