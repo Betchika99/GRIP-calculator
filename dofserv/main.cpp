@@ -16,7 +16,6 @@
 int main() {
 
 
-
     uint16_t port = 12345;
     const char *address = "0.0.0.0";
     struct event_base *ev_base = event_init();
@@ -27,12 +26,16 @@ int main() {
     }
     printf("Succesfully started on %s port %d\n", address, port);
 
-    evhttp_set_cb(server, "/get_background_images", get_background_default_images, NULL);
-    evhttp_set_cb(server, "/get_model_images", get_model_default_images, NULL);
+    evhttp_set_cb(server, "/sign_in", sign_in, NULL);
+    evhttp_set_cb(server, "/strategies", strategies_list, NULL);
+    evhttp_set_cb(server, "/images_list", images_list, NULL);
+    evhttp_set_cb(server, "/background_image", get_background_image, NULL);
+    evhttp_set_cb(server, "/model_image", get_model_image, NULL);
     evhttp_set_cb(server, "/get_last_params", get_last_user_params, NULL);
     evhttp_set_cb(server, "/set_last_params", set_last_user_params, NULL);
     evhttp_set_cb(server, "/set_favorite", set_to_favorites, NULL);
-    evhttp_set_cb(server, "/get_favorites", get_my_favorites, NULL);
+    evhttp_set_cb(server, "/delete_favorite", delete_favourite, NULL);
+    evhttp_set_cb(server, "/favorites_list", get_my_favorites, NULL);
     evhttp_set_gencb(server, unspecified_URL, NULL);
     event_base_dispatch (ev_base);
 
