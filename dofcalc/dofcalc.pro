@@ -30,7 +30,8 @@ SOURCES += \
         dofmanager.cpp \
         propertylist.cpp \
         imagehandler.cpp \
-        mathlibrary.cpp
+        mathlibrary.cpp \
+    client.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,10 +39,15 @@ HEADERS += \
         propertylist.h \
         imagehandler.h \
         mathlibrary.h \
-    image.h
+    image.h \
+    client.h
 
 FORMS += \
         mainwindow.ui
+
+# change these two paths to your path to Boost
+INCLUDEPATH += /usr/local/Cellar/boost/1.68.0/include
+LIBS += -L/usr/local/Cellar/boost/1.68.0/lib -lboost_system -lpthread
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
