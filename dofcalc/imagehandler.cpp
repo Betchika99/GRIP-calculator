@@ -29,12 +29,12 @@ Image ImageHandler::gluedImage(int shiftX)
     if (modelHeight < backgroundHeight)
     {
         pos.setX((backgroundWidth-modelWidht)/2+shiftX);
-        pos.setY(backgroundHeight-modelHeight);
+        pos.setY(backgroundHeight-modelHeight-50);
     }
     else
     {
         pos.setX((backgroundWidth-modelWidht)/2  + shiftX);
-        pos.setY(0);
+        pos.setY(50);
     }
 //    img.setCompositionMode(QPainter::CompositionMode_SourceIn);
     result.imposeImages(model(),pos);

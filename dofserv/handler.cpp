@@ -37,7 +37,6 @@ void unspecified_URL(struct evhttp_request *request, void *arg){
 }
 
 void a(struct evhttp_request *request, void *arg){
-
   mongocxx::uri uri("mongodb://localhost:27017");
   mongocxx::client client(uri);
   mongocxx::database db = client["dofdb"];

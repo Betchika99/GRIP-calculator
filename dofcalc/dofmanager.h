@@ -72,7 +72,6 @@ private:
     MathLibrary ml;
     ImageHandler origin;
     ImageHandler result;
-
 };
 
 #endif // DOFMANAGER_H

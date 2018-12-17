@@ -3,11 +3,11 @@
 #include <iostream>
 
 string Client::getStrategies() {
-    return this->getParams("0.0.0.0", "12345", "/strategies");
+    return getParams("0.0.0.0", "12345", "/strategies");
 }
 
 string Client::getImagesNames() {
-    return this->getParams("0.0.0.0", "12345", "/images_list");
+    return getParams("0.0.0.0", "12345", "/images_list");
 }
 
 bool Client::getBackgroud(const string& fileName) {
@@ -19,23 +19,23 @@ bool Client::getModel(const string& fileName) {
 }
 
 string Client::getLastParams() {
-    return this->getParams("0.0.0.0", "12345", "/get_last_params");
+    return getParams("0.0.0.0", "12345", "/get_last_params");
 }
 
 string Client::getFavorite() {
-    return this->getParams("0.0.0.0", "12345", "/favorites_list");
+    return getParams("0.0.0.0", "12345", "/favorites_list");
 }
 
 bool Client::setLastParams(const string& jsonParams) {
-    return this->setParams("0.0.0.0", "12345", "/set_last_params", jsonParams);
+    return setParams("0.0.0.0", "12345", "/set_last_params", jsonParams);
 }
 
 bool Client::setFavorite(const string& jsonParams) {
-    return this->setParams("0.0.0.0", "12345", "/set_favorite", jsonParams);
+    return setParams("0.0.0.0", "12345", "/set_favorite", jsonParams);
 }
 
 bool Client::deleteFavorite(const string& jsonParams) {
-    return this->setParams("0.0.0.0", "12345", "/delete_favorite", jsonParams);
+    return setParams("0.0.0.0", "12345", "/delete_favorite", jsonParams);
 }
 
 string Client::getParams(const string& serverName, const string& port, const string& getCommand) {
