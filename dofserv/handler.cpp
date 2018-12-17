@@ -139,7 +139,7 @@ void a(struct evhttp_request *request, void *arg){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//PORTRAIT
 
 
 
@@ -191,8 +191,72 @@ void a(struct evhttp_request *request, void *arg){
   view = doc_value.view();
   coll.insert_one(view);
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //MACRO
 
+  coll = db["models"];
+  doc_value = builder
+    << "strategy_name" << "Macro"
+    << "name" << "Макро.Бабочка.Model.1.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
 
+  coll = db["backgrounds"];
+  doc_value = builder
+    << "strategy_name" << "Macro"
+    << "name" << "Макро.Цветок.Background.1.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Цветок.Background.1.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Macro"
+    << "name" << "Макро.Поляна.Background.2.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Поляна.Background.2.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //LANDSCAPE
+
+  coll = db["models"];
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "name" << "Макро.Бабочка.Model.1.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  coll = db["backgrounds"];
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "name" << "Пейзаж.Поле.Background.3.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "name" << "Пейзаж.Мост.Background.2.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "name" << "Пейзаж.Замок.Background.1.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
 
   evhttp_send_reply(request, 200, "OK", NULL);
 }
