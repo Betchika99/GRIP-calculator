@@ -31,12 +31,10 @@ SOURCES += \
         propertylist.cpp \
         imagehandler.cpp \
         mathlibrary.cpp \
-
-    strategies.cpp \
-    logger.cpp \
-    properties.cpp \
-
-    client.cpp
+        strategies.cpp \
+        logger.cpp \
+        properties.cpp \
+        client.cpp
 
 
 HEADERS += \
