@@ -437,10 +437,13 @@
         <double>1.000000000000000</double>
        </property>
        <property name="maximum">
-        <double>50.000000000000000</double>
+        <double>100.000000000000000</double>
        </property>
        <property name="singleStep">
         <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>15.000000000000000</double>
        </property>
       </widget>
       <widget class="QLabel" name="label_background">
