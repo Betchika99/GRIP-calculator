@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->combo_favorite->blockSignals(false);
 
     dof = new DOFManager();
+    Client c;
     updateUI();
     updateImage();
 }

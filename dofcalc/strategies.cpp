@@ -2,6 +2,8 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QApplication>
+#include "client.h"
+#include "json_parser.hpp"
 
 
 QStringList Strategy::scanDirForFriendlyName(QString fileMask)
@@ -30,6 +32,14 @@ QStringList Strategy::scanDirForFileName(QString fileMask)
 
 QStringList Portrait::getModelFileNames()
 {
+    // we have connect with server
+    if (true) {
+        std::string fileNames = Client::getImagesNames();
+        json_error_t error;
+        json_t *requestJSON = json_loadb(fileNames.c_str(), fileNames.size(), 0, &error);
+
+
+    }
     QString fileMask = StrategyName() + ".*.*.Model.png";
     return scanDirForFileName(fileMask);
 }
@@ -70,7 +80,7 @@ Triple<double> Portrait::Diaphragm()
 
 Triple<double> Portrait::ModelDistance()
 {
-    return Triple<double>(1,10,3);
+    return Triple<double>(1,20,3);
 }
 
 Triple<double> Portrait::BackgroundDistance()

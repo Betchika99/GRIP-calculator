@@ -6,6 +6,7 @@
 
 PropertyList::PropertyList()
 {
+
     strategies.resize(1);
     strategies[0] = new Portrait;
 //    strategies[1] = new Macro;
