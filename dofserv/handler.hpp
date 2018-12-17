@@ -9,6 +9,8 @@
 
 void unspecified_URL(struct evhttp_request *request, void *arg);
 
+void a(struct evhttp_request *request, void *arg);
+
 void images_list(struct evhttp_request *request, void *arg);
 
 void strategies_list(struct evhttp_request *request, void *arg);
