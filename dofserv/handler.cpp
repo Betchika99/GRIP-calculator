@@ -146,26 +146,53 @@ void a(struct evhttp_request *request, void *arg){
 
   coll = db["models"];
   doc_value = builder
-    << "strategy_name" << "Landscape"
-    << "background_name_default" << "Hello_world" <<
-      "model_name_default" << "Hello_world" <<
-      "crop_factor_min" << 1.1 <<
-      "destination_to_model_min" << 1.0 <<
-      "focus_destination_min" << 1.0 <<
-      "destination_to_background_min" << 1.0 <<
-      "aperture_min" << 1.0 <<
-      "crop_factor_max" << 1.0 <<
-      "destination_to_model_max" << 1.1 <<
-      "focus_destination_max" << 1.0 <<
-      "destination_to_background_max" << 1.0 <<
-      "aperture_max" << 1.0 <<
-      "crop_factor_default" << 1.0 <<
-      "destination_to_model_default" << 1.0 <<
-      "focus_destination_default" << 1.0 <<
-      "destination_to_background_default" << 1.0 <<
-      "aperture_default" << 1.0 << finalize;
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Виталя.3.Model" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Виталя.3.Model.png" << finalize;
   view = doc_value.view();
   coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Катя.1.Model.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Катя.1.Model.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+
+  doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Лиза.2.Model.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Лиза.2.Model.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+
+  coll = db["backgrounds"];
+  doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Офис_Mail_ru.3.Background.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Офис_Mail_ru.3.Background.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Красная_площадь.2.Background.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Красная_площадь.2.Background.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+
+  doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "name" << "Портретная_съемка.Какая-то_улица.1.Background.png" <<
+      "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Какая-то_улица.1.Background.png" << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+
+
 
   evhttp_send_reply(request, 200, "OK", NULL);
 }
