@@ -2,8 +2,12 @@
 #define PROPERTYLIST_H
 
 #include <QStringList>
+#include <vector>
+#include "strategies.h"
 
-enum Strategy {Portrait, Macro, LandScape, CloseUp};
+using std::vector;
+
+//enum Strategy {Portrait, Macro, LandScape, CloseUp};
 enum Orientation {Book, Album};
 
 class PropertyList
@@ -14,28 +18,32 @@ private:
     double crop;
     double distanceModel;
     double distanceBackgroud;
-    Strategy strategy;
+//    QString strategy;
     Orientation orientation;
     QStringList models;
     QStringList backgrounds;
+//    QStringList strategies;
     QStringList crops;
 
     int currentModelIndex;
     int currentBackgroundIndex;
+    int currentStrategyIndex;
     int currentCropIndex;
 
     QString settingsFile;
     QString imagesPath;
 
+
+    vector<Strategy*> strategies;
+    Strategy* currentStrategy;
 public:
     PropertyList();
     ~PropertyList();
 
 protected:
-    bool saveToFile(QString& filename); //погуглить
-    bool loadFromFile(QString& fiename);
-
-    QStringList scanPath(QString path, QString mask);
+//    QStringList scanPath(QString path, QString mask);
+    template <class T>
+    T setRange(T value, Triple<T> range);
     template <class T>
     T setRange(T value, T min, T max);
 
@@ -53,15 +61,14 @@ public:
     QStringList getCrops();
 
 
-
     void setDistanceModel(double value);
     double getDistanceModel() { return distanceModel; }
 
     void setDistanceBackgroud(double value);
     double getDistanceBackgroud() { return distanceBackgroud; }
 
-    void setStrategy(Strategy value);
-    Strategy getStrategy() { return strategy; }
+//    void setStrategy(int index);
+//    int getStrategy() { return currentStrategyIndex; }
 
     void setOrientation(Orientation value);
     Orientation getOrientation() { return orientation; }
@@ -74,7 +81,17 @@ public:
     void setCurrentBackgroundIndex(int value);
     int getCurrentBackgroundIndex() { return currentBackgroundIndex; }
 
+    QStringList getStrategies();
+    void setCurrentStrategyIndex(int value);
+    int getCurrentStrategyIndex() { return currentStrategyIndex; }
+    QString getCurrentStrategyModelFileName();
+    QString getCurrentStrategyBackgroundFileName();
+    Strategy* getCurrentStrategy() {return currentStrategy;}
+
     void setDefault();
+    bool saveToFile(QString& filename); //погуглить
+    bool loadFromFile(QString& fiename);
+
 };
 
 #endif // PROPERTYLIST_H

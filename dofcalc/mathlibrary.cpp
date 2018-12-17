@@ -1,5 +1,5 @@
 #include "mathlibrary.h"
-const int ERROR = -1;
+const int mathERROR = -1;
 
 MathLibrary::MathLibrary() {}
 
@@ -18,7 +18,7 @@ double MathLibrary::FindCrop(PropertyList *values) {
         double c = 0.03/crop;
         return c;
     }
-    return ERROR;
+    return mathERROR;
 }
 
 double MathLibrary::FindHyperFocal(PropertyList *values) {
@@ -29,7 +29,7 @@ double MathLibrary::FindHyperFocal(PropertyList *values) {
         double h = f*f/(c*d);
         return h;
     }
-    return ERROR;
+    return mathERROR;
 }
 
 double MathLibrary::FindNearestPointOfSharpness(PropertyList *values) {
@@ -41,7 +41,7 @@ double MathLibrary::FindNearestPointOfSharpness(PropertyList *values) {
         double dN = (s0 * f * f)/(f * f + (f/d * c) * (s0 - f));
         return dN;
     }
-    return ERROR;
+    return mathERROR;
 }
 
 double MathLibrary::FindFarestPointOfSharpness(PropertyList *values) {
@@ -53,7 +53,7 @@ double MathLibrary::FindFarestPointOfSharpness(PropertyList *values) {
         double dF = (s0 * f * f)/(f * f - (f/d * c) * (s0 - f));
         return dF;
     }
-    return ERROR;
+    return mathERROR;
 }
 
 double MathLibrary::FindGRIP(PropertyList *values) {
@@ -62,7 +62,7 @@ double MathLibrary::FindGRIP(PropertyList *values) {
         double dN = this->FindNearestPointOfSharpness(values);
         return (dF - dN);
     }
-    return ERROR;
+    return mathERROR;
 }
 
 void MathLibrary::Scale(PropertyList *values, ImageHandler& ih) {
@@ -79,7 +79,7 @@ void MathLibrary::Blur(PropertyList *values, ImageHandler& ih) {
     
     if (this->CheckerNull(values) && ih.isValid())  {
         Image& backgroud = ih.background();
-        qreal blurFactor = (values->getDiaphragm() / values->getFocalLenght()) + (values->getDistanceBackgroud() / values->getDistanceModel()) / 1000; // add blur factor expression to calculate
+        qreal blurFactor = ( values->getDiaphragm() / values->getFocalLenght() ) + (values->getDistanceBackgroud() / values->getDistanceModel())/1000; // add blur factor expression to calculate
         
         QT_BEGIN_NAMESPACE
         extern Q_WIDGETS_EXPORT void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed = 0 );

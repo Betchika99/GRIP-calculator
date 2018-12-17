@@ -14,6 +14,11 @@ public:
     ~DOFManager();
 
 public:
+    QStringList getStrategyList();
+    int  getStrategyIndex();
+    void setStrategyIndex(int index);
+    Strategy& getStrategy();
+
     QStringList getBackgroundsList();
     int  getBackgroundIndex();
     void setBackgroundIndex(int index);
@@ -41,17 +46,26 @@ public:
     double getAperture();
     void setAperture(double Value);
 
-
     double getGRIP();
     double getHyperFocal();
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
-//    void Blur();
-//    void Scale();
     Image getResultImage() {return result.gluedImage();}
-    void UpdateImages(int modelIndex, int backgroundIndex) { origin.UpdateImages(modelIndex, backgroundIndex); }
+    void UpdateImages();
     void PerformImageProcessing();
+
+    bool loadFromFile(QString &fileName)
+    {
+        bool success = pl.loadFromFile(fileName);
+        UpdateImages();
+        return success;
+    }
+    bool saveToFile(QString &fileName)
+    {
+        bool success = pl.saveToFile(fileName);
+        return success;
+    }
 
 private:
     PropertyList pl;

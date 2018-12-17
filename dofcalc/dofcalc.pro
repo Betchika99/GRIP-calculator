@@ -31,7 +31,13 @@ SOURCES += \
         propertylist.cpp \
         imagehandler.cpp \
         mathlibrary.cpp \
+
+    strategies.cpp \
+    logger.cpp \
+    properties.cpp \
+
     client.cpp
+
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +46,11 @@ HEADERS += \
         imagehandler.h \
         mathlibrary.h \
     image.h \
+    strategies.h \
+    logger.h \
+    properties.h \
     client.h
+
 
 FORMS += \
         mainwindow.ui
