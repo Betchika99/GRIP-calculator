@@ -9,6 +9,8 @@ add_executable(
         json_parser.cpp
         handler.hpp
         handler.cpp
+        db_work.hpp
+        db_work.cpp
         main.cpp
 )
 
