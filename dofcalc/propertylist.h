@@ -41,9 +41,6 @@ public:
     ~PropertyList();
 
 protected:
-    bool saveToFile(QString& filename); //погуглить
-    bool loadFromFile(QString& fiename);
-
 //    QStringList scanPath(QString path, QString mask);
     template <class T>
     T setRange(T value, Triple<T> range);
@@ -89,9 +86,12 @@ public:
     int getCurrentStrategyIndex() { return currentStrategyIndex; }
     QString getCurrentStrategyModelFileName();
     QString getCurrentStrategyBackgroundFileName();
-
+    Strategy* getCurrentStrategy() {return currentStrategy;}
 
     void setDefault();
+    bool saveToFile(QString& filename); //погуглить
+    bool loadFromFile(QString& fiename);
+
 };
 
 #endif // PROPERTYLIST_H

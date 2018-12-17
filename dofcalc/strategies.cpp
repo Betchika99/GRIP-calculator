@@ -1,4 +1,4 @@
- #include <strategies.h>
+#include <strategies.h>
 #include <QFileInfo>
 #include <QDir>
 #include <QApplication>

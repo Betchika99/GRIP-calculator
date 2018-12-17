@@ -30,7 +30,10 @@ SOURCES += \
         dofmanager.cpp \
         propertylist.cpp \
         imagehandler.cpp \
-        mathlibrary.cpp
+        mathlibrary.cpp \
+    strategies.cpp \
+    logger.cpp \
+    properties.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +41,10 @@ HEADERS += \
         propertylist.h \
         imagehandler.h \
         mathlibrary.h \
-    image.h
+    image.h \
+    strategies.h \
+    logger.h \
+    properties.h
 
 FORMS += \
         mainwindow.ui

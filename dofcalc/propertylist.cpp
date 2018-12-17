@@ -19,7 +19,9 @@ PropertyList::PropertyList()
 //    imagesPath =  QDir::toNativeSeparators(QApplication::applicationDirPath() + "/images/");
 //    models = scanPath(imagesPath, "*.model.*.png");     //load list of models
 //    backgrounds = scanPath(imagesPath, "*.background.png");     //load list of backgrounds
-    /*if (!loadFromFile(settingsFile))*/ setCurrentStrategyIndex(0);
+    setCurrentStrategyIndex(0);
+    setDefault();
+    loadFromFile(settingsFile);
 }
 
 PropertyList::~PropertyList()
@@ -102,19 +104,40 @@ void PropertyList::setDiaphragm(double value)
 
 void PropertyList::setCrop(double value)
 {
-    crop = setRange(value, 0.1, 16.0);
+    crop = setRange(value, 0.5, 10.0);
+    int crop10 = static_cast<int>(crop*10);
+    if (crop10 == 10) currentCropIndex = 0;
+    else if (crop10 == 13) currentCropIndex = 1;
+    else if (crop10 == 15) currentCropIndex = 2;
+    else if (crop10 == 16) currentCropIndex = 3;
+    else if (crop10 == 20) currentCropIndex = 4;
+    else if (crop10 == 40) currentCropIndex = 5;
+    else currentCropIndex = -1;
 }
 
 void PropertyList::setCurrentCropIndex(int value)
 {
     currentCropIndex = value;
+    switch (currentCropIndex)
+    {
+        case 0: crop = 1.0; break;
+        case 1: crop = 1.3; break;
+        case 2: crop = 1.5; break;
+        case 3: crop = 1.6; break;
+        case 4: crop = 2.0; break;
+        case 5: crop = 4.0; break;
+    }
 }
 
 QStringList PropertyList::getCrops()
 {
+    crops.clear();
     crops.append("Full Frame");
+    crops.append("APC-H");
+    crops.append("Nikon DX");
     crops.append("APC-C");
     crops.append("Four Thirds");
+    crops.append("2/3\"");
     return crops;
 }
 
@@ -159,9 +182,10 @@ void PropertyList::setCurrentModelIndex(int value)
 
 QStringList PropertyList::getBackgrounds()
 {
-    backgrounds.append("Какая-то улица");
-    backgrounds.append("Красная площадь");
-    backgrounds.append("Офис Mail.ru");
+//    backgrounds.clear();
+//    backgrounds.append("Какая-то улица");
+//    backgrounds.append("Красная площадь");
+    backgrounds = currentStrategy->getBackground();
     return backgrounds;
 }
 
@@ -198,7 +222,7 @@ void PropertyList::setCurrentStrategyIndex(int value)
    if (value >= strategies.size() || value < 0) value = 0;
    currentStrategyIndex = value;
    currentStrategy = strategies[currentStrategyIndex];
-   setDefault(); //todo: нужно сделать восстановление из dofcalk.settings
+   //todo: нужно сделать восстановление из dofcalk.settings
 }
 
 void PropertyList::setDefault()

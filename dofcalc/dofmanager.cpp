@@ -2,12 +2,32 @@
 
 DOFManager::DOFManager()
 {
-
+    UpdateImages();
 }
 
 DOFManager::~DOFManager()
 {
 
+}
+
+QStringList DOFManager::getStrategyList()
+{
+    return pl.getStrategies();
+}
+
+int DOFManager::getStrategyIndex()
+{
+    return pl.getCurrentStrategyIndex();
+}
+
+void DOFManager::setStrategyIndex(int index)
+{
+    pl.setCurrentStrategyIndex(index);
+}
+
+Strategy& DOFManager::getStrategy()
+{
+    return *pl.getCurrentStrategy();
 }
 
 QStringList DOFManager::getBackgroundsList()
@@ -22,7 +42,8 @@ int DOFManager::getBackgroundIndex()
 
 void DOFManager::setBackgroundIndex(int index)
 {
-    return pl.setCurrentBackgroundIndex(index);
+    pl.setCurrentBackgroundIndex(index);
+    UpdateImages();
 }
 
 QStringList DOFManager::getModelsList()
@@ -66,36 +87,21 @@ void DOFManager::setCropFactor(double crop)
     return pl.setCrop(crop);
 }
 
-QStringList DOFManager::getStrategyList()
-{
-    return pl.getStrategies();
-}
-
-int DOFManager::getStrategyIndex()
-{
-    return pl.getCurrentStrategyIndex();
-}
-
-void DOFManager::setStrategyIndex(int index)
-{
-    pl.setCurrentStrategyIndex(index);
-}
-
 double DOFManager::getBackgroundDistance()
 {
     return pl.getDistanceBackgroud();
 }
+
 void DOFManager::setBackgroundDistance(double value)
 {
     pl.setDistanceBackgroud(value);
-    UpdateImages();
 }
-
 
 double DOFManager::getModelDistance()
 {
     return pl.getDistanceModel();
 }
+
 void DOFManager::setModelDistance(double value)
 {
     return pl.setDistanceModel(value);

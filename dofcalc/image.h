@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include <QPainter>
 
-class Image{    //доделать
+class Image{
 public:
     Image() { painter.begin(&pixmap); }
     //инициализация через file

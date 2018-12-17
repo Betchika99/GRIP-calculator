@@ -21,20 +21,20 @@ Image ImageHandler::gluedImage(int shiftX)
     Image result = background();
     QPoint pos;
 
-//    int modelWidht = model().asQImage().width();
+    int modelWidht = model().asQImage().width();
     int modelHeight = model().asQImage().height();
     int backgroundWidth = background().asQImage().width();
     int backgroundHeight = background().asQImage().height();
 
-    if (modelHeight > backgroundHeight)
+    if (modelHeight < backgroundHeight)
     {
-        pos.setX(backgroundWidth/3 + shiftX);
-        pos.setY(backgroundHeight/2);
+        pos.setX((backgroundWidth-modelWidht)/2+shiftX);
+        pos.setY(backgroundHeight-modelHeight);
     }
     else
     {
-        pos.setX(backgroundWidth/3  + shiftX);
-        pos.setY(backgroundHeight - modelHeight);
+        pos.setX((backgroundWidth-modelWidht)/2  + shiftX);
+        pos.setY(0);
     }
 //    img.setCompositionMode(QPainter::CompositionMode_SourceIn);
     result.imposeImages(model(),pos);

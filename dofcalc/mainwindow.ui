@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>901</width>
-    <height>586</height>
+    <width>1149</width>
+    <height>655</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>686</width>
-    <height>434</height>
+    <width>888</width>
+    <height>655</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
     <property name="spacing">
      <number>10</number>
     </property>
-    <item row="1" column="1">
+    <item row="4" column="1">
      <widget class="QTableWidget" name="table_dof">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -34,14 +34,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>280</width>
-        <height>86</height>
+        <width>240</width>
+        <height>96</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>280</width>
-        <height>86</height>
+        <width>240</width>
+        <height>96</height>
        </size>
       </property>
       <property name="frameShape">
@@ -74,11 +74,17 @@
       <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>125</number>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>49</number>
+      </attribute>
       <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
+       <bool>false</bool>
       </attribute>
       <attribute name="verticalHeaderDefaultSectionSize">
-       <number>21</number>
+       <number>23</number>
       </attribute>
       <attribute name="verticalHeaderHighlightSections">
        <bool>false</bool>
@@ -93,36 +99,254 @@
        <property name="text">
         <string>Глубина резкости</string>
        </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
       </row>
       <row>
        <property name="text">
         <string>Передний фронт ГРИП</string>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
        </property>
       </row>
       <row>
        <property name="text">
         <string>Задний фронт ГРИП</string>
        </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
       </row>
       <row>
        <property name="text">
         <string>Гиперфокальное расст</string>
        </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
       </row>
       <column/>
+      <item row="0" column="0">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignLeading|AlignVCenter</set>
+       </property>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignLeading|AlignVCenter</set>
+       </property>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignLeading|AlignVCenter</set>
+       </property>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignLeading|AlignVCenter</set>
+       </property>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QFrame" name="frame_control">
+    <item row="1" column="0" rowspan="4">
+     <widget class="QLabel" name="image">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame_logon">
       <property name="minimumSize">
        <size>
-        <width>300</width>
-        <height>0</height>
+        <width>615</width>
+        <height>44</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>300</width>
+        <width>16777215</width>
+        <height>44</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <widget class="QLabel" name="label_login">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>12</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Имя пользователя</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="edit_login">
+       <property name="geometry">
+        <rect>
+         <x>112</x>
+         <y>12</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_password">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>12</y>
+         <width>40</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Пароль</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="edit_password">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>12</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_login">
+       <property name="geometry">
+        <rect>
+         <x>432</x>
+         <y>10</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Войти</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_register">
+       <property name="geometry">
+        <rect>
+         <x>527</x>
+         <y>10</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Регистрация</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_welcome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>14</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="3">
+     <widget class="QFrame" name="frame_control">
+      <property name="minimumSize">
+       <size>
+        <width>240</width>
+        <height>422</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
         <height>16777215</height>
        </size>
       </property>
@@ -132,11 +356,11 @@
       <property name="frameShadow">
        <enum>QFrame::Plain</enum>
       </property>
-      <widget class="QSlider" name="slider_focallen">
+      <widget class="QSlider" name="slider_focal_length">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>378</y>
+         <y>338</y>
          <width>140</width>
          <height>19</height>
         </rect>
@@ -166,17 +390,17 @@
         <bool>false</bool>
        </property>
        <property name="tickPosition">
-        <enum>QSlider::TicksBelow</enum>
+        <enum>QSlider::NoTicks</enum>
        </property>
        <property name="tickInterval">
         <number>70</number>
        </property>
       </widget>
-      <widget class="QSlider" name="slider_distance">
+      <widget class="QSlider" name="slider_model_distance">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>258</y>
+         <y>238</y>
          <width>140</width>
          <height>19</height>
         </rect>
@@ -194,12 +418,12 @@
         <enum>QSlider::NoTicks</enum>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="spin_distance">
+      <widget class="QDoubleSpinBox" name="spin_model_distance">
        <property name="geometry">
         <rect>
-         <x>189</x>
-         <y>250</y>
-         <width>81</width>
+         <x>160</x>
+         <y>238</y>
+         <width>70</width>
          <height>22</height>
         </rect>
        </property>
@@ -223,7 +447,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>8</y>
+         <y>58</y>
          <width>81</width>
          <height>16</height>
         </rect>
@@ -232,11 +456,11 @@
         <string>Задний план</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_crop">
+      <widget class="QLabel" name="label_crop_factor">
        <property name="geometry">
         <rect>
          <x>161</x>
-         <y>173</y>
+         <y>160</y>
          <width>70</width>
          <height>13</height>
         </rect>
@@ -245,11 +469,11 @@
         <string>Кроп-фактор</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_focallen">
+      <widget class="QLabel" name="label_focal_length">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>350</y>
+         <y>318</y>
          <width>241</width>
          <height>16</height>
         </rect>
@@ -258,11 +482,11 @@
         <string>Эквивалентное фокусное расстояние </string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_aperture">
+      <widget class="QLabel" name="label_diaphragm">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>400</y>
+         <y>368</y>
          <width>171</width>
          <height>16</height>
         </rect>
@@ -270,13 +494,16 @@
        <property name="text">
         <string>Диафрагмагменное число</string>
        </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
       </widget>
-      <widget class="QSlider" name="slider_aperture">
+      <widget class="QSlider" name="slider_diaphragm">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>430</y>
-         <width>171</width>
+         <y>388</y>
+         <width>140</width>
          <height>19</height>
         </rect>
        </property>
@@ -299,14 +526,14 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="tickPosition">
-        <enum>QSlider::TicksBelow</enum>
+        <enum>QSlider::NoTicks</enum>
        </property>
       </widget>
       <widget class="QComboBox" name="combo_model">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>78</y>
+         <y>128</y>
          <width>220</width>
          <height>22</height>
         </rect>
@@ -316,24 +543,30 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>191</y>
+         <y>178</y>
          <width>70</width>
          <height>22</height>
         </rect>
        </property>
        <property name="minimum">
-        <double>0.100000000000000</double>
+        <double>0.500000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>10.000000000000000</double>
        </property>
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>
+       <property name="value">
+        <double>1.000000000000000</double>
+       </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="spin_focallen">
+      <widget class="QDoubleSpinBox" name="spin_focal_length">
        <property name="geometry">
         <rect>
-         <x>189</x>
-         <y>380</y>
-         <width>81</width>
+         <x>160</x>
+         <y>338</y>
+         <width>70</width>
          <height>22</height>
         </rect>
        </property>
@@ -354,7 +587,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>58</y>
+         <y>108</y>
          <width>71</width>
          <height>16</height>
         </rect>
@@ -363,21 +596,21 @@
         <string>Модель</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="combo_sensor">
+      <widget class="QComboBox" name="combo_crop">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>191</y>
+         <y>178</y>
          <width>140</width>
          <height>22</height>
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_sensor">
+      <widget class="QLabel" name="label_crop">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>171</y>
+         <y>158</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -386,11 +619,11 @@
         <string>Формат кадра</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_distance">
+      <widget class="QLabel" name="label_model_distance">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>238</y>
+         <y>218</y>
          <width>141</width>
          <height>10</height>
         </rect>
@@ -403,17 +636,17 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>28</y>
+         <y>78</y>
          <width>220</width>
          <height>22</height>
         </rect>
        </property>
       </widget>
-      <widget class="QSlider" name="slider_backgroun_distance">
+      <widget class="QSlider" name="slider_background_distance">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>310</y>
+         <y>288</y>
          <width>141</width>
          <height>22</height>
         </rect>
@@ -437,9 +670,9 @@
       <widget class="QDoubleSpinBox" name="spin_backgrond_distance">
        <property name="geometry">
         <rect>
-         <x>190</x>
-         <y>310</y>
-         <width>81</width>
+         <x>160</x>
+         <y>288</y>
+         <width>70</width>
          <height>22</height>
         </rect>
        </property>
@@ -447,7 +680,7 @@
         <string> м</string>
        </property>
        <property name="decimals">
-        <number>2</number>
+        <number>1</number>
        </property>
        <property name="minimum">
         <double>1.000000000000000</double>
@@ -462,11 +695,11 @@
         <double>1.000000000000000</double>
        </property>
       </widget>
-      <widget class="QLabel" name="label_background_meters">
+      <widget class="QLabel" name="label_background_distance">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>290</y>
+         <y>268</y>
          <width>181</width>
          <height>16</height>
         </rect>
@@ -475,12 +708,12 @@
         <string>Расстояние до фона</string>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="spin_aperture">
+      <widget class="QDoubleSpinBox" name="spin_diaphragm">
        <property name="geometry">
         <rect>
-         <x>210</x>
-         <y>430</y>
-         <width>62</width>
+         <x>171</x>
+         <y>388</y>
+         <width>58</width>
          <height>22</height>
         </rect>
        </property>
@@ -500,14 +733,14 @@
         <double>32.000000000000000</double>
        </property>
        <property name="singleStep">
-        <double>0.400000000000000</double>
+        <double>0.100000000000000</double>
        </property>
       </widget>
-      <widget class="QLabel" name="diafragm_letter">
+      <widget class="QLabel" name="diaphragm_letter">
        <property name="geometry">
         <rect>
-         <x>198</x>
-         <y>433</y>
+         <x>160</x>
+         <y>391</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -520,7 +753,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>130</y>
+         <y>28</y>
          <width>220</width>
          <height>22</height>
         </rect>
@@ -530,7 +763,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>110</y>
+         <y>8</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -541,20 +774,87 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="2">
-     <widget class="QLabel" name="image">
+    <item row="3" column="1">
+     <widget class="QFrame" name="frame_favorite">
+      <property name="minimumSize">
+       <size>
+        <width>240</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
+        <height>96</height>
+       </size>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
-      <property name="text">
-       <string/>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
       </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+      <widget class="QLabel" name="label_favorite">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>8</y>
+         <width>161</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Название набора параметров</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="combo_favorite">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>28</y>
+         <width>220</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="insertPolicy">
+        <enum>QComboBox::InsertAtBottom</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_save">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Сохранить</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_delete">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Удалить</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -564,13 +864,13 @@
  <tabstops>
   <tabstop>combo_background</tabstop>
   <tabstop>combo_model</tabstop>
-  <tabstop>combo_sensor</tabstop>
+  <tabstop>combo_crop</tabstop>
   <tabstop>spin_crop</tabstop>
-  <tabstop>slider_distance</tabstop>
-  <tabstop>spin_distance</tabstop>
-  <tabstop>slider_focallen</tabstop>
-  <tabstop>spin_focallen</tabstop>
-  <tabstop>slider_aperture</tabstop>
+  <tabstop>slider_model_distance</tabstop>
+  <tabstop>spin_model_distance</tabstop>
+  <tabstop>slider_focal_length</tabstop>
+  <tabstop>spin_focal_length</tabstop>
+  <tabstop>slider_diaphragm</tabstop>
   <tabstop>table_dof</tabstop>
  </tabstops>
  <resources/>
