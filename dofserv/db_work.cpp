@@ -11,7 +11,6 @@
 #include <mongocxx/instance.hpp>
 #include <jansson.h>
 
-mongocxx::instance inst{};
 mongocxx::uri uri("mongodb://localhost:27017");
 mongocxx::client client(uri);
 mongocxx::database db = client["dofdb"];

@@ -21,7 +21,6 @@ using bsoncxx::builder::stream::finalize;
 using bsoncxx::builder::stream::open_array;
 using bsoncxx::builder::stream::open_document;
 
-
 #define HEADER_BUFFER_SIZE 1024
 #define HTTP_FORBIDDEN 500
 
@@ -36,6 +35,143 @@ void unspecified_URL(struct evhttp_request *request, void *arg){
     evhttp_send_reply(request, 404, "Not Found", buffer);
     evbuffer_free(buffer);
 }
+
+void a(struct evhttp_request *request, void *arg){
+
+  mongocxx::uri uri("mongodb://localhost:27017");
+  mongocxx::client client(uri);
+  mongocxx::database db = client["dofdb"];
+  mongocxx::collection coll = db["strategies"];
+
+  auto builder = document{};
+  bsoncxx::document::value doc_value = builder
+    << "strategy_name" << "Portrait"
+    << "background_name_default" << "Hello_world" <<
+      "model_name_default" << "Hello_world" <<
+      "crop_factor_min" << 1.1 <<
+      "destination_to_model_min" << 1.0 <<
+      "focus_destination_min" << 1.0 <<
+      "destination_to_background_min" << 1.0 <<
+      "aperture_min" << 1.0 <<
+      "crop_factor_max" << 1.0 <<
+      "destination_to_model_max" << 1.1 <<
+      "focus_destination_max" << 1.0 <<
+      "destination_to_background_max" << 1.0 <<
+      "aperture_max" << 1.0 <<
+      "crop_factor_default" << 1.0 <<
+      "destination_to_model_default" << 1.0 <<
+      "focus_destination_default" << 1.0 <<
+      "destination_to_background_default" << 1.0 <<
+      "aperture_default" << 1.0 << finalize;
+  bsoncxx::document::view view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Macro"
+    << "background_name_default" << "Hello_world" <<
+      "model_name_default" << "Hello_world" <<
+      "crop_factor_min" << 1.1 <<
+      "destination_to_model_min" << 1.0 <<
+      "focus_destination_min" << 1.0 <<
+      "destination_to_background_min" << 1.0 <<
+      "aperture_min" << 1.0 <<
+      "crop_factor_max" << 1.0 <<
+      "destination_to_model_max" << 1.1 <<
+      "focus_destination_max" << 1.0 <<
+      "destination_to_background_max" << 1.0 <<
+      "aperture_max" << 1.0 <<
+      "crop_factor_default" << 1.0 <<
+      "destination_to_model_default" << 1.0 <<
+      "focus_destination_default" << 1.0 <<
+      "destination_to_background_default" << 1.0 <<
+      "aperture_default" << 1.0 << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "CloseUp"
+    << "background_name_default" << "Hello_world" <<
+      "model_name_default" << "Hello_world" <<
+      "crop_factor_min" << 1.1 <<
+      "destination_to_model_min" << 1.0 <<
+      "focus_destination_min" << 1.0 <<
+      "destination_to_background_min" << 1.0 <<
+      "aperture_min" << 1.0 <<
+      "crop_factor_max" << 1.0 <<
+      "destination_to_model_max" << 1.1 <<
+      "focus_destination_max" << 1.0 <<
+      "destination_to_background_max" << 1.0 <<
+      "aperture_max" << 1.0 <<
+      "crop_factor_default" << 1.0 <<
+      "destination_to_model_default" << 1.0 <<
+      "focus_destination_default" << 1.0 <<
+      "destination_to_background_default" << 1.0 <<
+      "aperture_default" << 1.0 << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "background_name_default" << "Hello_world" <<
+      "model_name_default" << "Hello_world" <<
+      "crop_factor_min" << 1.1 <<
+      "destination_to_model_min" << 1.0 <<
+      "focus_destination_min" << 1.0 <<
+      "destination_to_background_min" << 1.0 <<
+      "aperture_min" << 1.0 <<
+      "crop_factor_max" << 1.0 <<
+      "destination_to_model_max" << 1.1 <<
+      "focus_destination_max" << 1.0 <<
+      "destination_to_background_max" << 1.0 <<
+      "aperture_max" << 1.0 <<
+      "crop_factor_default" << 1.0 <<
+      "destination_to_model_default" << 1.0 <<
+      "focus_destination_default" << 1.0 <<
+      "destination_to_background_default" << 1.0 <<
+      "aperture_default" << 1.0 << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+  coll = db["models"];
+  doc_value = builder
+    << "strategy_name" << "Landscape"
+    << "background_name_default" << "Hello_world" <<
+      "model_name_default" << "Hello_world" <<
+      "crop_factor_min" << 1.1 <<
+      "destination_to_model_min" << 1.0 <<
+      "focus_destination_min" << 1.0 <<
+      "destination_to_background_min" << 1.0 <<
+      "aperture_min" << 1.0 <<
+      "crop_factor_max" << 1.0 <<
+      "destination_to_model_max" << 1.1 <<
+      "focus_destination_max" << 1.0 <<
+      "destination_to_background_max" << 1.0 <<
+      "aperture_max" << 1.0 <<
+      "crop_factor_default" << 1.0 <<
+      "destination_to_model_default" << 1.0 <<
+      "focus_destination_default" << 1.0 <<
+      "destination_to_background_default" << 1.0 <<
+      "aperture_default" << 1.0 << finalize;
+  view = doc_value.view();
+  coll.insert_one(view);
+
+  evhttp_send_reply(request, 200, "OK", NULL);
+}
+
+
+
 
 void images_list(struct evhttp_request *request, void *arg){
   struct evkeyvalq uri_params;
@@ -213,7 +349,9 @@ void get_model_image(struct evhttp_request *request, void *arg){
     printf("%s\n", requestDataString);
   }
 
+
   const char* img_address = return_model_address(json_to_model_name(requestJSON)).c_str();
+
   evhttp_add_header (request->output_headers, "Content-Type", "image/png");
   int fd = open(img_address, O_RDONLY);
   if (fd < 0) {
