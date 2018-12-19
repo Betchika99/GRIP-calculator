@@ -2,12 +2,32 @@
 
 DOFManager::DOFManager()
 {
-
+    UpdateImages();
 }
 
 DOFManager::~DOFManager()
 {
 
+}
+
+QStringList DOFManager::getStrategyList()
+{
+    return pl.getStrategies();
+}
+
+int DOFManager::getStrategyIndex()
+{
+    return pl.getCurrentStrategyIndex();
+}
+
+void DOFManager::setStrategyIndex(int index)
+{
+    pl.setCurrentStrategyIndex(index);
+}
+
+Strategy& DOFManager::getStrategy()
+{
+    return *pl.getCurrentStrategy();
 }
 
 QStringList DOFManager::getBackgroundsList()
@@ -22,7 +42,8 @@ int DOFManager::getBackgroundIndex()
 
 void DOFManager::setBackgroundIndex(int index)
 {
-    return pl.setCurrentBackgroundIndex(index);
+    pl.setCurrentBackgroundIndex(index);
+    UpdateImages();
 }
 
 QStringList DOFManager::getModelsList()
@@ -37,7 +58,8 @@ int DOFManager::getModelIndex()
 
 void DOFManager::setModelIndex(int index)
 {
-    return pl.setCurrentModelIndex(index);
+    pl.setCurrentModelIndex(index);
+    UpdateImages();
 }
 
 QStringList DOFManager::getSensorsList()
@@ -45,9 +67,9 @@ QStringList DOFManager::getSensorsList()
     return pl.getCrops();
 }
 
-int DOFManager::getSensorIndex()    //in pl
+int DOFManager::getSensorIndex()
 {
-    return  pl.getCurrentCropIndex();
+    return pl.getCurrentCropIndex();
 }
 
 void DOFManager::setSensorIndex(int index)
@@ -69,16 +91,17 @@ double DOFManager::getBackgroundDistance()
 {
     return pl.getDistanceBackgroud();
 }
+
 void DOFManager::setBackgroundDistance(double value)
 {
-    return pl.setDistanceBackgroud(value);
+    pl.setDistanceBackgroud(value);
 }
-
 
 double DOFManager::getModelDistance()
 {
     return pl.getDistanceModel();
 }
+
 void DOFManager::setModelDistance(double value)
 {
     return pl.setDistanceModel(value);
@@ -131,6 +154,13 @@ double DOFManager::getNearestPointOfSharpness()
 double DOFManager::getFarestPointOfSharpness()
 {
     return ml.FindFarestPointOfSharpness(&pl);
+}
+
+void DOFManager::UpdateImages()
+{
+   QString fileNameModel = pl.getCurrentStrategyModelFileName();
+   QString fileNameBackground = pl.getCurrentStrategyBackgroundFileName();
+   origin.UpdateImages(fileNameModel, fileNameBackground);
 }
 
 void DOFManager::PerformImageProcessing()

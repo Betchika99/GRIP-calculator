@@ -18,7 +18,8 @@ public:
     Image& model() { return images[1]; }
     Image& background() { return images[0]; }
     bool isValid() { return model().isValid() && background().isValid(); }
-    void UpdateImages(int indexModel, int indexBack);
+    void UpdateImages(QString modelBodyPath, QString backgroundPath);
+//    void UpdateImages(QString fileName);
 
 private:
     vector<Image> images;
