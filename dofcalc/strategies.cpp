@@ -34,11 +34,8 @@ QStringList Portrait::getModelFileNames()
 {
     // we have connect with server
     if (true) {
-        std::string fileNames = Client::getImagesNames();
-        json_error_t error;
-        json_t *requestJSON = json_loadb(fileNames.c_str(), fileNames.size(), 0, &error);
-
-
+        QStringList fileNames = Client::getImagesNames();
+        return fileNames;
     }
     QString fileMask = StrategyName() + ".*.*.Model.png";
     return scanDirForFileName(fileMask);

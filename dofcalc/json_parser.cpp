@@ -1,5 +1,25 @@
 #include "json_parser.hpp"
 
+QStringList json_to_models_names(json_t *input_JSON) {
+    QStringList result;
+    QString name;
+    if (!json_is_string(json_object_get(input_JSON, "name"))) {
+        fprintf(stderr, "ERROR: name is not a string\n");
+        name = "DEFAULTNAME";
+    } else {
+        json_t *root = json_object_get(input_JSON, "name");
+        for (size_t i = 0; i < json_array_size(root); i++) {
+            json_t *data, *sha, *commit, *message;
+            const char *message_text;
+            data = json_array_get(root, i);
+            if (!json_is_object(data)) {
+                fprintf(stderr, "error: commit data %zu is not an object\n", i + 1);
+                json_decref(root);
+                return result;
+            }
+    }
+}
+
 std::string json_to_favourite_name(json_t *input_JSON){
   std::string name;
   if(!json_is_string(json_object_get(input_JSON, "name"))){
@@ -87,7 +107,6 @@ all_params json_to_params_struct(json_t *requestJSON){
   params_set.focus_destination = json_real_value(json_object_get(input, "focus_destination"));
   params_set.destination_to_background = json_real_value(json_object_get(input, "destination_to_background"));
   params_set.aperture = json_real_value(json_object_get(input, "aperture"));
-
 
   return params_set;
 }

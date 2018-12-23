@@ -1,8 +1,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
+#include <QStringList>
 #include <string>
 #include <fstream>
 #include "boost/asio.hpp"
+#include "json_parser.hpp"
 
 using namespace std;
 using namespace boost::asio;
@@ -13,7 +15,7 @@ public:
     Client() = default;
     ~Client() = default;
     string static getStrategies();
-    string static getImagesNames();
+    QStringList static getImagesNames(const QString& strategyName);
     // пока ищут картинку по захардокеднному урлу
     bool static getBackgroud(const string& fileName);
     bool static getModel(const string& fileName);
@@ -24,7 +26,9 @@ public:
     bool static deleteFavorite(const string& jsonParams);
 
 private:
-    string static getParams(const string& serverName, const string& port, const string& getCommand);
+    QStringList static getParams(const string& serverName, const string& port,
+                                 const string& getCommand, const QString& paramName,
+                                 const string& paramType);
     bool static getPicture(const string& serverName, const string& port,
                     const string& getCommand, const string& fileName,
                     const string& pictureType);

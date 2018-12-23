@@ -69,7 +69,7 @@ void MathLibrary::Scale(PropertyList *values, ImageHandler& ih) {
     
     if (this->CheckerNull(values) && ih.isValid())  {
         Image& model = ih.model();
-        double scaleFactor = 1 / (values->getDistanceModel());
+        double scaleFactor = (values->getFocalLenght() / values->getDistanceModel()) / 100.0;
         QSize realImageSize = model.asQImage().size();
         model = model.scale(scaleFactor * realImageSize);
     }
@@ -91,17 +91,17 @@ void MathLibrary::Blur(PropertyList *values, ImageHandler& ih) {
         if (dF > values->getDistanceModel() && dN < values->getDistanceModel()) {
             if (!(dF > values->getDistanceBackgroud() && dN < values->getDistanceBackgroud())) {
                 QImage qimg = backgroud.asQImage();
-                qt_blurImage(qimg, blurFactor*1000, true);
+                qt_blurImage(qimg, blurFactor*100, true);
                 backgroud = qimg;
                 return;
             }
         } else {
             QImage qimg = model.asQImage();
-            qt_blurImage(qimg, blurFactor*1000, true);
+            qt_blurImage(qimg, blurFactor*100, true);
             model = qimg;
             if (!(dF > values->getDistanceBackgroud() && dN < values->getDistanceBackgroud())) {
                 QImage qimg = backgroud.asQImage();
-                qt_blurImage(qimg, blurFactor*1000, true);
+                qt_blurImage(qimg, blurFactor*100, true);
                 backgroud = qimg;
                 return;
             }

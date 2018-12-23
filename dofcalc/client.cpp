@@ -3,11 +3,11 @@
 #include <iostream>
 
 string Client::getStrategies() {
-    return getParams("0.0.0.0", "12345", "/strategies");
+    //return getParams("0.0.0.0", "12345", "/strategies");
 }
 
-string Client::getImagesNames() {
-    return getParams("0.0.0.0", "12345", "/images_list");
+QStringList Client::getImagesNames(const QString& strategyName) {
+    return getParams("0.0.0.0", "12345", "/images_list", strategyName, "strategy_name");
 }
 
 bool Client::getBackgroud(const string& fileName) {
@@ -19,11 +19,11 @@ bool Client::getModel(const string& fileName) {
 }
 
 string Client::getLastParams() {
-    return getParams("0.0.0.0", "12345", "/get_last_params");
+    //return getParams("0.0.0.0", "12345", "/get_last_params");
 }
 
 string Client::getFavorite() {
-    return getParams("0.0.0.0", "12345", "/favorites_list");
+   // return getParams("0.0.0.0", "12345", "/favorites_list");
 }
 
 bool Client::setLastParams(const string& jsonParams) {
@@ -38,7 +38,10 @@ bool Client::deleteFavorite(const string& jsonParams) {
     return setParams("0.0.0.0", "12345", "/delete_favorite", jsonParams);
 }
 
-string Client::getParams(const string& serverName, const string& port, const string& getCommand) {
+QStringList Client::getParams(const string& serverName, const string& port,
+                              const string& getCommand, const QString& paramName,
+                              const string& paramType) {
+    QStringList result;
     boost::asio::io_service io_service;
     tcp::resolver resolver(io_service);
     tcp::resolver::query query(serverName, port);
@@ -46,19 +49,22 @@ string Client::getParams(const string& serverName, const string& port, const str
     tcp::resolver::iterator end;
 
     tcp::socket socket(io_service);
- //   boost::system::error_code error = boost::asio::error::host_not_found;
- //   while (error && endpoint_iterator != end) {
- //      socket.close();
-//       socket.connect(*endpoint_iterator++, error);
-//    }
     boost::asio::connect(socket, endpoint_iterator);
     boost::asio::streambuf request;
     std::ostream request_stream(&request);
 
-    request_stream << "GET " << getCommand << " HTTP/1.0\r\n";
+    json_t *root = json_object();
+    json_object_set_new(root, paramType.c_str(), json_string(paramName.toStdString().c_str()));
+    string responseData = string(json_dumps(root, JSON_INDENT(3)));
+
+    request_stream << "POST " << getCommand << " HTTP/1.0\r\n";
     request_stream << "Host: " << serverName << "\r\n";
+    request_stream << "User-Agent: C/1.0";
+    request_stream << "Content-Type: application/json; charset=utf-8 \r\n";
     request_stream << "Accept: */*\r\n";
+    request_stream << "Content-Length: " << responseData.length() << "\r\n";
     request_stream << "Connection: close\r\n\r\n";
+    request_stream << responseData;
 
        // Send the request.
     boost::asio::write(socket, request);
@@ -78,12 +84,12 @@ string Client::getParams(const string& serverName, const string& port, const str
 
     if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
         std::cerr << "Invalid response\n";
-        return "";
+        return result;
      }
 
      if (status_code != 200) {
         std::cout << "Response returned with status code " << status_code << "\n";
-        return "";
+        return result;
      }
 
        // Read the response headers, which are terminated by a blank line.
@@ -94,7 +100,6 @@ string Client::getParams(const string& serverName, const string& port, const str
     while (std::getline(response_stream, header) && header != "\r") {}
 
        // Write whatever content we already have to output.
-    string result = "";
     while (response.size() > 0) {
         std::istream is(&response);
         string line;
