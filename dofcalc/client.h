@@ -14,6 +14,15 @@ class Client {
 public:
     Client() = default;
     ~Client() = default;
+    QStringList static getModelsNames(const QString& strategyName);
+    QStringList static getBackgroundsNames(const QString& strategyName);
+
+
+
+
+
+
+
     string static getStrategies();
     QStringList static getImagesNames(const QString& strategyName);
     // пока ищут картинку по захардокеднному урлу
@@ -26,9 +35,17 @@ public:
     bool static deleteFavorite(const string& jsonParams);
 
 private:
+    QStringList static makeRequest(const QString& paramName, const string& flag);
+
+
+
+
+
+
+
     QStringList static getParams(const string& serverName, const string& port,
                                  const string& getCommand, const QString& paramName,
-                                 const string& paramType);
+                                 const string& paramType, const string& flag);
     bool static getPicture(const string& serverName, const string& port,
                     const string& getCommand, const string& fileName,
                     const string& pictureType);

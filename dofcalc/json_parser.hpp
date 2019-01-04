@@ -3,6 +3,10 @@
 #include <jansson.h>
 #include <string>
 #include <QStringList>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <iostream>
 
 struct all_params{
     std::string strategy_name;
@@ -76,7 +80,11 @@ struct user{
     }
 };
 
-QStringList json_to_models_names(json_t *input_JSON);
+QStringList parseJSON(const QString &jsonQString, const std::string &flag);
+
+QStringList json_to_models_names(const QString &jsonQString);
+
+QStringList json_to_backgrounds_names(const QString &jsonQString);
 
 std::string json_to_favourite_name(json_t *input_JSON);
 

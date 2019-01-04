@@ -111,10 +111,11 @@ json_t *return_strategies(){
 
 json_t *return_models(std::string strategy_name){
   json_t *array  = json_array();
+//    mongocxx::instance inst{};
+    mongocxx::client conn{mongocxx::uri{}};
+    auto coll = conn["dofdb"]["models"];
 
-  mongocxx::collection coll = db["models"];
-
-  mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
+    mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
   for(auto doc : cursor) {
     bsoncxx::document::element name_element = doc["name"];
     json_t *element = json_object();
@@ -131,6 +132,7 @@ json_t *return_backgrounds(std::string strategy_name){
 
   mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
   for(auto doc : cursor) {
+    bsoncxx::document::element name_element = doc["name"];
     json_t *element = json_object();
     json_object_set_new( element, "background_name", json_string(name_element.get_utf8().value.to_string().c_str()));
     json_array_append_new(array, element);

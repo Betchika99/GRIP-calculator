@@ -33,10 +33,10 @@ QStringList Strategy::scanDirForFileName(QString fileMask)
 QStringList Portrait::getModelFileNames()
 {
     // we have connect with server
-    if (true) {
-        QStringList fileNames = Client::getImagesNames();
-        return fileNames;
-    }
+  //  if (true) {
+        QStringList fileNames = Client::getModelsNames(StrategyName());
+  //      return fileNames;
+  //  }
     QString fileMask = StrategyName() + ".*.*.Model.png";
     return scanDirForFileName(fileMask);
 }
@@ -44,13 +44,17 @@ QStringList Portrait::getModelFileNames()
 
 QStringList Portrait::getBackgroundFileNames()
 {
+    if (true) {
+        QStringList fileNames = Client::getBackgroundsNames(StrategyName());
+        return fileNames;
+    }
     QString fileMask = StrategyName() + ".*.*.Background.png";
     return scanDirForFileName(fileMask);
 }
 
 QString Portrait::StrategyName()
 {
-    return "Портретная съемка";     //friendly name for strategy
+    return "Portrait";     //friendly name for strategy
 }
 
 QStringList Portrait::getModel()

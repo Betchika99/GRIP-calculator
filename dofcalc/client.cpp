@@ -1,13 +1,32 @@
 #include "client.h"
 #include "jansson.h"
 #include <iostream>
+#include <QJsonObject>
+#include <QJsonDocument>
+
+QStringList Client::getModelsNames(const QString& strategyName) {
+    return makeRequest(strategyName, "model");
+}
+
+QStringList Client::getBackgroundsNames(const QString& strategyName) {
+    return makeRequest(strategyName, "background");
+}
+
+QStringList Client::makeRequest(const QString& paramName, const string& flag) {
+    return getParams("0.0.0.0", "12345", "/images_list", paramName, "strategy_name", flag);
+}
+
+
+
+
+
 
 string Client::getStrategies() {
     //return getParams("0.0.0.0", "12345", "/strategies");
 }
 
 QStringList Client::getImagesNames(const QString& strategyName) {
-    return getParams("0.0.0.0", "12345", "/images_list", strategyName, "strategy_name");
+    //return getParams("0.0.0.0", "12345", "/images_list", strategyName, "strategy_name");
 }
 
 bool Client::getBackgroud(const string& fileName) {
@@ -40,7 +59,7 @@ bool Client::deleteFavorite(const string& jsonParams) {
 
 QStringList Client::getParams(const string& serverName, const string& port,
                               const string& getCommand, const QString& paramName,
-                              const string& paramType) {
+                              const string& paramType, const string& flag) {
     QStringList result;
     boost::asio::io_service io_service;
     tcp::resolver resolver(io_service);
@@ -97,26 +116,33 @@ QStringList Client::getParams(const string& serverName, const string& port,
 
        // Process the response headers.
     std::string header;
-    while (std::getline(response_stream, header) && header != "\r") {}
+    while (std::getline(response_stream, header) && header != "\r") { std::cout << header << "\n"; }
+    std::cout << "\n";
 
        // Write whatever content we already have to output.
+    QString jsonQString = "";
     while (response.size() > 0) {
-        std::istream is(&response);
-        string line;
-        std::getline(is, line);
-        result += line;
+  //      std::cout << &response;
+          std::istream is(&response);
+          string line;
+          is >> line;
+          jsonQString += QString::fromStdString(line);
     }
        // Read until EOF, writing data to output as we go.
     boost::system::error_code error;
     while (boost::asio::read(socket, response, boost::asio::transfer_at_least(1), error)) {
-        std::istream is(&response);
-        string line;
-        std::getline(is, line);
-        result += line;
+        //      std::cout << &response;
+        while (response.size() > 0) {
+                std::istream is(&response);
+                string line;
+                is >> line;
+                jsonQString += QString::fromStdString(line);
+        }
     }
     if (error != boost::asio::error::eof)
           throw boost::system::system_error(error);
-    return result;
+
+    return parseJSON(jsonQString, flag);
 }
 
 bool Client::getPicture(const string& serverName, const string& port,

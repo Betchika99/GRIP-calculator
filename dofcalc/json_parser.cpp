@@ -1,26 +1,89 @@
 #include "json_parser.hpp"
 
-QStringList json_to_models_names(json_t *input_JSON) {
-    QStringList result;
-    QString name;
-    if (!json_is_string(json_object_get(input_JSON, "name"))) {
-        fprintf(stderr, "ERROR: name is not a string\n");
-        name = "DEFAULTNAME";
-    } else {
-        json_t *root = json_object_get(input_JSON, "name");
-        for (size_t i = 0; i < json_array_size(root); i++) {
-            json_t *data, *sha, *commit, *message;
-            const char *message_text;
-            data = json_array_get(root, i);
-            if (!json_is_object(data)) {
-                fprintf(stderr, "error: commit data %zu is not an object\n", i + 1);
-                json_decref(root);
-                return result;
-            }
+QStringList parseJSON(const QString &jsonQString, const std::string &flag) {
+    if (flag == "model") {
+        return json_to_models_names(jsonQString);
     }
+    if (flag == "background") {
+        return json_to_backgrounds_names(jsonQString);
+    }
+    QStringList error;
+    return error;
 }
 
-std::string json_to_favourite_name(json_t *input_JSON){
+QStringList json_to_models_names(const QString &jsonQString) {
+    QStringList result;
+    result.clear();
+    if (jsonQString.isEmpty()) {
+        result.clear();
+        return result;
+    }
+    QJsonObject obj;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonQString.toUtf8());
+    // check validity of the document
+    if (!doc.isNull()) {
+       if (doc.isObject()) {
+           obj = doc.object();
+       } else {
+           result.clear();
+           return result;
+       }
+    } else {
+       result.clear();
+       return result;
+    }
+
+    QJsonArray modelsArray = obj["model_names"].toArray();
+    if (modelsArray.empty()) {
+        result.clear();
+        return result;
+    }
+    result.clear();
+    for (int i = 0; i < modelsArray.size(); i++) {
+        QJsonObject modelObject = modelsArray[i].toObject();
+        QString modelName = modelObject["model_name"].toString();
+        result.append(modelName);
+    }
+    return result;
+}
+
+QStringList json_to_backgrounds_names(const QString &jsonQString) {
+    QStringList result;
+    result.clear();
+    if (jsonQString.isEmpty()) {
+        result.clear();
+        return result;
+    }
+    QJsonObject obj;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonQString.toUtf8());
+    // check validity of the document
+    if (!doc.isNull()) {
+       if (doc.isObject()) {
+           obj = doc.object();
+       } else {
+           result.clear();
+           return result;
+       }
+    } else {
+       result.clear();
+       return result;
+    }
+
+    QJsonArray modelsArray = obj["background_names"].toArray();
+    if (modelsArray.empty()) {
+        result.clear();
+        return result;
+    }
+    result.clear();
+    for (int i = 0; i < modelsArray.size(); i++) {
+        QJsonObject modelObject = modelsArray[i].toObject();
+        QString modelName = modelObject["background_name"].toString();
+        result.append(modelName);
+    }
+    return result;
+}
+
+std::string json_to_favourite_name(json_t *input_JSON) {
   std::string name;
   if(!json_is_string(json_object_get(input_JSON, "name"))){
     fprintf(stderr, "ERROR: name is not a string\n");
@@ -31,7 +94,7 @@ std::string json_to_favourite_name(json_t *input_JSON){
   return name;
 }
 
-std::string json_to_model_name(json_t *input_JSON){
+std::string json_to_model_name(json_t *input_JSON) {
   std::string model_name;
   if(!json_is_string(json_object_get(input_JSON, "model_name"))){
     fprintf(stderr, "ERROR: model_name is not a string\n");
@@ -42,7 +105,7 @@ std::string json_to_model_name(json_t *input_JSON){
   return model_name;
 }
 
-std::string json_to_background_name(json_t *input_JSON){
+std::string json_to_background_name(json_t *input_JSON) {
   std::string background_name;
   if(!json_is_string(json_object_get(input_JSON, "background_name"))){
     fprintf(stderr, "ERROR: background_name is not a string\n");
@@ -53,7 +116,7 @@ std::string json_to_background_name(json_t *input_JSON){
   return background_name;
 }
 
-std::string json_to_strategy_name(json_t *input_JSON){
+std::string json_to_strategy_name(json_t *input_JSON) {
   std::string strategy_name;
   if(!json_is_string(json_object_get(input_JSON, "strategy_name"))){
     fprintf(stderr, "ERROR: strategy_name is not a string\n");
@@ -64,7 +127,7 @@ std::string json_to_strategy_name(json_t *input_JSON){
   return strategy_name;
 }
 
-user json_to_user_struct(json_t *input_JSON){
+user json_to_user_struct(json_t *input_JSON) {
 
   if(!json_is_string(json_object_get(input_JSON, "email"))) fprintf(stderr, "ERROR: email is not a string\n");
   if(!json_is_string(json_object_get(input_JSON, "password"))) fprintf(stderr, "ERROR: password is not a string\n");
@@ -77,7 +140,7 @@ user json_to_user_struct(json_t *input_JSON){
   return new_user;
 }
 
-all_params json_to_params_struct(json_t *requestJSON){
+all_params json_to_params_struct(json_t *requestJSON) {
   json_t *input = json_object_get(requestJSON, "input_params");
 
   std::string strategy_name;
