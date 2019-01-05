@@ -35,7 +35,8 @@ SOURCES += \
     toolslibrary.cpp \
     apiprovider.cpp \
     properties.cpp \
-    loginwindow.cpp
+    loginwindow.cpp \
+    client.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS += \
     properties.h \
     toolslibrary.h \
     apiprovider.h \
-    loginwindow.h
+    loginwindow.h \
+    client.h
 
 FORMS += \
         mainwindow.ui \
