@@ -20,14 +20,9 @@
    <string>DOF Calculator</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTableWidget" name="table_dof">
-    <property name="geometry">
-     <rect>
-      <x>639</x>
-      <y>550</y>
-      <width>240</width>
-      <height>96</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="spacing">
+     <number>10</number>
     </property>
     <item row="0" column="1" rowspan="3">
      <widget class="QFrame" name="frame_control">
