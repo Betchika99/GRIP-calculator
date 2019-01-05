@@ -82,4 +82,3 @@ QJsonObject StrategyList::exportToJSON()
     };
     return json;
 }
-

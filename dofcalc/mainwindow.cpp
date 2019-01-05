@@ -258,4 +258,3 @@ void MainWindow::updateImage()
     ui->table_dof->item(3, 0)->setText(QString::asprintf("%1.2f м", dof.getHyperFocal()));
     ui->image->setPixmap(dof.getResultImage().scale(ui->image->size()).asQPixmap());
 }
-
