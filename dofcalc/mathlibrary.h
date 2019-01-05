@@ -1,12 +1,8 @@
 #ifndef MATHLIBRARY_H
 #define MATHLIBRARY_H
 
-#include "ui_mainwindow.h"
-#include "propertylist.h"
+#include "properties.h"
 #include "imagehandler.h"
-
-#include <QPainter>
-#include <QPixmap>
 
 class MathLibrary {
 public:

@@ -2,9 +2,9 @@
 #define PROPERTIES_H
 
 #include <QtCore>
-#include <QtWidgets>
 
-//enum Orientation {Book, Album};
+enum Orientation {Album, Book};
+Q_DECLARE_METATYPE(Orientation);
 
 template<class T>
 class PropertyValue
@@ -13,211 +13,146 @@ private:
     T minVal, maxVal, defVal, val;
 public:
     PropertyValue(): minVal(0), maxVal(0), defVal(0), val(0) {}
-    PropertyValue(T min, T max, T def):
-        minVal(min), maxVal(max), defVal(def), val(def) {}
-    PropertyValue(T min, T max, T def, T value):
-        minVal(min), maxVal(max), defVal(def), val(value) {}
     PropertyValue& operator = (const PropertyValue &src)
     {
-        minVal=src.min();
-        maxVal=src.max();
-        defVal=src.defaults();
-        val=src.value();
+        minVal = src.min();
+        maxVal = src.max();
+        defVal = src.defaults();
+        val = src.value();
+        return *this;
     }
-    bool valid() {return minVal<maxVal && minVal<=defVal && defVal<=maxVal;}
+    bool valid() const {return minVal<maxVal && minVal<=defVal && defVal<=maxVal;}
     void reset() {if (valid()) setValue(defVal);}
-    T min() {return minVal;}
-    T max() {return maxVal;}
-    T defaults() {return defVal;}
-    T value() {return val;}
+    T min() const {return minVal;}
+    T max() const {return maxVal;}
+    T defaults() const {return defVal;}
+    T value() const {return val;}
     void setValue(T value)
     {
         if (value<minVal) value=minVal; if (value>maxVal) value=maxVal; val=value;
+    }
+    void set(T min, T max, T def)
+    {
+        minVal = min; maxVal = max; defVal = def; setValue(defVal);
     }
     void set(T min, T max, T def, T value)
     {
         minVal = min; maxVal = max; defVal = def; setValue(value);
     }
-    void setupWidget(QWidget *widget)
-    {
-        bool blockedState = widget->signalsBlocked();
-        widget->blockSignals(true);
-        if (dynamic_cast<QDoubleSpinBox*>(widget))
-        {
-            QDoubleSpinBox *spin = dynamic_cast<QDoubleSpinBox*>(widget);
-            spin->setRange(minVal, maxVal);
-            spin->setValue(val);
-        }
-        else if (dynamic_cast<QSlider*>(widget))
-        {
-            QSlider *slider = dynamic_cast<QSlider*>(widget);
-            slider->setRange(minVal, maxVal);
-            slider->setValue(val);
-        }
-        widget->blockSignals(blockedState);
-    }
-    QJsonObject asJson()
-    {
-        QJsonObject json;
-        json["min"] = min();
-        json["max"] = max();
-        json["defaults"] = defaults();
-        json["value"] = value();
-        return json;
-    }
-    void loadFromJson(QJsonObject json)
-    {
-        set(json["min"].toDouble(),
-            json["max"].toDouble(),
-            json["defaults"].toDouble(),
-            json["value"].toDouble());
-    }
+    bool importFromJSON(const QJsonObject &json);
+    QJsonObject exportToJSON() const;
 };
 
 template<class T>
-class PropertyCombo
+class PropertySwitch
 {
-private:
-    QList<QPair<QString, T>> comboList;
-    int currentIndex;
-    bool indexValid(int idx) {return idx >= 0 && idx < comboList.count();}
 public:
-    PropertyCombo(): currentIndex(-1) {}
-    PropertyCombo& operator = (const PropertyCombo &src)
+    struct SwitchPair
     {
-        comboList = src.comboList;
+        QString title;
+        T value;
+        SwitchPair(): title(), value(0) {}
+        SwitchPair(QString t, T v): title(t), value(v) {}
+        SwitchPair& operator = (const SwitchPair &src)
+        {
+            title = src.title; value = src.value; return *this;
+        }
+    };
+private:
+    QList<SwitchPair> list;
+    int currentIndex;
+protected:
+    bool indexValid(int i) const {return i >= 0 && i < count();}
+    int validateIndex(int i) const
+    {
+        if (i<-1) i=-1; if (i>=count()) i=count()-1; return i;
+    }
+public:
+    PropertySwitch(): currentIndex(-1) {}
+    PropertySwitch& operator = (const PropertySwitch &src)
+    {
+        list = src.list;
         currentIndex = src.currentIndex;
+        return *this;
     }
-    void addEntry(QPair<QString, T> entry)
+    void addEntry(SwitchPair entry) {list.append(entry);}
+    void addEntry(QString title, T value) {addEntry(SwitchPair(title, value));}
+    void delEntry(int i)
     {
-        comboList.append(entry);
+        if (indexValid(i)) {list.removeAt(i); validateIndex(currentIndex);}
     }
-    void addEntry(QString friendlyName, T value)
+    int  count() const {return list.count();}
+    void clear() {list.clear(); currentIndex = -1;}
+    const SwitchPair& operator[] (int i) const
     {
-        addEntry(QPair<QString, T>(friendlyName, value));
+        assert(indexValid(i)); return list.at(i);
     }
-    void clear()
-    {
-        comboList.clear();
-        currentIndex = -1;
-    }
-    QPair<QString, T> operator[] (int idx)
-    {
-        return indexValid(idx) ? comboList.at(idx) : QPair<QString, T>();
-    }
-    QStringList friendlyNames()
+    QStringList titleList() const
     {
         QStringList sl;
-        for (int i = 0; i < comboList.count(); i++) sl.append(comboList.at(i).first);
+        for (int i = 0; i < count(); i++) sl.append(list.at(i).title);
         return sl;
     }
-    int index() {return currentIndex;}
-    void setIndex(int idx) {if (indexValid(idx)) currentIndex = idx;}
-    void setIndexByValue(T value)
+    int  index() const {return currentIndex;}
+    void setIndex(int i) {currentIndex = validateIndex(i);}
+    void setIndexByTitle(QString title)
     {
-        for (int i = 0; i < comboList.count(); i++)
+        for (int i = 0; i < count(); i++)
         {
-            if (comboList.at(i).second == value) {currentIndex = i; return;}
+            if (list.at(i).title == title) {currentIndex = i; return;}
         }
         currentIndex = -1;
     }
-    T value() {return (*this)[currentIndex].second;}
-    void setupWidget(QWidget *widget)
+    void setIndexByValue(T value)
     {
-        bool blockedState = widget->signalsBlocked();
-        widget->blockSignals(true);
-        if (dynamic_cast<QComboBox*>(widget))
+        for (int i = 0; i < count(); i++)
         {
-            QComboBox *cb = dynamic_cast<QComboBox*>(widget);
-            cb->clear();
-            cb->addItems(friendlyNames());
-            cb->setCurrentIndex(currentIndex);
+            if (list.at(i).value == value) {currentIndex = i; return;}
         }
-        widget->blockSignals(blockedState);
+        currentIndex = -1;
     }
-    QJsonObject asJson()
+    QString title() const
     {
-        QJsonObject json, obj;
-        QJsonArray array;
-        for (int i = 0; i < comboList.count(); i++)
-        {
-            obj["friendlyName"] = comboList.at(i).first;
-            obj["data"] = comboList.at(i).second;
-            array.append(obj);
-        }
-        json["list"] = array;
-        json["currentIndex"] = index();
-        return json;
+        assert(indexValid(currentIndex));
+        return list.at(currentIndex).title;
     }
-    void loadFromJson(QJsonObject json)
+    T value() const
     {
-        clear();
-        QJsonArray array = json["list"].toArray();
-        for (int i = 0; i < array.count(); i++)
-        {
-            QJsonObject obj = array[i].toObject();
-            if (obj["friendlyName"].isUndefined() || obj["data"].isUndefined()) continue;
-            addEntry(obj["friendlyName"].toString(), obj["data"].toDouble());
-        }
-        currentIndex = json["currentIndex"].toInt();
+        assert(indexValid(currentIndex));
+        return list.at(currentIndex).value;
     }
+    bool importFromJSON(const QJsonObject &json);
+    QJsonObject exportToJSON() const;
 };
 
-template<class TC, class TV>
-class PropertyComboValue : public PropertyCombo<TC>
-{
-private:
-    PropertyValue<TV> linkedVal;
-public:
-    void setLinkedRanges(TV min, TV max, TV def)
-    {
-        linkedVal.set(min, max, def, def);
-    }
-    TV value() {return linkedVal.value();}
-    void setValue(TV value)
-    {
-        linkedVal.setValue(value);
-        PropertyCombo<TC>::setIndexByValue(linkedVal.value());
-    }
-    void setIndex(int idx)
-    {
-        PropertyCombo<TC>::setIndex(idx);
-        linkedVal.setValue((*this)[idx].second);
-    }
-    void setIndexByValue(TV value)
-    {
-        PropertyCombo<TC>::setIndexByValue(value);
-        linkedVal.setValue(value);
-    }
-    void setupWidget(QWidget *widget)
-    {
-        PropertyCombo<TC>::setupWidget(widget);
-        bool blockedState = widget->signalsBlocked();
-        widget->blockSignals(true);
-        if (dynamic_cast<QDoubleSpinBox*>(widget))
-        {
-            QDoubleSpinBox *spin = dynamic_cast<QDoubleSpinBox*>(widget);
-            spin->setRange(linkedVal.min(), linkedVal.max());
-            spin->setValue(linkedVal.value());
-        }
-        widget->blockSignals(blockedState);
-    }
-};
-
-class PropertySet
+class PropertyList
 {
 public:
-    QString name;
-    PropertyCombo<QString> background;
-    PropertyCombo<QString> model;
-    //PropertyCombo<Orientation> orientation; todo
-    PropertyComboValue<QString, double> crop;
-    PropertyValue<double> backgroudDistance;
+    PropertySwitch<QString> background;
+    PropertySwitch<QString> model;
+    PropertySwitch<Orientation> orientation;
+    PropertySwitch<double> crop;
+    PropertyValue<double> cropFactor;
     PropertyValue<double> modelDistance;
-    PropertyValue<double> focalLenght;
+    PropertyValue<double> backgroundDistance;
+    PropertyValue<double> focalLength;
     PropertyValue<double> diaphragm;
-    QJsonObject asJSON();
-    bool loadFromJSON(QJsonObject &json);
+public:
+    PropertyList& operator = (const PropertyList &src)
+    {
+        background = src.background;
+        model = src.model;
+        orientation = src.orientation;
+        crop = src.crop;
+        cropFactor = src.cropFactor;
+        modelDistance = src.modelDistance;
+        backgroundDistance = src.backgroundDistance;
+        focalLength = src.focalLength;
+        diaphragm = src.diaphragm;
+        return *this;
+    }
+    bool importFromJSON(const QJsonObject &json);
+    QJsonObject exportToJSON() const;
 };
 
 #endif // PROPERTIES_H

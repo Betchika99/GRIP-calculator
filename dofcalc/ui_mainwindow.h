@@ -14,6 +14,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -28,8 +29,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QTableWidget *table_dof;
-    QLabel *image;
+    QGridLayout *gridLayout;
     QFrame *frame_control;
     QSlider *slider_focal_length;
     QSlider *slider_model_distance;
@@ -59,95 +59,28 @@ public:
     QComboBox *combo_favorite;
     QPushButton *button_save;
     QPushButton *button_delete;
+    QLabel *image;
+    QTableWidget *table_dof;
+    QFrame *frame_logon;
+    QPushButton *button_login;
+    QPushButton *button_register;
+    QLabel *label_welcome;
+    QPushButton *button_logout;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(888, 655);
+        MainWindow->resize(1149, 655);
         MainWindow->setMinimumSize(QSize(888, 655));
-        MainWindow->setMaximumSize(QSize(1500, 1500));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        table_dof = new QTableWidget(centralWidget);
-        if (table_dof->columnCount() < 1)
-            table_dof->setColumnCount(1);
-        if (table_dof->rowCount() < 4)
-            table_dof->setRowCount(4);
-        QFont font;
-        font.setFamily(QStringLiteral("Segoe UI"));
-        font.setPointSize(12);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setFont(font);
-        table_dof->setVerticalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setFont(font);
-        table_dof->setVerticalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        __qtablewidgetitem2->setFont(font);
-        table_dof->setVerticalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        __qtablewidgetitem3->setFont(font);
-        table_dof->setVerticalHeaderItem(3, __qtablewidgetitem3);
-        QFont font1;
-        font1.setFamily(QStringLiteral("Segoe UI"));
-        font1.setPointSize(8);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        __qtablewidgetitem4->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
-        __qtablewidgetitem4->setFont(font1);
-        __qtablewidgetitem4->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
-        table_dof->setItem(0, 0, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        __qtablewidgetitem5->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
-        __qtablewidgetitem5->setFont(font1);
-        __qtablewidgetitem5->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
-        table_dof->setItem(1, 0, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        __qtablewidgetitem6->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
-        __qtablewidgetitem6->setFont(font1);
-        __qtablewidgetitem6->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
-        table_dof->setItem(2, 0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        __qtablewidgetitem7->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
-        __qtablewidgetitem7->setFont(font1);
-        __qtablewidgetitem7->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
-        table_dof->setItem(3, 0, __qtablewidgetitem7);
-        table_dof->setObjectName(QStringLiteral("table_dof"));
-        table_dof->setGeometry(QRect(639, 550, 240, 96));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(table_dof->sizePolicy().hasHeightForWidth());
-        table_dof->setSizePolicy(sizePolicy);
-        table_dof->setMinimumSize(QSize(240, 96));
-        table_dof->setMaximumSize(QSize(240, 96));
-        table_dof->setFrameShape(QFrame::HLine);
-        table_dof->setFrameShadow(QFrame::Raised);
-        table_dof->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        table_dof->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        table_dof->setAutoScroll(false);
-        table_dof->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        table_dof->setSelectionMode(QAbstractItemView::NoSelection);
-        table_dof->setRowCount(4);
-        table_dof->setColumnCount(1);
-        table_dof->horizontalHeader()->setVisible(false);
-        table_dof->horizontalHeader()->setDefaultSectionSize(125);
-        table_dof->horizontalHeader()->setMinimumSectionSize(49);
-        table_dof->horizontalHeader()->setStretchLastSection(false);
-        table_dof->verticalHeader()->setDefaultSectionSize(23);
-        table_dof->verticalHeader()->setHighlightSections(false);
-        table_dof->verticalHeader()->setMinimumSectionSize(21);
-        table_dof->verticalHeader()->setStretchLastSection(false);
-        image = new QLabel(centralWidget);
-        image->setObjectName(QStringLiteral("image"));
-        image->setGeometry(QRect(9, 9, 620, 637));
-        image->setMinimumSize(QSize(620, 637));
-        image->setFrameShape(QFrame::StyledPanel);
-        image->setScaledContents(false);
-        image->setAlignment(Qt::AlignCenter);
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(10);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         frame_control = new QFrame(centralWidget);
         frame_control->setObjectName(QStringLiteral("frame_control"));
-        frame_control->setGeometry(QRect(639, 9, 240, 425));
         frame_control->setMinimumSize(QSize(240, 422));
         frame_control->setMaximumSize(QSize(240, 16777215));
         frame_control->setFrameShape(QFrame::StyledPanel);
@@ -177,22 +110,20 @@ public:
         spin_model_distance->setGeometry(QRect(160, 238, 70, 22));
         spin_model_distance->setDecimals(1);
         spin_model_distance->setMinimum(1);
-        spin_model_distance->setMaximum(100);
+        spin_model_distance->setMaximum(50);
         spin_model_distance->setSingleStep(0.5);
-        spin_model_distance->setValue(15);
         label_background = new QLabel(frame_control);
         label_background->setObjectName(QStringLiteral("label_background"));
         label_background->setGeometry(QRect(10, 58, 81, 16));
         label_crop_factor = new QLabel(frame_control);
         label_crop_factor->setObjectName(QStringLiteral("label_crop_factor"));
-        label_crop_factor->setGeometry(QRect(150, 160, 91, 16));
+        label_crop_factor->setGeometry(QRect(161, 160, 70, 13));
         label_focal_length = new QLabel(frame_control);
         label_focal_length->setObjectName(QStringLiteral("label_focal_length"));
-        label_focal_length->setGeometry(QRect(0, 318, 241, 16));
+        label_focal_length->setGeometry(QRect(10, 318, 241, 16));
         label_diaphragm = new QLabel(frame_control);
         label_diaphragm->setObjectName(QStringLiteral("label_diaphragm"));
         label_diaphragm->setGeometry(QRect(10, 368, 171, 16));
-        label_diaphragm->setTextFormat(Qt::AutoText);
         slider_diaphragm = new QSlider(frame_control);
         slider_diaphragm->setObjectName(QStringLiteral("slider_diaphragm"));
         slider_diaphragm->setGeometry(QRect(10, 388, 140, 19));
@@ -256,11 +187,11 @@ public:
         spin_diaphragm = new QDoubleSpinBox(frame_control);
         spin_diaphragm->setObjectName(QStringLiteral("spin_diaphragm"));
         spin_diaphragm->setGeometry(QRect(171, 388, 58, 22));
-        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(spin_diaphragm->sizePolicy().hasHeightForWidth());
-        spin_diaphragm->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(spin_diaphragm->sizePolicy().hasHeightForWidth());
+        spin_diaphragm->setSizePolicy(sizePolicy);
         spin_diaphragm->setDecimals(1);
         spin_diaphragm->setMinimum(1);
         spin_diaphragm->setMaximum(32);
@@ -273,18 +204,19 @@ public:
         combo_strategy->setGeometry(QRect(10, 28, 220, 22));
         label_strategy = new QLabel(frame_control);
         label_strategy->setObjectName(QStringLiteral("label_strategy"));
-        label_strategy->setGeometry(QRect(10, 8, 101, 16));
-        label_strategy->setMinimumSize(QSize(101, 16));
+        label_strategy->setGeometry(QRect(10, 8, 91, 16));
+
+        gridLayout->addWidget(frame_control, 0, 1, 3, 1);
+
         frame_favorite = new QFrame(centralWidget);
         frame_favorite->setObjectName(QStringLiteral("frame_favorite"));
-        frame_favorite->setGeometry(QRect(639, 444, 240, 96));
         frame_favorite->setMinimumSize(QSize(240, 0));
         frame_favorite->setMaximumSize(QSize(240, 96));
         frame_favorite->setFrameShape(QFrame::StyledPanel);
         frame_favorite->setFrameShadow(QFrame::Plain);
         label_favorite = new QLabel(frame_favorite);
         label_favorite->setObjectName(QStringLiteral("label_favorite"));
-        label_favorite->setGeometry(QRect(10, 8, 161, 16));
+        label_favorite->setGeometry(QRect(10, 8, 181, 16));
         combo_favorite = new QComboBox(frame_favorite);
         combo_favorite->setObjectName(QStringLiteral("combo_favorite"));
         combo_favorite->setGeometry(QRect(10, 28, 220, 22));
@@ -298,6 +230,100 @@ public:
         button_delete->setObjectName(QStringLiteral("button_delete"));
         button_delete->setEnabled(false);
         button_delete->setGeometry(QRect(100, 60, 75, 23));
+
+        gridLayout->addWidget(frame_favorite, 3, 1, 1, 1);
+
+        image = new QLabel(centralWidget);
+        image->setObjectName(QStringLiteral("image"));
+        image->setFrameShape(QFrame::StyledPanel);
+        image->setScaledContents(false);
+        image->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(image, 1, 0, 4, 1);
+
+        table_dof = new QTableWidget(centralWidget);
+        if (table_dof->columnCount() < 1)
+            table_dof->setColumnCount(1);
+        if (table_dof->rowCount() < 4)
+            table_dof->setRowCount(4);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        table_dof->setVerticalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        table_dof->setVerticalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        table_dof->setVerticalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        table_dof->setVerticalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        __qtablewidgetitem4->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
+        __qtablewidgetitem4->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
+        table_dof->setItem(0, 0, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        __qtablewidgetitem5->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
+        __qtablewidgetitem5->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
+        table_dof->setItem(1, 0, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        __qtablewidgetitem6->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
+        __qtablewidgetitem6->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
+        table_dof->setItem(2, 0, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        __qtablewidgetitem7->setTextAlignment(Qt::AlignLeading|Qt::AlignVCenter);
+        __qtablewidgetitem7->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
+        table_dof->setItem(3, 0, __qtablewidgetitem7);
+        table_dof->setObjectName(QStringLiteral("table_dof"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(table_dof->sizePolicy().hasHeightForWidth());
+        table_dof->setSizePolicy(sizePolicy1);
+        table_dof->setMinimumSize(QSize(240, 96));
+        table_dof->setMaximumSize(QSize(240, 96));
+        table_dof->setFrameShape(QFrame::HLine);
+        table_dof->setFrameShadow(QFrame::Raised);
+        table_dof->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        table_dof->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        table_dof->setAutoScroll(false);
+        table_dof->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        table_dof->setSelectionMode(QAbstractItemView::NoSelection);
+        table_dof->setRowCount(4);
+        table_dof->setColumnCount(1);
+        table_dof->horizontalHeader()->setVisible(false);
+        table_dof->horizontalHeader()->setStretchLastSection(true);
+        table_dof->verticalHeader()->setDefaultSectionSize(23);
+        table_dof->verticalHeader()->setHighlightSections(false);
+        table_dof->verticalHeader()->setMinimumSectionSize(21);
+        table_dof->verticalHeader()->setStretchLastSection(false);
+
+        gridLayout->addWidget(table_dof, 4, 1, 1, 1);
+
+        frame_logon = new QFrame(centralWidget);
+        frame_logon->setObjectName(QStringLiteral("frame_logon"));
+        frame_logon->setMinimumSize(QSize(615, 44));
+        frame_logon->setMaximumSize(QSize(16777215, 44));
+        frame_logon->setFrameShape(QFrame::StyledPanel);
+        frame_logon->setFrameShadow(QFrame::Plain);
+        button_login = new QPushButton(frame_logon);
+        button_login->setObjectName(QStringLiteral("button_login"));
+        button_login->setEnabled(true);
+        button_login->setGeometry(QRect(30, 10, 75, 23));
+        button_register = new QPushButton(frame_logon);
+        button_register->setObjectName(QStringLiteral("button_register"));
+        button_register->setEnabled(true);
+        button_register->setGeometry(QRect(130, 10, 101, 23));
+        label_welcome = new QLabel(frame_logon);
+        label_welcome->setObjectName(QStringLiteral("label_welcome"));
+        label_welcome->setGeometry(QRect(30, 10, 401, 16));
+        button_logout = new QPushButton(frame_logon);
+        button_logout->setObjectName(QStringLiteral("button_logout"));
+        button_logout->setEnabled(true);
+        button_logout->setGeometry(QRect(440, 10, 93, 28));
+        label_welcome->raise();
+        button_login->raise();
+        button_register->raise();
+        button_logout->raise();
+
+        gridLayout->addWidget(frame_logon, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralWidget);
         QWidget::setTabOrder(combo_background, combo_model);
         QWidget::setTabOrder(combo_model, combo_crop);
@@ -317,20 +343,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "DOF Calculator", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = table_dof->verticalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\320\223\320\273\321\203\320\261\320\270\320\275\320\260 \321\200\320\265\320\267\320\272\320\276\321\201\321\202\320\270", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = table_dof->verticalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\264\320\275\320\270\320\271 \321\204\321\200\320\276\320\275\321\202 \320\223\320\240\320\230\320\237", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = table_dof->verticalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\275\320\270\320\271 \321\204\321\200\320\276\320\275\321\202 \320\223\320\240\320\230\320\237", nullptr));
-        QTableWidgetItem *___qtablewidgetitem3 = table_dof->verticalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\320\223\320\270\320\277\320\265\321\200\321\204\320\276\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \321\200\320\260\321\201\321\201\321\202", nullptr));
-
-        const bool __sortingEnabled = table_dof->isSortingEnabled();
-        table_dof->setSortingEnabled(false);
-        table_dof->setSortingEnabled(__sortingEnabled);
-
-        image->setText(QString());
         spin_model_distance->setSuffix(QApplication::translate("MainWindow", " \320\274", nullptr));
         label_background->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\275\320\270\320\271 \320\277\320\273\320\260\320\275", nullptr));
         label_crop_factor->setText(QApplication::translate("MainWindow", "\320\232\321\200\320\276\320\277-\321\204\320\260\320\272\321\202\320\276\321\200", nullptr));
@@ -344,9 +356,27 @@ public:
         label_background_distance->setText(QApplication::translate("MainWindow", "\320\240\320\260\321\201\321\201\321\202\320\276\321\217\320\275\320\270\320\265 \320\264\320\276 \321\204\320\276\320\275\320\260", nullptr));
         diaphragm_letter->setText(QApplication::translate("MainWindow", "f/", nullptr));
         label_strategy->setText(QApplication::translate("MainWindow", "\320\240\320\265\320\266\320\270\320\274 \321\201\321\212\320\265\320\274\320\272\320\270", nullptr));
-        label_favorite->setText(QApplication::translate("MainWindow", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\275\320\260\320\261\320\276\321\200\320\260 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\320\276\320\262", nullptr));
+        label_favorite->setText(QApplication::translate("MainWindow", "\320\235\320\260\320\270\320\274\320\265\320\275\320\276\320\262\320\260\320\275\320\270\320\265 \320\275\320\260\320\261\320\276\321\200\320\260 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\320\276\320\262", nullptr));
         button_save->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         button_delete->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
+        image->setText(QString());
+        QTableWidgetItem *___qtablewidgetitem = table_dof->verticalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\320\223\320\273\321\203\320\261\320\270\320\275\320\260 \321\200\320\265\320\267\320\272\320\276\321\201\321\202\320\270", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = table_dof->verticalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\264\320\275\320\270\320\271 \321\204\321\200\320\276\320\275\321\202 \320\223\320\240\320\230\320\237", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = table_dof->verticalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\275\320\270\320\271 \321\204\321\200\320\276\320\275\321\202 \320\223\320\240\320\230\320\237", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = table_dof->verticalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\320\223\320\270\320\277\320\265\321\200\321\204\320\276\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \321\200\320\260\321\201\321\201\321\202", nullptr));
+
+        const bool __sortingEnabled = table_dof->isSortingEnabled();
+        table_dof->setSortingEnabled(false);
+        table_dof->setSortingEnabled(__sortingEnabled);
+
+        button_login->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\271\321\202\320\270", nullptr));
+        button_register->setText(QApplication::translate("MainWindow", "\320\240\320\265\320\263\320\270\321\201\321\202\321\200\320\260\321\206\320\270\321\217", nullptr));
+        label_welcome->setText(QString());
+        button_logout->setText(QApplication::translate("MainWindow", "\320\222\321\213\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };
