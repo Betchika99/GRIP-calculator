@@ -2,9 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "dofmanager.h"
 #include "ui_mainwindow.h"
-#include "client.h"
+#include "dofmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -40,13 +39,18 @@ private slots:
     void on_combo_favorite_editTextChanged(const QString &arg1);
     void on_button_save_clicked();
     void on_button_delete_clicked();
+    
+    void on_button_logout_clicked();
 
-private:
+protected:
     Ui::MainWindow *ui;
-    DOFManager *dof;
+    DOFManager dof;
 
 private:
     bool eventFilter(QObject *obj, QEvent *event);
+    template <class T> void updateWidget(QComboBox *wg, const PropertySwitch<T> &p);
+    template <class T> void updateWidget(QDoubleSpinBox *wg, const PropertyValue<T> &p);
+    template <class T> void updateWidget(QSlider *wg, const PropertyValue<T> &p);
     void updateUI();
     void updateImage();
 };

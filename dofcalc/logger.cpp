@@ -1,5 +1,5 @@
-#include <QApplication>
 #include <QtCore>
+#include "toolslibrary.h"
 #include "logger.h"
 
 class LogSupport
@@ -11,18 +11,14 @@ public:
 private:
     const int oldFileAge = 7;
     QFile   logFile;
-    QString logPath;
 };
 
 static LogSupport *logSupport = nullptr;
 
 LogSupport::LogSupport()
 {
-    QString baseName = QFileInfo(QApplication::applicationFilePath()).baseName();
-    logPath = QDir::tempPath() + "/" + baseName + "/";
-    QDir().mkpath(logPath);
-    baseName += QDateTime().currentDateTime().toString("_yyyyMMdd-HHmmss.log");
-    logFile.setFileName(logPath + baseName);
+    QString logName = AppName() + QDateTime().currentDateTime().toString("_yyyyMMdd-HHmmss.log");;
+    logFile.setFileName(LogPath() + logName);
     logFile.open(QIODevice::WriteOnly|QIODevice::Unbuffered);
 }
 
@@ -30,10 +26,10 @@ LogSupport::~LogSupport()
 {
     logFile.close();
     QDateTime currentTime = QDateTime().currentDateTime();
-    QDir dirBrowser(logPath, "*.log");
+    QDir dirBrowser(LogPath(), "*.log");
     for (int i = 0; i < dirBrowser.entryList().count(); i++)
     {
-        QFile file(logPath + dirBrowser.entryList()[i]);
+        QFile file(LogPath() + dirBrowser.entryList()[i]);
         QDateTime fileTime = file.fileTime(QFileDevice::FileModificationTime);
         if (file.size() == 0 || fileTime.daysTo(currentTime) > oldFileAge) file.remove();
     }
@@ -61,11 +57,13 @@ void CloseLog()
 
 void Log(QString line)
 {
+    if (!logSupport) return;
     logSupport->Write(line);
 }
 
 void Log(const char *format, ...)
 {
+    if (!logSupport) return;
     va_list arglist;
     va_start(arglist, format);
     logSupport->Write(QString::vasprintf(format, arglist));
@@ -73,6 +71,7 @@ void Log(const char *format, ...)
 
 void Log(void *data, size_t size)
 {
+    if (!logSupport) return;
     quint8 *p = static_cast<quint8*>(data);
     QString line;
     for (size_t i = 0; i < size;)
@@ -86,6 +85,3 @@ void Log(void *data, size_t size)
     }
     if (!line.isEmpty()) logSupport->Write(line);
 }
-
-
-

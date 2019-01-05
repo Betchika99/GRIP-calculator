@@ -1,30 +1,29 @@
 #ifndef IMAGEHANDLER_H
 #define IMAGEHANDLER_H
-#include "image.h"
 
+#include "image.h"
 #include <vector>
 
 using std::vector;
 
 class ImageHandler
 {
+private:
+    const unsigned int SupportedLayersCount = 2;
+
 public:
     ImageHandler();
     ImageHandler(const ImageHandler& source) { images = source.images; }
+    ImageHandler& operator = (const ImageHandler& source) { images = source.images; return *this; }
     unsigned int layersCount() { return images.size(); }
-//    Image getImage(unsigned int index) { return images[index]; } //математика работает с ним же
-//    void setImage(Image img, unsigned  int index) { images[index] = img; }
     Image gluedImage(int shiftX = 0);
-    Image& model() { return images[1]; }
     Image& background() { return images[0]; }
+    Image& model() { return images[1]; }
     bool isValid() { return model().isValid() && background().isValid(); }
-    void UpdateImages(QString modelBodyPath, QString backgroundPath);
-//    void UpdateImages(QString fileName);
+    void loadImages(QString backgroundFileName, QString modelFileName);
 
 private:
     vector<Image> images;
-
-//    class Con //подкласс
 };
 
 #endif // IMAGEHANDLER_H

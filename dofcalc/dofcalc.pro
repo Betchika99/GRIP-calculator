@@ -28,41 +28,31 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         dofmanager.cpp \
-        propertylist.cpp \
         imagehandler.cpp \
         mathlibrary.cpp \
-        strategies.cpp \
-        logger.cpp \
-        properties.cpp \
-        client.cpp \
-    json_parser.cpp
-
+    strategies.cpp \
+    logger.cpp \
+    toolslibrary.cpp \
+    apiprovider.cpp \
+    properties.cpp \
+    loginwindow.cpp
 
 HEADERS += \
         mainwindow.h \
         dofmanager.h \
-        propertylist.h \
         imagehandler.h \
         mathlibrary.h \
     image.h \
     strategies.h \
     logger.h \
     properties.h \
-    client.h \
-    json_parser.hpp
-
+    toolslibrary.h \
+    apiprovider.h \
+    loginwindow.h
 
 FORMS += \
-        mainwindow.ui
-
-# change these two paths to your path to Boost
-INCLUDEPATH += \
-         /usr/local/Cellar/boost/1.68.0/include \
-         /usr/local/Cellar/jansson/2.12/include
-
-LIBS += \
-        -L/usr/local/Cellar/boost/1.68.0/lib -lboost_system -lpthread \
-        -L/usr/local/Cellar/jansson/2.12/lib -ljansson
+        mainwindow.ui \
+    loginwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
