@@ -516,3 +516,6 @@ dofcalc/boost/asio/yield.hpp
 dofcalc/boost/config.hpp
 dofcalc/boost/throw_exception.hpp
 dofcalc/boost/version.hpp
+*.png
+*.settings
+*.log

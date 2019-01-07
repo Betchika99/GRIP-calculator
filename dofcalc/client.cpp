@@ -1,19 +1,9 @@
 #include "client.h"
 #include "jansson.h"
 #include <iostream>
-#include <QJsonObject>
-#include <QJsonDocument>
 
-QStringList Client::getModelsNames(const QString& strategyName) {
-    return makeRequest(strategyName, "model");
-}
-
-QStringList Client::getBackgroundsNames(const QString& strategyName) {
-    return makeRequest(strategyName, "background");
-}
-
-QStringList Client::makeRequest(const QString& paramName, const string& flag) {
-    return getParams("0.0.0.0", "12345", "/images_list", paramName, "strategy_name", flag);
+QJsonObject Client::getImagesNames(const QString& strategyName) {
+    return getParams("0.0.0.0", "12345", "/images_list", strategyName, "strategy_name");
 }
 
 
@@ -23,10 +13,7 @@ QStringList Client::makeRequest(const QString& paramName, const string& flag) {
 
 string Client::getStrategies() {
     //return getParams("0.0.0.0", "12345", "/strategies");
-}
-
-QStringList Client::getImagesNames(const QString& strategyName) {
-    //return getParams("0.0.0.0", "12345", "/images_list", strategyName, "strategy_name");
+    return "Hello, World";
 }
 
 bool Client::getBackgroud(const string& fileName) {
@@ -39,10 +26,12 @@ bool Client::getModel(const string& fileName) {
 
 string Client::getLastParams() {
     //return getParams("0.0.0.0", "12345", "/get_last_params");
+    return "Hello, World";
 }
 
 string Client::getFavorite() {
    // return getParams("0.0.0.0", "12345", "/favorites_list");
+    return "Hello, World";
 }
 
 bool Client::setLastParams(const string& jsonParams) {
@@ -57,9 +46,9 @@ bool Client::deleteFavorite(const string& jsonParams) {
     return setParams("0.0.0.0", "12345", "/delete_favorite", jsonParams);
 }
 
-QStringList Client::getParams(const string& serverName, const string& port,
+QJsonObject Client::getParams(const string& serverName, const string& port,
                               const string& getCommand, const QString& paramName,
-                              const string& paramType, const string& flag) {
+                              const string& paramType) {
     QStringList result;
     boost::asio::io_service io_service;
     tcp::resolver resolver(io_service);
@@ -101,14 +90,16 @@ QStringList Client::getParams(const string& serverName, const string& port,
     std::string status_message;
     std::getline(response_stream, status_message);
 
+    QJsonObject obj;
+
     if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
         std::cerr << "Invalid response\n";
-        return result;
+        return obj;
      }
 
      if (status_code != 200) {
         std::cout << "Response returned with status code " << status_code << "\n";
-        return result;
+        return obj;
      }
 
        // Read the response headers, which are terminated by a blank line.
@@ -142,7 +133,18 @@ QStringList Client::getParams(const string& serverName, const string& port,
     if (error != boost::asio::error::eof)
           throw boost::system::system_error(error);
 
-    return parseJSON(jsonQString, flag);
+    QJsonDocument doc = QJsonDocument::fromJson(jsonQString.toUtf8());
+    // check validity of the document
+    if (!doc.isNull()) {
+       if (doc.isObject()) {
+           obj = doc.object();
+       } else {
+           return obj;
+       }
+    } else {
+       return obj;
+    }
+    return obj;
 }
 
 bool Client::getPicture(const string& serverName, const string& port,

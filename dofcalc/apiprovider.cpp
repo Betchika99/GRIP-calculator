@@ -1,6 +1,7 @@
 #include "apiprovider.h"
 #include "toolslibrary.h"
 #include "logger.h"
+#include "client.h"
 
 APIProvider::APIProvider()
 {
@@ -10,7 +11,7 @@ APIProvider::APIProvider()
 bool APIProvider::serverOnline()
 {
     //todo something like ping or request
-    return false;
+    return true;
 }
 
 bool APIProvider::login(QString login, QString password)
@@ -42,9 +43,11 @@ void APIProvider::loadStrategyList(StrategyList &sl)
     QString settingsName = "strategies.settings";
     if (serverOnline())
     {
-        sl.strategies.clear();
+      //  sl.strategies.clear();
+        QString strategyName = "Portrait";
         //todo requestS
         //get strategies and pictures
+        sl.importFromJSON(Client::getImagesNames(strategyName));
         settingsName = "remotestrategies.settings";
     }
     Log("APIProvider.loadStrategyList(): Server unavailable, load local");

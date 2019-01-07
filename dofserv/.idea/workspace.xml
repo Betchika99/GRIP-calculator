@@ -8,16 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e558e7f2-e87a-40c0-99f7-d486e4e67cac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../dofcalc/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.pro.user" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.pro.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dofcalc/json_parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/json_parser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dofcalc/strategies.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/strategies.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dofserv.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dofserv.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_work.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/db_work.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/handler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +34,7 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.9" value="1" />
@@ -198,12 +192,12 @@
       <workItem from="1545003749583" duration="5786000" />
       <workItem from="1545334961216" duration="43000" />
       <workItem from="1545604679605" duration="4904000" />
-      <workItem from="1546595675103" duration="5062000" />
+      <workItem from="1546595675103" duration="5311000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11150000" />
+    <option name="totallyTimeSpent" value="11399000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="23" width="1371" height="877" extended-state="0" />
