@@ -146,14 +146,16 @@ void a(struct evhttp_request *request, void *arg){
 //   coll = db["models"];
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Виталя.3.Model" <<
+//     << "title" << "Виталя"
+//     << "value" << "Портретная_съемка.Виталя.3.Model.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Виталя.3.Model.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Катя.1.Model.png" <<
+//     << "title" << "Катя"
+//     << "value" << "Портретная_съемка.Катя.1.Model.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Катя.1.Model.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -161,7 +163,8 @@ void a(struct evhttp_request *request, void *arg){
 //
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Лиза.2.Model.png" <<
+//     << "title" << "Лиза"
+//     << "value" << "Портретная_съемка.Лиза.2.Model.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Лиза.2.Model.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -170,14 +173,16 @@ void a(struct evhttp_request *request, void *arg){
 //   coll = db["backgrounds"];
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Офис_Mail_ru.3.Background.png" <<
+//     << "title" << "Офис Mail.ru"
+//     << "value" << "Портретная_съемка.Офис_Mail_ru.3.Background.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Офис_Mail_ru.3.Background.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Красная_площадь.2.Background.png" <<
+//     << "title" << "Красная площадь"
+//     << "value" << "Портретная_съемка.Красная_площадь.2.Background.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Красная_площадь.2.Background.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -185,7 +190,8 @@ void a(struct evhttp_request *request, void *arg){
 //
 //   doc_value = builder
 //     << "strategy_name" << "Portrait"
-//     << "name" << "Портретная_съемка.Какая-то_улица.1.Background.png" <<
+//     << "title" << "Какая-то улица"
+//     << "value" << "Портретная_съемка.Какая-то_улица.1.Background.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Какая-то_улица.1.Background.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -200,7 +206,8 @@ void a(struct evhttp_request *request, void *arg){
 //   coll = db["models"];
 //   doc_value = builder
 //     << "strategy_name" << "Macro"
-//     << "name" << "Макро.Бабочка.Model.1.png" <<
+//     << "title" << "Бабочка"
+//     << "value" << "Макро.Бабочка.Model.1.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -208,14 +215,16 @@ void a(struct evhttp_request *request, void *arg){
 //   coll = db["backgrounds"];
 //   doc_value = builder
 //     << "strategy_name" << "Macro"
-//     << "name" << "Макро.Цветок.Background.1.png" <<
+//     << "title" << "Цветок"
+//     << "value" << "Макро.Цветок.Background.1.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Цветок.Background.1.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   doc_value = builder
 //     << "strategy_name" << "Macro"
-//     << "name" << "Макро.Поляна.Background.2.png" <<
+//     << "title" << "Поляна"
+//     << "value" << "Макро.Поляна.Background.2.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Поляна.Background.2.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -230,29 +239,35 @@ void a(struct evhttp_request *request, void *arg){
 //   coll = db["models"];
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
-//     << "name" << "Макро.Бабочка.Model.1.png" <<
+//     << "title" << "Бабочка"
+//     << "value" << "Макро.Бабочка.Model.1.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   coll = db["backgrounds"];
+//
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
-//     << "name" << "Пейзаж.Поле.Background.3.png" <<
+//     << "title" << "Поле"
+//     << "value" << "Пейзаж.Поле.Background.3.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
+//
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
-//     << "name" << "Пейзаж.Мост.Background.2.png" <<
+//     << "title" << "Мост"
+//     << "value" << "Пейзаж.Мост.Background.2.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
-//     << "name" << "Пейзаж.Замок.Background.1.png" <<
+//     << "title" << "Замок"
+//     << "value" << "Пейзаж.Замок.Background.1.png" <<
 //       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
@@ -330,8 +345,9 @@ void strategies_list(struct evhttp_request *request, void *arg){
     char *requestDataString = json_dumps(requestJSON, JSON_INDENT(4));
     printf("%s\n", requestDataString);
   }
+  json_t *root = json_object();
 
-  json_t *root = return_strategies();
+  json_object_set_new(root, "list", return_pictures_and_strategies() );
 
   char *responseData = json_dumps(root, JSON_INDENT(3));
   int responseLen = strlen(responseData);
@@ -621,7 +637,7 @@ void get_my_favorites(struct evhttp_request *request, void *arg){
   json_t *favourites_list = return_favourites(current_user);
 
 
-  json_object_set_new( root, "sets", favourites_list );
+  json_object_set_new( root, "list", favourites_list );
 
 
   char *responseData = json_dumps(root, JSON_INDENT(3));

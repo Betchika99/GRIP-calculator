@@ -27,7 +27,10 @@ json_t *return_favourites(user current_user);
 
 bool set_favourite(user current_user, all_params params, std::string favourite);
 
-
 bool delete_favourite_from_db(user current_user, std::string favourite_name);
+
+json_t *return_pictures_and_strategies();
+
+
 
 #endif // DB_WORK_H
