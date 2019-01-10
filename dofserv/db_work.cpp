@@ -117,7 +117,7 @@ json_t *return_models(std::string strategy_name){
 
     mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
   for(auto doc : cursor) {
-    bsoncxx::document::element name_element = doc["name"];
+    bsoncxx::document::element name_element = doc["title"];
     json_t *element = json_object();
     json_object_set_new( element, "model_name", json_string(name_element.get_utf8().value.to_string().c_str()));
     json_array_append_new(array, element);
@@ -132,7 +132,7 @@ json_t *return_backgrounds(std::string strategy_name){
 
   mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
   for(auto doc : cursor) {
-    bsoncxx::document::element name_element = doc["name"];
+    bsoncxx::document::element name_element = doc["title"];
     json_t *element = json_object();
     json_object_set_new( element, "background_name", json_string(name_element.get_utf8().value.to_string().c_str()));
     json_array_append_new(array, element);
@@ -342,4 +342,102 @@ bool set_favourite(user current_user, all_params params, std::string favourite_n
   }
 
 
+}
+
+json_t *return_pictures_and_strategies(){
+  json_t *array  = json_array();
+
+  mongocxx::collection strat = db["strategies"];
+
+  mongocxx::cursor cursor = strat.find({});
+  for(auto doc : cursor) {
+    json_t *root = json_object();
+
+    bsoncxx::document::element strategy_name_elem = doc["strategy_name"];
+    json_object_set_new( root, "strategy_name", json_string( strategy_name_elem.get_utf8().value.to_string().c_str() ) );
+
+    //BACKGROUNDS
+
+    json_t *background  = json_array();
+
+    mongocxx::collection coll = db["backgrounds"];
+
+    mongocxx::cursor cursorb = coll.find(document{} << "strategy_name" << strategy_name_elem.get_utf8().value.to_string() << finalize);
+    for(auto docb : cursorb) {
+      bsoncxx::document::element title_element = docb["title"];
+      bsoncxx::document::element value_element = docb["value"];
+      json_t *element = json_object();
+      json_object_set_new( element, "title", json_string(title_element.get_utf8().value.to_string().c_str()));
+      json_object_set_new( element, "value", json_string(value_element.get_utf8().value.to_string().c_str()));
+      json_array_append_new(background, element);
+    }
+    json_t *background_list = json_object();
+    json_object_set_new(background_list, "list", background );
+    json_object_set_new(root, "background", background_list );
+
+    //MODELS
+
+    json_t *model  = json_array();
+
+    coll = db["models"];
+
+    mongocxx::cursor cursorm = coll.find(document{} << "strategy_name" << strategy_name_elem.get_utf8().value.to_string() << finalize);
+    for(auto docm : cursorm) {
+      bsoncxx::document::element title_element = docm["title"];
+      bsoncxx::document::element value_element = docm["value"];
+      json_t *element = json_object();
+      json_object_set_new( element, "title", json_string(title_element.get_utf8().value.to_string().c_str()));
+      json_object_set_new( element, "value", json_string(value_element.get_utf8().value.to_string().c_str()));
+      json_array_append_new(model, element);
+    }
+    json_t *model_list = json_object();
+    json_object_set_new(model_list, "list", model );
+    json_object_set_new(root, "model", model_list );
+
+    //PARAMS
+
+
+    json_t *destination_to_model = json_object();
+    bsoncxx::document::element destination_to_model_min_elem = doc["destination_to_model_min"];
+    json_object_set_new( destination_to_model, "min", json_real( destination_to_model_min_elem.get_double() ) );
+    bsoncxx::document::element destination_to_model_max_elem = doc["destination_to_model_max"];
+    json_object_set_new( destination_to_model, "max", json_real( destination_to_model_max_elem.get_double() ) );
+    bsoncxx::document::element destination_to_model_default_elem = doc["destination_to_model_default"];
+    json_object_set_new( destination_to_model, "defaults", json_real( destination_to_model_default_elem.get_double() ) );
+    json_object_set_new(root, "destination_to_model", destination_to_model );
+
+
+
+    json_t *destination_to_background = json_object();
+    bsoncxx::document::element destination_to_background_min_elem = doc["destination_to_background_min"];
+    json_object_set_new( destination_to_background, "min", json_real( destination_to_background_min_elem.get_double() ) );
+    bsoncxx::document::element destination_to_background_max_elem = doc["destination_to_background_max"];
+    json_object_set_new( destination_to_background, "max", json_real( destination_to_background_max_elem.get_double() ) );
+    bsoncxx::document::element destination_to_background_default_elem = doc["destination_to_background_default"];
+    json_object_set_new( destination_to_background, "defaults", json_real( destination_to_background_default_elem.get_double() ) );
+    json_object_set_new(root, "destination_to_background", destination_to_background );
+
+
+    json_t *focus_destination = json_object();
+    bsoncxx::document::element focus_destination_min_elem = doc["focus_destination_min"];
+    json_object_set_new( focus_destination, "min", json_real( focus_destination_min_elem.get_double() ) );
+    bsoncxx::document::element focus_destination_max_elem = doc["focus_destination_max"];
+    json_object_set_new( focus_destination, "max", json_real( focus_destination_max_elem.get_double() ) );
+    bsoncxx::document::element focus_destination_default_elem = doc["focus_destination_default"];
+    json_object_set_new( focus_destination, "defaults", json_real( focus_destination_default_elem.get_double() ) );
+    json_object_set_new(root, "focus_destination", focus_destination );
+
+
+    json_t *aperture = json_object();
+    bsoncxx::document::element aperture_min_elem = doc["aperture_min"];
+    json_object_set_new( aperture, "min", json_real( aperture_min_elem.get_double() ) );
+    bsoncxx::document::element aperture_max_elem = doc["aperture_max"];
+    json_object_set_new( aperture, "max", json_real( aperture_max_elem.get_double() ) );
+    bsoncxx::document::element aperture_default_elem = doc["aperture_default"];
+    json_object_set_new( aperture, "defaults", json_real( aperture_default_elem.get_double() ) );
+    json_object_set_new(root, "aperture", aperture );
+
+    json_array_append_new(array, root );
+  }
+  return array;
 }
