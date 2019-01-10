@@ -7,7 +7,13 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e558e7f2-e87a-40c0-99f7-d486e4e67cac" name="Default Changelist" comment="" />
+    <list default="true" id="e558e7f2-e87a-40c0-99f7-d486e4e67cac" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,12 +23,32 @@
     <session id="-1743750730">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="hpp" value="1" />
+          <entry key="cpp" value="1" />
+          <entry key="hpp" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="ObjectiveC" value="1" />
+          <entry key="ObjectiveC" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cpp" value="146" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="ObjectiveC" value="146" />
         </counts>
       </usages-collector>
     </session>
@@ -32,8 +58,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+            <state relative-caret-position="394">
+              <caret line="32" column="50" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/handler.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -41,16 +76,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="278" column="77" lean-forward="true" selection-start-line="276" selection-start-column="2" selection-end-line="278" selection-end-column="77" />
-              <folding>
-                <element signature="e#9009#11385#0" />
-                <element signature="e#11387#12400#0" />
-                <element signature="e#12402#13491#0" />
-                <element signature="e#13493#15128#0" />
-                <element signature="e#15130#16056#0" />
-                <element signature="e#16058#17062#0" />
-              </folding>
+            <state relative-caret-position="-4806">
+              <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db_work.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2851">
+              <caret line="119" column="49" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -58,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/json_parser.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+            <state relative-caret-position="270">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -68,10 +104,7 @@
         <entry file="file://$PROJECT_DIR$/json_parser.hpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="20" lean-forward="true" selection-end-line="99" />
-              <folding>
-                <element signature="e#45#65#0" expanded="true" />
-              </folding>
+              <caret line="14" column="20" selection-end-line="99" />
             </state>
           </provider>
         </entry>
@@ -89,6 +122,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/db_work.cpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/handler.cpp" />
       </list>
     </option>
@@ -98,6 +133,13 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="69" />
+    <option name="y" value="23" />
+    <option name="width" value="1371" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -110,7 +152,7 @@
         <subPane>
           <expand>
             <path>
-              <item name="DofServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dofserv" type="b2602c69:ProjectViewProjectNode" />
               <item name="dofserv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -118,6 +160,9 @@
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -136,7 +181,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="156b2ddb-cf6b-4ee9-8134-dc938758db33" name="Default Changelist" comment="" />
+      <changelist id="e558e7f2-e87a-40c0-99f7-d486e4e67cac" name="Default Changelist" comment="" />
       <created>1544955449632</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -145,17 +190,20 @@
       <workItem from="1544982691236" duration="534000" />
       <workItem from="1544983615612" duration="1893000" />
       <workItem from="1545003749583" duration="5786000" />
+      <workItem from="1545334961216" duration="43000" />
+      <workItem from="1545604679605" duration="4904000" />
+      <workItem from="1546595675103" duration="5311000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1141000" />
+    <option name="totallyTimeSpent" value="11399000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="69" y="23" width="1371" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20243205" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21143717" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -167,7 +215,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32891566" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.17108434" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.13757962" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="CMake" order="12" />
@@ -177,36 +225,55 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/json_parser.hpp">
+    <entry file="file://$PROJECT_DIR$/json_parser.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="20" lean-forward="true" selection-end-line="99" />
-          <folding>
-            <element signature="e#45#65#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/json_parser.cpp">
+    <entry file="file://$PROJECT_DIR$/json_parser.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="20" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_work.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2851">
+          <caret line="119" column="49" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="32" column="50" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handler.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handler.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="278" column="77" lean-forward="true" selection-start-line="276" selection-start-column="2" selection-end-line="278" selection-end-column="77" />
-          <folding>
-            <element signature="e#9009#11385#0" />
-            <element signature="e#11387#12400#0" />
-            <element signature="e#12402#13491#0" />
-            <element signature="e#13493#15128#0" />
-            <element signature="e#15130#16056#0" />
-            <element signature="e#16058#17062#0" />
-          </folding>
+        <state relative-caret-position="-4806">
+          <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
         </state>
       </provider>
     </entry>

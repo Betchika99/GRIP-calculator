@@ -1,139 +1,157 @@
 #include "dofmanager.h"
+#include "toolslibrary.h"
+#include <QtCore>
+
+const std::vector<PropertySwitch<Orientation>::SwitchPair> Orientations =
+{
+    {"Альбомная", Album},
+    {"Книжная", Book},
+};
+
+const std::vector<PropertySwitch<double>::SwitchPair> Crops =
+{
+    {"Full Frame", 1.0},
+    {"APC-H", 1.3},
+    {"Nikon DX", 1.5},
+    {"APC-C", 1.6},
+    {"Four Thirds", 2.0},
+    {"1 дюйм", 2.7},
+    {"2/3 дюйма", 4.0},
+};
 
 DOFManager::DOFManager()
 {
-    UpdateImages();
+    loadConstantProperties();
+    api.loadStrategyList(sl);
+    sl.updatePropertyList(pl);
+    api.loadFavoriteList(fl);
+    reloadImages();
 }
 
-DOFManager::~DOFManager()
+void DOFManager::loadConstantProperties()
 {
-
+    for (size_t i = 0; i < Orientations.size(); i++)
+        pl.orientation.addEntry(Orientations[i].title, Orientations[i].value);
+    for (size_t i = 0; i < Crops.size(); i++)
+        pl.crop.addEntry(Crops[i].title, Crops[i].value);
+    pl.orientation.setIndex(0);
+    pl.crop.setIndex(0);
+    pl.cropFactor.set(0.5, 10, pl.crop.value());
 }
 
-QStringList DOFManager::getStrategyList()
+void DOFManager::setStrategy(int index)
 {
-    return pl.getStrategies();
+    sl.strategies.setIndex(index);
+    sl.updatePropertyList(pl);
+    reloadImages();
 }
 
-int DOFManager::getStrategyIndex()
+void DOFManager::setBackground(int index)
 {
-    return pl.getCurrentStrategyIndex();
+    pl.background.setIndex(index);
+    reloadImages();
 }
 
-void DOFManager::setStrategyIndex(int index)
+void DOFManager::setModel(int index)
 {
-    pl.setCurrentStrategyIndex(index);
+    pl.model.setIndex(index);
+    reloadImages();
 }
 
-Strategy& DOFManager::getStrategy()
+void DOFManager::setOrientation(int index)
 {
-    return *pl.getCurrentStrategy();
+    pl.orientation.setIndex(index);
+    reloadImages();
 }
 
-QStringList DOFManager::getBackgroundsList()
+void DOFManager::setCrop(int index)
 {
-    return pl.getBackgrounds();
+    pl.crop.setIndex(index);
+    pl.cropFactor.setValue(roundTo(pl.crop.value(), 2));
 }
 
-int DOFManager::getBackgroundIndex()
+void DOFManager::setCropFactor(double value)
 {
-    return pl.getCurrentBackgroundIndex();
-}
-
-void DOFManager::setBackgroundIndex(int index)
-{
-    pl.setCurrentBackgroundIndex(index);
-    UpdateImages();
-}
-
-QStringList DOFManager::getModelsList()
-{
-    return pl.getModels();
-}
-
-int DOFManager::getModelIndex()
-{
-    return pl.getCurrentModelIndex();
-}
-
-void DOFManager::setModelIndex(int index)
-{
-    pl.setCurrentModelIndex(index);
-    UpdateImages();
-}
-
-QStringList DOFManager::getSensorsList()
-{
-    return pl.getCrops();
-}
-
-int DOFManager::getSensorIndex()
-{
-    return pl.getCurrentCropIndex();
-}
-
-void DOFManager::setSensorIndex(int index)
-{
-    pl.setCurrentCropIndex(index);
-}
-
-double DOFManager::getCropFactor()
-{
-    return pl.getCrop();
-}
-
-void DOFManager::setCropFactor(double crop)
-{
-    return pl.setCrop(crop);
-}
-
-double DOFManager::getBackgroundDistance()
-{
-    return pl.getDistanceBackgroud();
-}
-
-void DOFManager::setBackgroundDistance(double value)
-{
-    pl.setDistanceBackgroud(value);
-}
-
-double DOFManager::getModelDistance()
-{
-    return pl.getDistanceModel();
+    pl.cropFactor.setValue(value);
+    pl.crop.setIndexByValue(roundTo(pl.cropFactor.value(), 2));
 }
 
 void DOFManager::setModelDistance(double value)
 {
-    return pl.setDistanceModel(value);
+    pl.modelDistance.setValue(value);
 }
 
-double DOFManager::getFocalLength()
+void DOFManager::setBackgroundDistance(double value)
 {
-    return pl.getFocalLenght();
+    pl.backgroundDistance.setValue(value);
 }
 
 void DOFManager::setFocalLength(double value)
 {
-    return pl.setFocalLenght(value);
+    pl.focalLength.setValue(value);
 }
 
-//QStringList DOFManager::getAperturesList()
-//{
-//    QStringList list;
-//    list.append("F/1.0");
-//    list.append("F/1.4");
-//    list.append("F/1.6");
-//    return list;
-//}
-
-double DOFManager::getAperture()
+void DOFManager::setDiaphragm(double value)
 {
-    return pl.getDiaphragm();
+    pl.diaphragm.setValue(value);
 }
 
-void DOFManager::setAperture(double value)
+bool DOFManager::loadFavorite(QString title)
 {
-    return pl.setDiaphragm(value);
+    fl.setIndexByTitle(title);
+    bool success = fl.index() >= 0 && api.loadFavorite(fl.title(), sl, pl);
+    if (success)
+    {
+        setCropFactor(pl.cropFactor.value());
+        reloadImages();
+    }
+    return success;
+}
+
+bool DOFManager::saveFavorite(QString title)
+{
+    bool success = api.saveFavorite(title, sl, pl);
+    if (success)
+    {
+        api.loadFavoriteList(fl);
+        fl.setIndexByTitle(title);
+    }
+    return success;
+}
+
+void DOFManager::deleteFavorite(QString title)
+{
+    if (api.deleteFavorite(title))
+    {
+        api.loadFavoriteList(fl);
+        fl.setIndex(-1);
+    }
+}
+
+void DOFManager::resetToDefaults()
+{
+    pl.modelDistance.reset();
+    pl.backgroundDistance.reset();
+    pl.focalLength.reset();
+    pl.diaphragm.reset();
+}
+
+void DOFManager::performImageProcessing()
+{
+    result = origin;
+    ml.Blur(&pl, result);
+    ml.Scale(&pl, result);
+}
+
+void DOFManager::reloadImages()
+{
+    origin.loadImages(ImagePath()+pl.background.value(), ImagePath()+pl.model.value());
+}
+
+double DOFManager::roundTo(double value, int precision)
+{
+    double multiplier = pow(10, precision);
+    return qRound(value * multiplier) / multiplier;
 }
 
 double DOFManager::getGRIP()
@@ -155,28 +173,3 @@ double DOFManager::getFarestPointOfSharpness()
 {
     return ml.FindFarestPointOfSharpness(&pl);
 }
-
-void DOFManager::UpdateImages()
-{
-   QString fileNameModel = pl.getCurrentStrategyModelFileName();
-   QString fileNameBackground = pl.getCurrentStrategyBackgroundFileName();
-   origin.UpdateImages(fileNameModel, fileNameBackground);
-}
-
-void DOFManager::PerformImageProcessing()
-{
-    result = origin;
-    ml.Blur(&pl, result);
-    ml.Scale(&pl, result);
-}
-
-//void DOFManager::Blur()
-//{
-//    ml.Blur(&pl, origin, result);
-//}
-
-//void DOFManager::Scale()
-//{
-//    ml.Scale(&pl, origin, result);
-//}
-

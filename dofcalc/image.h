@@ -1,6 +1,8 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include "logger.h"
+#include "toolslibrary.h"
 #include <QImage>
 #include <QPixmap>
 #include <QPainter>
@@ -18,8 +20,8 @@ public:
     ~Image() { painter.end(); }
 
     QImage asQImage() { return pixmap.toImage(); }
-    QPainter& asQPainter() { return painter; }
-    QPixmap asQPixmap() const { return pixmap; }
+    const QPainter& asQPainter() const { return painter; }
+    const QPixmap& asQPixmap() const { return pixmap; }
 
     //накладывает картинку на саму себя
     void imposeImages(const Image& imgFon, QPoint pos){ painter.drawPixmap(pos, imgFon.asQPixmap()); }
@@ -28,7 +30,11 @@ public:
     bool isValid() const { return !pixmap.isNull(); }
     Image scale(const QSize& size) { QPixmap pm = pixmap.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation); return Image(pm); }
     Image scale(int widht, int height) { return scale(QSize(widht, height)); }
-    void load(QString fileName) { pixmap.load(fileName);}
+    void load(QString fileName)
+    {
+        bool success = pixmap.load(fileName);
+        if (!success) Log("Image.load(): failed to load %s", fileName.toUtf8().data());
+    }
     Image& operator=(const Image &img) { pixmap = img.asQPixmap(); return *this; }
     Image& operator=(const QImage &img) { pixmap.convertFromImage(img); return *this; }
 

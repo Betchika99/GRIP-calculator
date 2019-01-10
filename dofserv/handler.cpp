@@ -37,6 +37,7 @@ void unspecified_URL(struct evhttp_request *request, void *arg){
 }
 
 void a(struct evhttp_request *request, void *arg){
+
 //   mongocxx::uri uri("mongodb://localhost:27017");
 //   mongocxx::client client(uri);
 //   mongocxx::database db = client["dofdb"];
@@ -250,8 +251,8 @@ void a(struct evhttp_request *request, void *arg){
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
 //     << "title" << "Поле"
-//     << "value" << "Пейзаж.Поле.Background.3.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
+//     << "value" << "Пейзаж.Поле.Background.3.png" <<
+//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
@@ -259,16 +260,16 @@ void a(struct evhttp_request *request, void *arg){
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
 //     << "title" << "Мост"
-//     << "value" << "Пейзаж.Мост.Background.2.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
+//     << "value" << "Пейзаж.Мост.Background.2.png" <<
+//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 //
 //   doc_value = builder
 //     << "strategy_name" << "Landscape"
 //     << "title" << "Замок"
-//     << "value" << "Пейзаж.Замок.Background.1.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
+//     << "value" << "Пейзаж.Замок.Background.1.png" <<
+//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
 //   view = doc_value.view();
 //   coll.insert_one(view);
 
@@ -311,6 +312,7 @@ void images_list(struct evhttp_request *request, void *arg){
 
   char *responseData = json_dumps(root, JSON_INDENT(3));
   int responseLen = strlen(responseData);
+
   char responseHeader[HEADER_BUFFER_SIZE];
   snprintf(responseHeader, HEADER_BUFFER_SIZE, "%d", (int)responseLen);
   json_decref(root);
@@ -319,6 +321,10 @@ void images_list(struct evhttp_request *request, void *arg){
   evhttp_add_header(request->output_headers, "Content-Type", "application/json");
   evhttp_add_header(request->output_headers, "Content-Length", responseHeader);
   evbuffer_add(buffer, responseData, responseLen);
+
+    if (responseData != NULL){
+        printf("%s\n", responseData);
+    }
 
   evhttp_send_reply(request, 200, "OK", buffer);
 

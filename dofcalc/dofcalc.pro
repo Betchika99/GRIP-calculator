@@ -28,32 +28,35 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         dofmanager.cpp \
-        propertylist.cpp \
         imagehandler.cpp \
         mathlibrary.cpp \
-        strategies.cpp \
-        logger.cpp \
-        properties.cpp \
-        client.cpp \
+    strategies.cpp \
+    logger.cpp \
+    toolslibrary.cpp \
+    apiprovider.cpp \
+    properties.cpp \
+    loginwindow.cpp \
+    client.cpp \
     json_parser.cpp
-
 
 HEADERS += \
         mainwindow.h \
         dofmanager.h \
-        propertylist.h \
         imagehandler.h \
         mathlibrary.h \
     image.h \
     strategies.h \
     logger.h \
     properties.h \
+    toolslibrary.h \
+    apiprovider.h \
+    loginwindow.h \
     client.h \
     json_parser.hpp
 
-
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    loginwindow.ui
 
 # change these two paths to your path to Boost
 INCLUDEPATH += \

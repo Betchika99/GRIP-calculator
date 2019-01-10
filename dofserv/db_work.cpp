@@ -111,10 +111,11 @@ json_t *return_strategies(){
 
 json_t *return_models(std::string strategy_name){
   json_t *array  = json_array();
+//    mongocxx::instance inst{};
+    mongocxx::client conn{mongocxx::uri{}};
+    auto coll = conn["dofdb"]["models"];
 
-  mongocxx::collection coll = db["models"];
-
-  mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
+    mongocxx::cursor cursor = coll.find(document{} << "strategy_name" << strategy_name << finalize);
   for(auto doc : cursor) {
     bsoncxx::document::element name_element = doc["title"];
     json_t *element = json_object();

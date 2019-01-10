@@ -2,6 +2,11 @@
 #define JSON_PARSER_H
 #include <jansson.h>
 #include <string>
+#include <QStringList>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <iostream>
 
 struct all_params{
     std::string strategy_name;
@@ -16,8 +21,6 @@ struct all_params{
 
     all_params(std::string name_of_strategy)
     {
-
-
        if (name_of_strategy == "Portrait"){
           strategy_name = name_of_strategy;
           background_name = "Background1Name";
@@ -64,9 +67,6 @@ struct all_params{
          destination_to_background = 500.0;
          aperture = 8.0;
        }
-
-
-
     }
 };
 
@@ -80,6 +80,12 @@ struct user{
     }
 };
 
+QStringList parseJSON(const QString &jsonQString, const std::string &flag);
+
+QStringList json_to_models_names(const QString &jsonQString);
+
+QStringList json_to_backgrounds_names(const QString &jsonQString);
+
 std::string json_to_favourite_name(json_t *input_JSON);
 
 std::string json_to_model_name(json_t *input_JSON);
@@ -87,7 +93,6 @@ std::string json_to_model_name(json_t *input_JSON);
 std::string json_to_background_name(json_t *input_JSON);
 
 std::string json_to_strategy_name(json_t *input_JSON);
-
 
 user json_to_user_struct(json_t *input_JSON);
 

@@ -1,74 +1,69 @@
 #ifndef DOFMANAGER_H
 #define DOFMANAGER_H
 
-#include <QStringList>
-#include "propertylist.h"
-#include "mathlibrary.h"
+#include "apiprovider.h"
+#include "properties.h"
+#include "strategies.h"
 #include "imagehandler.h"
+#include "mathlibrary.h"
 
 class DOFManager
 {
-
 public:
     DOFManager();
-    ~DOFManager();
 
 public:
-    QStringList getStrategyList();
-    int  getStrategyIndex();
-    void setStrategyIndex(int index);
-    Strategy& getStrategy();
+    bool login(QString name, QString password) {return api.login(name, password);}
+    bool createUser(QString name, QString password) {return api.createUser(name, password);}
+    void logout() {api.logout();}
+    bool userOnline() {return api.userOnline();}
 
-    QStringList getBackgroundsList();
-    int  getBackgroundIndex();
-    void setBackgroundIndex(int index);
-
-    QStringList getModelsList();
-    int  getModelIndex();
-    void setModelIndex(int index);
-
-    QStringList getSensorsList();
-    int  getSensorIndex();
-    void setSensorIndex(int index);
-
-    double getCropFactor();
-    void setCropFactor(double crop);
-
-    double getBackgroundDistance();
-    void setBackgroundDistance(double value);
-
-    double getModelDistance();
+    void setStrategy(int index);
+    void setBackground(int index);
+    void setModel(int index);
+    void setOrientation(int index);
+    void setCrop(int index);
+    void setCropFactor(double value);
     void setModelDistance(double value);
-
-    double getFocalLength();
+    void setBackgroundDistance(double value);
     void setFocalLength(double value);
+    void setDiaphragm(double value);
 
-    double getAperture();
-    void setAperture(double Value);
+    const PropertySwitch<Strategy>& strategy() {return sl.strategies;}
+    const PropertySwitch<QString>& background() {return pl.background;}
+    const PropertySwitch<QString>& model() {return pl.model;}
+    const PropertySwitch<Orientation>& orientation() {return pl.orientation;}
+    const PropertySwitch<double>& crop() {return pl.crop;}
+    const PropertyValue<double>& cropFactor() {return pl.cropFactor;}
+    const PropertyValue<double>& modelDistance() {return pl.modelDistance;}
+    const PropertyValue<double>& backgroundDistance() {return pl.backgroundDistance;}
+    const PropertyValue<double>& focalLength() {return pl.focalLength;}
+    const PropertyValue<double>& diaphragm() {return pl.diaphragm;}
 
+    bool loadFavorite(QString title);
+    bool saveFavorite(QString title);
+    void deleteFavorite(QString title);
+    const PropertySwitch<QString>& favorite() {return fl;}
+
+    void resetToDefaults();
+    void performImageProcessing();
+
+    Image getResultImage() {return result.gluedImage();}
     double getGRIP();
     double getHyperFocal();
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
-    Image getResultImage() {return result.gluedImage();}
-    void UpdateImages();
-    void PerformImageProcessing();
-
-    bool loadFromFile(QString &fileName)
-    {
-        bool success = pl.loadFromFile(fileName);
-        UpdateImages();
-        return success;
-    }
-    bool saveToFile(QString &fileName)
-    {
-        bool success = pl.saveToFile(fileName);
-        return success;
-    }
+protected:
+    void loadConstantProperties();
+    void reloadImages();
+    double roundTo(double value, int precision);
 
 private:
+    APIProvider api;
+    StrategyList sl;
     PropertyList pl;
+    PropertySwitch<QString> fl;
     MathLibrary ml;
     ImageHandler origin;
     ImageHandler result;

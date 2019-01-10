@@ -24,6 +24,7 @@ int main() {
        printf("ERROR: Can't start on %s port %d\n", address, port);
        exit (1);
     }
+    mongocxx::instance inst{};
     printf("Succesfully started on %s port %d\n", address, port);
 
     evhttp_set_cb(server, "/a", a, NULL);
@@ -39,12 +40,6 @@ int main() {
     evhttp_set_cb(server, "/favorites_list", get_my_favorites, NULL);
     evhttp_set_gencb(server, unspecified_URL, NULL);
     event_base_dispatch (ev_base);
-
-
-
     evhttp_free(server);
-
-
-
     return 0;
 }
