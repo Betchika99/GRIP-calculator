@@ -15,28 +15,33 @@ class Client {
 public:
     Client() = default;
     ~Client() = default;
+    QJsonObject static getStrategies();
     QJsonObject static getImagesNames(const QString& strategyName);
-
-
-
-
-
-
-
-    string static getStrategies();
     // пока ищут картинку по захардокеднному урлу
     bool static getBackgroud(const string& fileName);
     bool static getModel(const string& fileName);
-    string static getLastParams();
+    QJsonObject static getLastParams(const QJsonObject& userInfo);
+
+
+
+
+
+
+
     string static getFavorite();
     bool static setLastParams(const string& jsonParams);
     bool static setFavorite(const string& jsonParams);
     bool static deleteFavorite(const string& jsonParams);
 
 private:
+    QJsonObject static makeRequestForStrategies(const string& serverName, const string& port,
+                                                const string& getCommand);
     QJsonObject static getParams(const string& serverName, const string& port,
-                                 const string& getCommand, const QString& paramName,
-                                 const string& paramType);
+                                 const string& getCommand, const QJsonObject& userInfo);
+
+
+
+
 
     bool static getPicture(const string& serverName, const string& port,
                     const string& getCommand, const string& fileName,

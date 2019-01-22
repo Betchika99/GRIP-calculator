@@ -44,13 +44,29 @@ void APIProvider::loadStrategyList(StrategyList &sl)
     if (serverOnline())
     {
       //  sl.strategies.clear();
-        QString strategyName = "Portrait";
         //todo requestS
         //get strategies and pictures
-        sl.importFromJSON(Client::getImagesNames(strategyName));
+        Log("APIProvider.loadStrategyList(): load from Server");
+        QJsonObject obj = Client::getStrategies();
+        bool success = sl.importFromJSON(obj);
+//        const char *logmsg = success ?
+//            "APIProvider.loadStrategyList(): Loaded from JSON %s" :
+//            "APIProvider.loadStrategyList(): JSON parsing error $s";
+
+     //   Client::getBackgroud("Портретная_съемка.Офис_Mail_ru.3.Background.png");
+    //    Client::getModel("Портретная_съемка.Лиза.2.Model.png");
+
+        QJsonDocument doc(obj);
+        QString strJson(doc.toJson(QJsonDocument::Compact));
+        Log("OKE", strJson.data());
         settingsName = "remotestrategies.settings";
+        QFile mFile("settings/" + settingsName);
+        mFile.open(QIODevice::WriteOnly);
+        mFile.close();
     }
-    Log("APIProvider.loadStrategyList(): Server unavailable, load local");
+    else {
+        Log("APIProvider.loadStrategyList(): Server unavailable, load local");
+    }
     QFile file(SettingsPath() + settingsName); //in if-branch create new file for server
     if (file.open(QIODevice::ReadOnly|QIODevice::Text) && file.size())
     {
@@ -61,7 +77,6 @@ void APIProvider::loadStrategyList(StrategyList &sl)
             "APIProvider.loadStrategyList(): Loaded from JSON %s" :
             "APIProvider.loadStrategyList(): JSON parsing error $s";
         Log(logmsg, doc.toJson(QJsonDocument::Compact).data());
-
     }
 }
 

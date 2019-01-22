@@ -38,240 +38,240 @@ void unspecified_URL(struct evhttp_request *request, void *arg){
 
 void a(struct evhttp_request *request, void *arg){
 
-//   mongocxx::uri uri("mongodb://localhost:27017");
-//   mongocxx::client client(uri);
-//   mongocxx::database db = client["dofdb"];
-//   mongocxx::collection coll = db["strategies"];
-//
-//   auto builder = document{};
-//   bsoncxx::document::value doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "background_name_default" << "Hello_world" <<
-//       "model_name_default" << "Hello_world" <<
-//       "crop_factor_min" << 1.1 <<
-//       "destination_to_model_min" << 1.0 <<
-//       "focus_destination_min" << 1.0 <<
-//       "destination_to_background_min" << 1.0 <<
-//       "aperture_min" << 1.0 <<
-//       "crop_factor_max" << 1.0 <<
-//       "destination_to_model_max" << 1.1 <<
-//       "focus_destination_max" << 1.0 <<
-//       "destination_to_background_max" << 1.0 <<
-//       "aperture_max" << 1.0 <<
-//       "crop_factor_default" << 1.0 <<
-//       "destination_to_model_default" << 1.0 <<
-//       "focus_destination_default" << 1.0 <<
-//       "destination_to_background_default" << 1.0 <<
-//       "aperture_default" << 1.0 << finalize;
-//   bsoncxx::document::view view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Macro"
-//     << "background_name_default" << "Hello_world" <<
-//       "model_name_default" << "Hello_world" <<
-//       "crop_factor_min" << 1.1 <<
-//       "destination_to_model_min" << 1.0 <<
-//       "focus_destination_min" << 1.0 <<
-//       "destination_to_background_min" << 1.0 <<
-//       "aperture_min" << 1.0 <<
-//       "crop_factor_max" << 1.0 <<
-//       "destination_to_model_max" << 1.1 <<
-//       "focus_destination_max" << 1.0 <<
-//       "destination_to_background_max" << 1.0 <<
-//       "aperture_max" << 1.0 <<
-//       "crop_factor_default" << 1.0 <<
-//       "destination_to_model_default" << 1.0 <<
-//       "focus_destination_default" << 1.0 <<
-//       "destination_to_background_default" << 1.0 <<
-//       "aperture_default" << 1.0 << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "CloseUp"
-//     << "background_name_default" << "Hello_world" <<
-//       "model_name_default" << "Hello_world" <<
-//       "crop_factor_min" << 1.1 <<
-//       "destination_to_model_min" << 1.0 <<
-//       "focus_destination_min" << 1.0 <<
-//       "destination_to_background_min" << 1.0 <<
-//       "aperture_min" << 1.0 <<
-//       "crop_factor_max" << 1.0 <<
-//       "destination_to_model_max" << 1.1 <<
-//       "focus_destination_max" << 1.0 <<
-//       "destination_to_background_max" << 1.0 <<
-//       "aperture_max" << 1.0 <<
-//       "crop_factor_default" << 1.0 <<
-//       "destination_to_model_default" << 1.0 <<
-//       "focus_destination_default" << 1.0 <<
-//       "destination_to_background_default" << 1.0 <<
-//       "aperture_default" << 1.0 << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Landscape"
-//     << "background_name_default" << "Hello_world" <<
-//       "model_name_default" << "Hello_world" <<
-//       "crop_factor_min" << 1.1 <<
-//       "destination_to_model_min" << 1.0 <<
-//       "focus_destination_min" << 1.0 <<
-//       "destination_to_background_min" << 1.0 <<
-//       "aperture_min" << 1.0 <<
-//       "crop_factor_max" << 1.0 <<
-//       "destination_to_model_max" << 1.1 <<
-//       "focus_destination_max" << 1.0 <<
-//       "destination_to_background_max" << 1.0 <<
-//       "aperture_max" << 1.0 <<
-//       "crop_factor_default" << 1.0 <<
-//       "destination_to_model_default" << 1.0 <<
-//       "focus_destination_default" << 1.0 <<
-//       "destination_to_background_default" << 1.0 <<
-//       "aperture_default" << 1.0 << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//
-//
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// //PORTRAIT
-//
-//
-//
-//
-//   coll = db["models"];
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Виталя"
-//     << "value" << "Портретная_съемка.Виталя.3.Model.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Виталя.3.Model.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Катя"
-//     << "value" << "Портретная_съемка.Катя.1.Model.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Катя.1.Model.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Лиза"
-//     << "value" << "Портретная_съемка.Лиза.2.Model.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Лиза.2.Model.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//
-//   coll = db["backgrounds"];
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Офис Mail.ru"
-//     << "value" << "Портретная_съемка.Офис_Mail_ru.3.Background.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Офис_Mail_ru.3.Background.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Красная площадь"
-//     << "value" << "Портретная_съемка.Красная_площадь.2.Background.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Красная_площадь.2.Background.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//
-//   doc_value = builder
-//     << "strategy_name" << "Portrait"
-//     << "title" << "Какая-то улица"
-//     << "value" << "Портретная_съемка.Какая-то_улица.1.Background.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Портретная_съемка.Какая-то_улица.1.Background.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   //MACRO
-//
-//   coll = db["models"];
-//   doc_value = builder
-//     << "strategy_name" << "Macro"
-//     << "title" << "Бабочка"
-//     << "value" << "Макро.Бабочка.Model.1.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   coll = db["backgrounds"];
-//   doc_value = builder
-//     << "strategy_name" << "Macro"
-//     << "title" << "Цветок"
-//     << "value" << "Макро.Цветок.Background.1.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Цветок.Background.1.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Macro"
-//     << "title" << "Поляна"
-//     << "value" << "Макро.Поляна.Background.2.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Поляна.Background.2.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   //LANDSCAPE
-//
-//   coll = db["models"];
-//   doc_value = builder
-//     << "strategy_name" << "Landscape"
-//     << "title" << "Бабочка"
-//     << "value" << "Макро.Бабочка.Model.1.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   coll = db["backgrounds"];
-//
-//   doc_value = builder
-//     << "strategy_name" << "Landscape"
-//     << "title" << "Поле"
-//     << "value" << "Пейзаж.Поле.Background.3.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//
-//   doc_value = builder
-//     << "strategy_name" << "Landscape"
-//     << "title" << "Мост"
-//     << "value" << "Пейзаж.Мост.Background.2.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
-//
-//   doc_value = builder
-//     << "strategy_name" << "Landscape"
-//     << "title" << "Замок"
-//     << "value" << "Пейзаж.Замок.Background.1.png" <<
-//       "address" << "/Users/iamfrommoscow/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
-//   view = doc_value.view();
-//   coll.insert_one(view);
+   mongocxx::uri uri("mongodb://localhost:27017");
+   mongocxx::client client(uri);
+   mongocxx::database db = client["dofdb"];
+   mongocxx::collection coll = db["strategies"];
+
+   auto builder = document{};
+   bsoncxx::document::value doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "background_name_default" << "Hello_world" <<
+       "model_name_default" << "Hello_world" <<
+       "crop_factor_min" << 1.1 <<
+       "destination_to_model_min" << 1.0 <<
+       "focus_destination_min" << 35.0 <<
+       "destination_to_background_min" << 1.0 <<
+       "aperture_min" << 1.0 <<
+       "crop_factor_max" << 1.0 <<
+       "destination_to_model_max" << 10.0 <<
+       "focus_destination_max" << 300.0 <<
+       "destination_to_background_max" << 10.0 <<
+       "aperture_max" << 10.0 <<
+       "crop_factor_default" << 1.0 <<
+       "destination_to_model_default" << 3.0 <<
+       "focus_destination_default" << 85.0 <<
+       "destination_to_background_default" << 3.0 <<
+       "aperture_default" << 3.0 << finalize;
+   bsoncxx::document::view view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Macro"
+     << "background_name_default" << "Hello_world" <<
+       "model_name_default" << "Hello_world" <<
+       "crop_factor_min" << 1.1 <<
+       "destination_to_model_min" << 1.0 <<
+       "focus_destination_min" << 35.0 <<
+       "destination_to_background_min" << 1.0 <<
+       "aperture_min" << 1.0 <<
+       "crop_factor_max" << 1.0 <<
+       "destination_to_model_max" << 10.0 <<
+       "focus_destination_max" << 300.0 <<
+       "destination_to_background_max" << 10.0 <<
+       "aperture_max" << 10.0 <<
+       "crop_factor_default" << 1.0 <<
+       "destination_to_model_default" << 3.0 <<
+       "focus_destination_default" << 85.0 <<
+       "destination_to_background_default" << 3.0 <<
+       "aperture_default" << 3.0 << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "CloseUp"
+     << "background_name_default" << "Hello_world" <<
+        "model_name_default" << "Hello_world" <<
+        "crop_factor_min" << 1.1 <<
+        "destination_to_model_min" << 1.0 <<
+        "focus_destination_min" << 35.0 <<
+        "destination_to_background_min" << 1.0 <<
+        "aperture_min" << 1.0 <<
+        "crop_factor_max" << 1.0 <<
+        "destination_to_model_max" << 10.0 <<
+        "focus_destination_max" << 300.0 <<
+        "destination_to_background_max" << 10.0 <<
+        "aperture_max" << 10.0 <<
+        "crop_factor_default" << 1.0 <<
+        "destination_to_model_default" << 3.0 <<
+        "focus_destination_default" << 85.0 <<
+        "destination_to_background_default" << 3.0 <<
+        "aperture_default" << 3.0 << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Landscape"
+     << "background_name_default" << "Hello_world" <<
+        "model_name_default" << "Hello_world" <<
+        "crop_factor_min" << 1.1 <<
+        "destination_to_model_min" << 1.0 <<
+        "focus_destination_min" << 35.0 <<
+        "destination_to_background_min" << 1.0 <<
+        "aperture_min" << 1.0 <<
+        "crop_factor_max" << 1.0 <<
+        "destination_to_model_max" << 10.0 <<
+        "focus_destination_max" << 300.0 <<
+        "destination_to_background_max" << 10.0 <<
+        "aperture_max" << 10.0 <<
+        "crop_factor_default" << 1.0 <<
+        "destination_to_model_default" << 3.0 <<
+        "focus_destination_default" << 85.0 <<
+        "destination_to_background_default" << 3.0 <<
+        "aperture_default" << 3.0 << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //PORTRAIT
+
+
+
+
+   coll = db["models"];
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Виталя"
+     << "value" << "Портретная_съемка.Виталя.3.Model.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Виталя.3.Model.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Катя"
+     << "value" << "Портретная_съемка.Катя.1.Model.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Катя.1.Model.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Лиза"
+     << "value" << "Портретная_съемка.Лиза.2.Model.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Лиза.2.Model.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+
+   coll = db["backgrounds"];
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Офис Mail.ru"
+     << "value" << "Портретная_съемка.Офис_Mail_ru.3.Background.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Офис_Mail_ru.3.Background.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Красная площадь"
+     << "value" << "Портретная_съемка.Красная_площадь.2.Background.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Красная_площадь.2.Background.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+
+   doc_value = builder
+     << "strategy_name" << "Portrait"
+     << "title" << "Какая-то улица"
+     << "value" << "Портретная_съемка.Какая-то_улица.1.Background.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Портретная_съемка.Какая-то_улица.1.Background.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //MACRO
+
+   coll = db["models"];
+   doc_value = builder
+     << "strategy_name" << "Macro"
+     << "title" << "Бабочка"
+     << "value" << "Макро.Бабочка.Model.1.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   coll = db["backgrounds"];
+   doc_value = builder
+     << "strategy_name" << "Macro"
+     << "title" << "Цветок"
+     << "value" << "Макро.Цветок.Background.1.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Макро.Цветок.Background.1.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Macro"
+     << "title" << "Поляна"
+     << "value" << "Макро.Поляна.Background.2.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Макро.Поляна.Background.2.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //LANDSCAPE
+
+   coll = db["models"];
+   doc_value = builder
+     << "strategy_name" << "Landscape"
+     << "title" << "Бабочка"
+     << "value" << "Макро.Бабочка.Model.1.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Макро.Бабочка.Model.1.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   coll = db["backgrounds"];
+
+   doc_value = builder
+     << "strategy_name" << "Landscape"
+     << "title" << "Поле"
+     << "value" << "Пейзаж.Поле.Background.3.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Пейзаж.Поле.Background.3.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+
+   doc_value = builder
+     << "strategy_name" << "Landscape"
+     << "title" << "Мост"
+     << "value" << "Пейзаж.Мост.Background.2.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Пейзаж.Мост.Background.2.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
+
+   doc_value = builder
+     << "strategy_name" << "Landscape"
+     << "title" << "Замок"
+     << "value" << "Пейзаж.Замок.Background.1.png" <<
+       "address" << "/Users/e_dobryanskaya/Desktop/dofpics/Пейзаж.Замок.Background.1.png" << finalize;
+   view = doc_value.view();
+   coll.insert_one(view);
 
   evhttp_send_reply(request, 200, "OK", NULL);
 }
@@ -365,6 +365,10 @@ void strategies_list(struct evhttp_request *request, void *arg){
   evhttp_add_header(request->output_headers, "Content-Type", "application/json");
   evhttp_add_header(request->output_headers, "Content-Length", responseHeader);
   evbuffer_add(buffer, responseData, responseLen);
+    
+    if (responseData != NULL){
+        printf("%s\n", responseData);
+    }
 
   evhttp_send_reply(request, 200, "OK", buffer);
 

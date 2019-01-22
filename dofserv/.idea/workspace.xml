@@ -9,9 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e558e7f2-e87a-40c0-99f7-d486e4e67cac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/apiprovider.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/apiprovider.o" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/apiprovider.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/client.h" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/client.o" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/client.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.app/Contents/MacOS/dofcalc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/dofcalc.pro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/ui_mainwindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/strategies.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/strategies.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dofcalc/strategies.o" beforeDir="false" afterPath="$PROJECT_DIR$/../dofcalc/strategies.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/handler.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,20 +41,20 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="3" />
-          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="146" />
+          <entry key="cpp" value="160" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="146" />
+          <entry key="ObjectiveC" value="160" />
         </counts>
       </usages-collector>
     </session>
@@ -58,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="32" column="50" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="53" />
+            <state relative-caret-position="339">
+              <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -67,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handler.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+            <state relative-caret-position="255">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -76,8 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4806">
-              <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
+            <state relative-caret-position="290">
+              <caret line="167" column="20" selection-start-line="167" selection-start-column="20" selection-end-line="167" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -85,7 +91,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_work.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2851">
+            <state relative-caret-position="1696">
               <caret line="119" column="49" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
             </state>
           </provider>
@@ -135,7 +141,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="x" value="69" />
     <option name="y" value="23" />
     <option name="width" value="1371" />
@@ -147,7 +153,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -159,6 +164,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -193,17 +199,18 @@
       <workItem from="1545334961216" duration="43000" />
       <workItem from="1545604679605" duration="4904000" />
       <workItem from="1546595675103" duration="5311000" />
+      <workItem from="1548098733268" duration="2864000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11399000" />
+    <option name="totallyTimeSpent" value="14263000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="23" width="1371" height="877" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21143717" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20386267" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -215,7 +222,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32891566" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.13757962" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3421687" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="CMake" order="12" />
@@ -251,29 +258,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db_work.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2851">
+        <state relative-caret-position="1696">
           <caret line="119" column="49" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="32" column="50" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="53" />
+        <state relative-caret-position="339">
+          <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handler.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+        <state relative-caret-position="255">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handler.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4806">
-          <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
+        <state relative-caret-position="290">
+          <caret line="167" column="20" selection-start-line="167" selection-start-column="20" selection-end-line="167" selection-end-column="54" />
         </state>
       </provider>
     </entry>

@@ -39,15 +39,15 @@ bool StrategyList::importFromJSON(const QJsonObject &json)
     for (int i = 0; i < array.count(); i++)
     {
         QJsonObject obj = array[i].toObject();
-        QJsonValue title = obj["strategy"];
+        QJsonValue title = obj["strategy_name"];
         if (!title.isString()) continue;
         Strategy strategy;
         if (!strategy.background.importFromJSON(obj["background"].toObject())) continue;
         if (!strategy.model.importFromJSON(obj["model"].toObject())) continue;
-        if (!strategy.modelDistance.importFromJSON(obj["modelDistance"].toObject())) continue;
-        if (!strategy.backgroundDistance.importFromJSON(obj["backgroundDistance"].toObject())) continue;
-        if (!strategy.focalLength.importFromJSON(obj["focalLength"].toObject())) continue;
-        if (!strategy.diaphragm.importFromJSON(obj["diaphragm"].toObject())) continue;
+        if (!strategy.modelDistance.importFromJSON(obj["destination_to_model"].toObject())) continue;
+        if (!strategy.backgroundDistance.importFromJSON(obj["destination_to_background"].toObject())) continue;
+        if (!strategy.focalLength.importFromJSON(obj["focus_destination"].toObject())) continue;
+        if (!strategy.diaphragm.importFromJSON(obj["aperture"].toObject())) continue;
         strategies.addEntry(title.toString(), strategy);
         compatible = true;
     }

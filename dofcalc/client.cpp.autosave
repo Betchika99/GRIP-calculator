@@ -207,15 +207,17 @@ QJsonObject Client::getParams(const string& serverName, const string& port,
     boost::asio::connect(socket, endpoint_iterator);
     boost::asio::streambuf request;
     std::ostream request_stream(&request);
+    
+    string responseData = string(json_dumps(userInfo, JSON_INDENT(3)));
 
     request_stream << "POST " << getCommand << " HTTP/1.0\r\n";
     request_stream << "Host: " << serverName << "\r\n";
     request_stream << "User-Agent: C/1.0";
     request_stream << "Content-Type: application/json; charset=utf-8 \r\n";
     request_stream << "Accept: */*\r\n";
-    request_stream << "Content-Length: " << userInfo.length() << "\r\n";
+    request_stream << "Content-Length: " << responseData.length() << "\r\n";
     request_stream << "Connection: close\r\n\r\n";
-    request_stream << userInfo;
+    request_stream << responseData;
 
        // Send the request.
     boost::asio::write(socket, request);
