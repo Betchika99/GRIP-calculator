@@ -1,24 +1,37 @@
+#include <QtCore>
 #include "imagehandler.h"
-#include <QDir>
-#include <QFileInfo>
 
-bool ImageHandler::loadFromFile(QString filemask)
+ImageHandler::ImageHandler()
 {
-    clean();
-    QFileInfo fi(filemask);
-    QDir d(fi.path());
-    d.setNameFilters( QStringList() << fi.fileName() );
-    QStringList files = d.entryList();
+    images.resize(SupportedLayersCount);
+}
 
-    images.resize(files.count());
-    for (int i=0; i < files.count(); i++)
+Image ImageHandler::gluedImage(int shiftX)
+{
+    Image result = background();
+    QPoint pos;
+
+    int modelWidht = model().asQImage().width();
+    int modelHeight = model().asQImage().height();
+    int backgroundWidth = background().asQImage().width();
+    int backgroundHeight = background().asQImage().height();
+
+    if (modelHeight < backgroundHeight)
     {
-        bool res = images[i].load( QDir::toNativeSeparators(fi.path()+'/'+files[i]) );
-        if (!res)
-        {
-            clean();
-            return false;
-        }
+        pos.setX((backgroundWidth-modelWidht)/2+shiftX);
+        pos.setY(backgroundHeight-modelHeight);
     }
-    return true;
+    else
+    {
+        pos.setX((backgroundWidth-modelWidht)/2  + shiftX);
+        pos.setY(0);
+    }
+    result.imposeImages(model(), pos);
+    return result;
+}
+
+void ImageHandler::loadImages(QString backgroundFileName, QString modelFileName)
+{
+    background().load(backgroundFileName);
+    model().load(modelFileName);
 }

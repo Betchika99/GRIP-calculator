@@ -1,118 +1,175 @@
 #include "dofmanager.h"
+#include "toolslibrary.h"
+#include <QtCore>
+
+const std::vector<PropertySwitch<Orientation>::SwitchPair> Orientations =
+{
+    {"Альбомная", Album},
+    {"Книжная", Book},
+};
+
+const std::vector<PropertySwitch<double>::SwitchPair> Crops =
+{
+    {"Full Frame", 1.0},
+    {"APC-H", 1.3},
+    {"Nikon DX", 1.5},
+    {"APC-C", 1.6},
+    {"Four Thirds", 2.0},
+    {"1 дюйм", 2.7},
+    {"2/3 дюйма", 4.0},
+};
 
 DOFManager::DOFManager()
 {
-
+    loadConstantProperties();
+    api.loadStrategyList(sl);
+    sl.updatePropertyList(pl);
+    api.loadFavoriteList(fl);
+    reloadImages();
 }
 
-DOFManager::~DOFManager()
+void DOFManager::loadConstantProperties()
 {
-
+    for (size_t i = 0; i < Orientations.size(); i++)
+        pl.orientation.addEntry(Orientations[i].title, Orientations[i].value);
+    for (size_t i = 0; i < Crops.size(); i++)
+        pl.crop.addEntry(Crops[i].title, Crops[i].value);
+    pl.orientation.setIndex(0);
+    pl.crop.setIndex(0);
+    pl.cropFactor.set(0.5, 10, pl.crop.value());
 }
 
-QStringList DOFManager::getBackgroundsList()
+void DOFManager::setStrategy(int index)
 {
-    QStringList list;
-    list.append("Background 1");
-    list.append("Background 2");
-    list.append("Background 3");
-    return list;
+    sl.strategies.setIndex(index);
+    sl.updatePropertyList(pl);
+    reloadImages();
 }
 
-int DOFManager::getBackgroundIndex()
+void DOFManager::setBackground(int index)
 {
-    return 0;
+    pl.background.setIndex(index);
+    reloadImages();
 }
 
-void DOFManager::setBackgroundIndex(int index)
+void DOFManager::setModel(int index)
 {
-
+    pl.model.setIndex(index);
+    reloadImages();
 }
 
-QStringList DOFManager::getModelsList()
+void DOFManager::setOrientation(int index)
 {
-    QStringList list;
-    list.append("Model 1");
-    list.append("Model 2");
-    list.append("Model 3");
-    return list;
+    pl.orientation.setIndex(index);
+    reloadImages();
 }
 
-int DOFManager::getModelIndex()
+void DOFManager::setCrop(int index)
 {
-    return 0;
+    pl.crop.setIndex(index);
+    pl.cropFactor.setValue(roundTo(pl.crop.value(), 2));
 }
 
-void DOFManager::setModelIndex(int index)
+void DOFManager::setCropFactor(double value)
 {
-
+    pl.cropFactor.setValue(value);
+    pl.crop.setIndexByValue(roundTo(pl.cropFactor.value(), 2));
 }
 
-QStringList DOFManager::getSensorsList()
+void DOFManager::setModelDistance(double value)
 {
-    QStringList list;
-    list.append("Full Frame");
-    list.append("APC-C");
-    list.append("Four Thirds");
-    return list;
+    pl.modelDistance.setValue(value);
 }
 
-int DOFManager::getSensorIndex()
+void DOFManager::setBackgroundDistance(double value)
 {
-    return 0;
-}
-
-void DOFManager::setSensorIndex(int index)
-{
-
-}
-
-double DOFManager::getCropFactor()
-{
-    return 1;
-}
-
-void DOFManager::setCropFactor(double crop)
-{
-
-}
-
-double DOFManager::getDistance()
-{
-    return pl.getDistanceModel();   //todo
-}
-
-void DOFManager::setDistance(double value)
-{
-    pl.setDistanceModel(value);
-}
-
-double DOFManager::getFocalLength()
-{
-    return 10;
+    pl.backgroundDistance.setValue(value);
 }
 
 void DOFManager::setFocalLength(double value)
 {
-
+    pl.focalLength.setValue(value);
 }
 
-QStringList DOFManager::getAperturesList()
+void DOFManager::setDiaphragm(double value)
 {
-    QStringList list;
-    list.append("F/1.0");
-    list.append("F/1.4");
-    list.append("F/1.6");
-    return list;
+    pl.diaphragm.setValue(value);
 }
 
-int DOFManager::getApertureIndex()
+bool DOFManager::loadFavorite(QString title)
 {
-    return 0;
+    fl.setIndexByTitle(title);
+    bool success = fl.index() >= 0 && api.loadFavorite(fl.title(), sl, pl);
+    if (success)
+    {
+        setCropFactor(pl.cropFactor.value());
+        reloadImages();
+    }
+    return success;
 }
 
-void DOFManager::setApertureIndex(int index)
+bool DOFManager::saveFavorite(QString title)
 {
-
+    bool success = api.saveFavorite(title, sl, pl);
+    if (success)
+    {
+        api.loadFavoriteList(fl);
+        fl.setIndexByTitle(title);
+    }
+    return success;
 }
 
+void DOFManager::deleteFavorite(QString title)
+{
+    if (api.deleteFavorite(title))
+    {
+        api.loadFavoriteList(fl);
+        fl.setIndex(-1);
+    }
+}
+
+void DOFManager::resetToDefaults()
+{
+    pl.modelDistance.reset();
+    pl.backgroundDistance.reset();
+    pl.focalLength.reset();
+    pl.diaphragm.reset();
+}
+
+void DOFManager::performImageProcessing()
+{
+    result = origin;
+    ml.Blur(&pl, result);
+    ml.Scale(&pl, result);
+}
+
+void DOFManager::reloadImages()
+{
+    origin.loadImages(ImagePath()+pl.background.value(), ImagePath()+pl.model.value());
+}
+
+double DOFManager::roundTo(double value, int precision)
+{
+    double multiplier = pow(10, precision);
+    return qRound(value * multiplier) / multiplier;
+}
+
+double DOFManager::getGRIP()
+{
+    return ml.FindGRIP(&pl);
+}
+
+double DOFManager::getHyperFocal()
+{
+    return ml.FindHyperFocal(&pl);
+}
+
+double DOFManager::getNearestPointOfSharpness()
+{
+    return ml.FindNearestPointOfSharpness(&pl);
+}
+
+double DOFManager::getFarestPointOfSharpness()
+{
+    return ml.FindFarestPointOfSharpness(&pl);
+}

@@ -1,119 +1,200 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDir>
-#include "propertylist.h"   //todo
-#include "imagehandler.h"   //todo
+#include "toolslibrary.h"
+#include "loginwindow.h"
+#include <QtCore>
+
+static const char* WelcomeTemplate = "Добро пожаловать, %s!  "
+                                     "Вы успешно авторизовались на нашем сервере";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     QApplication::setStyle("Fusion");
-
-    dof = new DOFManager();
-
     ui->setupUi(this);
-
-    ui->combo_background->addItems(dof->getBackgroundsList());
-    ui->combo_background->setCurrentIndex(dof->getBackgroundIndex());
-
-    ui->combo_model->addItems(dof->getModelsList());
-    ui->combo_model->setCurrentIndex(dof->getModelIndex());
-
-    ui->combo_sensor->addItems(dof->getSensorsList());
-    ui->combo_sensor->setCurrentIndex(dof->getSensorIndex());
-    ui->spin_crop->setValue(dof->getCropFactor());
-
-    ui->slider_distance->setValue(static_cast<int>(dof->getDistance()));
-    ui->spin_distance->setValue(dof->getDistance());
-
-    ui->slider_focallen->setValue(static_cast<int>(dof->getFocalLength()));
-    ui->spin_focallen->setValue(dof->getFocalLength());
-
-    ui->slider_aperture->setMaximum(dof->getAperturesList().count()-1);
-    ui->slider_aperture->setValue(dof->getApertureIndex());
-    ui->combo_aperture->addItems(dof->getAperturesList());
-    ui->combo_aperture->setCurrentIndex(dof->getApertureIndex());
-
+    ui->button_logout->setVisible(false);
+    ui->label_welcome->setVisible(false);
     ui->image->installEventFilter(this);
-
-    PropertyList pl;    //todo
-    ImageHandler ih;   //todo
-    ih.loadFromFile("D:\\temp\\test.model.*.png");
+    updateUI();
+    updateImage();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete dof;
+    //удалить другие файлы и почистить за собой
+}
+
+void MainWindow::on_button_login_clicked()
+{
+    LoginWindow lw;
+    lw.setModal(true);
+    lw.setTitle("Авторизация"); //вынести в константы!!!
+    lw.setWelcome("Авторизуйтесь, пожалуйста!");
+    if (!lw.exec()) return;
+
+    if ( dof.login(lw.login(), lw.password()) )
+    {
+        ui->button_login->setVisible(false);
+        ui->button_register->setVisible(false);
+        ui->button_logout->setVisible(true);
+        ui->label_welcome->setVisible(true);
+        QString welcome = QString::asprintf(WelcomeTemplate, lw.login().toUtf8().data());
+        ui->label_welcome->setText(welcome);
+    }
+}
+
+void MainWindow::on_button_register_clicked()
+{
+    LoginWindow lw;
+    lw.setModal(true);
+    lw.setTitle("Регистрация"); //вынести в константы!!!
+    lw.setWelcome("Зарегистрируйтесь, пожалуйста!");
+    if (!lw.exec()) return;
+
+    if ( dof.createUser(lw.login(), lw.password()) )
+    {
+        dof.login(lw.login(), lw.password());
+        ui->button_login->setVisible(false);
+        ui->button_register->setVisible(false);
+        ui->button_logout->setVisible(true);
+        ui->label_welcome->setVisible(true);
+        QString welcome = QString::asprintf(WelcomeTemplate, lw.login().toUtf8().data());
+        ui->label_welcome->setText(welcome);
+    }
+}
+
+void MainWindow::on_button_logout_clicked()
+{
+    dof.logout();
+    ui->button_login->setVisible(true);
+    ui->button_register->setVisible(true);
+    ui->button_logout->setVisible(false);
+    ui->label_welcome->setVisible(false);
+}
+
+void MainWindow::on_combo_strategy_currentIndexChanged(int index)
+{
+    dof.setStrategy(index);
+    updateUI();
 }
 
 void MainWindow::on_combo_background_currentIndexChanged(int index)
 {
-    dof->setBackgroundIndex(index);
+    dof.setBackground(index);
     updateImage();
 }
 
 void MainWindow::on_combo_model_currentIndexChanged(int index)
 {
-    dof->setModelIndex(index);
+    dof.setModel(index);
     updateImage();
 }
 
-void MainWindow::on_combo_sensor_currentIndexChanged(int index)
+void MainWindow::on_combo_crop_currentIndexChanged(int index)
 {
-    dof->setSensorIndex(index);
-    ui->spin_crop->setValue(dof->getCropFactor());
+    dof.setCrop(index);
+    updateWidget(ui->spin_crop, dof.cropFactor());
     updateImage();
 }
 
 void MainWindow::on_spin_crop_valueChanged(double arg1)
 {
-    dof->setCropFactor(arg1);
-    ui->combo_sensor->setCurrentIndex(dof->getSensorIndex());
+    dof.setCropFactor(arg1);
+    updateWidget(ui->combo_crop, dof.crop());
     updateImage();
 }
 
-void MainWindow::on_slider_distance_sliderMoved(int position)
+void MainWindow::on_slider_model_distance_sliderMoved(int position)
 {
-    dof->setDistance(position);
-    ui->spin_distance->setValue(dof->getDistance());
+    dof.setModelDistance(position);
+    updateWidget(ui->spin_model_distance, dof.modelDistance());
     updateImage();
 }
 
-void MainWindow::on_spin_distance_valueChanged(double arg1)
+void MainWindow::on_spin_model_distance_valueChanged(double arg1)
 {
-    dof->setDistance(arg1);
-    ui->slider_distance->setValue(static_cast<int>(dof->getDistance()));
+    dof.setModelDistance(arg1);
+    updateWidget(ui->slider_model_distance, dof.modelDistance());
     updateImage();
 }
 
-void MainWindow::on_slider_focallen_sliderMoved(int position)
+void MainWindow::on_slider_background_distance_sliderMoved(int position)
 {
-    dof->setFocalLength(position);
-    ui->spin_focallen->setValue(dof->getFocalLength());
+    dof.setBackgroundDistance(position);
+    updateWidget(ui->spin_backgrond_distance, dof.backgroundDistance());
     updateImage();
 }
 
-void MainWindow::on_spin_focallen_valueChanged(double arg1)
+void MainWindow::on_spin_backgrond_distance_valueChanged(double arg1)
 {
-    dof->setFocalLength(arg1);
-    ui->slider_focallen->setValue(static_cast<int>(dof->getFocalLength()));
+    dof.setBackgroundDistance(arg1);
+    updateWidget(ui->slider_background_distance, dof.backgroundDistance());
     updateImage();
 }
 
-void MainWindow::on_slider_aperture_sliderMoved(int position)
+void MainWindow::on_slider_focal_length_sliderMoved(int position)
 {
-    dof->setApertureIndex(position);
-    ui->combo_aperture->setCurrentIndex(dof->getApertureIndex());
+    dof.setFocalLength(position);
+    updateWidget(ui->spin_focal_length, dof.focalLength());
     updateImage();
 }
 
-void MainWindow::on_combo_aperture_currentIndexChanged(int index)
+void MainWindow::on_spin_focal_length_valueChanged(double arg1)
 {
-    dof->setApertureIndex(index);
-    ui->slider_aperture->setValue(dof->getApertureIndex());
+    dof.setFocalLength(arg1);
+    updateWidget(ui->slider_focal_length, dof.focalLength());
     updateImage();
+}
+
+void MainWindow::on_slider_diaphragm_sliderMoved(int position)
+{
+    dof.setDiaphragm(position);
+    updateWidget(ui->spin_diaphragm, dof.diaphragm());
+    updateImage();
+}
+
+void MainWindow::on_spin_diaphragm_valueChanged(double arg1)
+{
+    dof.setDiaphragm(arg1);
+    updateWidget(ui->slider_diaphragm, dof.diaphragm());
+    updateImage();
+}
+
+void MainWindow::on_combo_favorite_currentIndexChanged(int index)
+{
+    if (dof.loadFavorite(ui->combo_favorite->itemText(index)))
+    {
+        updateUI();
+        updateImage();
+    }
+    ui->button_delete->setEnabled(true);
+}
+
+void MainWindow::on_combo_favorite_editTextChanged(const QString &arg1)
+{
+    ui->button_save->setEnabled(!arg1.isEmpty());
+    ui->button_delete->setEnabled(false);
+}
+
+void MainWindow::on_button_save_clicked()
+{
+    if (dof.saveFavorite(ui->combo_favorite->currentText()))
+    {
+        updateWidget(ui->combo_favorite, dof.favorite());
+        ui->button_save->setEnabled(false);
+        ui->button_delete->setEnabled(true);
+
+    }
+}
+
+void MainWindow::on_button_delete_clicked()
+{
+    dof.deleteFavorite(ui->combo_favorite->currentText());
+    updateWidget(ui->combo_favorite, dof.favorite());
+    ui->button_save->setEnabled(false);
+    ui->button_delete->setEnabled(false);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
@@ -122,12 +203,58 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     return QObject::eventFilter(obj, event);
 }
 
-void MainWindow::updateImage()
+template<class T>
+void MainWindow::updateWidget(QComboBox *wg, const PropertySwitch<T> &p)
 {
-    QString sample = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/test.png");
-    QPixmap pm(sample);
-
-
-    ui->image->setPixmap(pm.scaled(ui->image->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    wg->blockSignals(true);
+    wg->clear();
+    wg->addItems(p.titleList());
+    wg->setCurrentIndex(p.index());
+    wg->blockSignals(false);
 }
 
+template<class T>
+void MainWindow::updateWidget(QDoubleSpinBox *wg, const PropertyValue<T> &p)
+{
+    wg->blockSignals(true);
+    wg->setRange(p.min(), p.max());
+    wg->setValue(p.value());
+    wg->blockSignals(false);
+}
+
+template<class T>
+void MainWindow::updateWidget(QSlider *wg, const PropertyValue<T> &p)
+{
+    wg->blockSignals(true);
+    wg->setRange(qRound(p.min()), qRound(p.max()));
+    wg->setValue(qRound(p.value()));
+    wg->blockSignals(false);
+}
+
+void MainWindow::updateUI()
+{
+    updateWidget(ui->combo_strategy, dof.strategy());
+    updateWidget(ui->combo_background, dof.background());
+    updateWidget(ui->combo_model, dof.model());
+    updateWidget(ui->combo_crop, dof.crop());
+    updateWidget(ui->spin_crop, dof.cropFactor());
+    updateWidget(ui->slider_model_distance, dof.modelDistance());
+    updateWidget(ui->spin_model_distance, dof.modelDistance());
+    updateWidget(ui->slider_background_distance, dof.backgroundDistance());
+    updateWidget(ui->spin_backgrond_distance, dof.backgroundDistance());
+    updateWidget(ui->slider_focal_length, dof.focalLength());
+    updateWidget(ui->spin_focal_length, dof.focalLength());
+    updateWidget(ui->slider_diaphragm, dof.diaphragm());
+    updateWidget(ui->spin_diaphragm, dof.diaphragm());
+    updateWidget(ui->combo_favorite, dof.favorite());
+}
+
+void MainWindow::updateImage()
+{
+    dof.performImageProcessing();
+    ui->table_dof->item(0, 0)->setText(QString::asprintf("%1.2f м", dof.getGRIP()));
+    ui->table_dof->item(1, 0)->setText(QString::asprintf("%1.2f м", dof.getNearestPointOfSharpness()));
+    ui->table_dof->item(2, 0)->setText(QString::asprintf("%1.2f м", dof.getFarestPointOfSharpness()));
+    ui->table_dof->item(3, 0)->setText(QString::asprintf("%1.2f м", dof.getHyperFocal()));
+    ui->image->setPixmap(dof.getResultImage().scale(ui->image->size()).asQPixmap());
+}

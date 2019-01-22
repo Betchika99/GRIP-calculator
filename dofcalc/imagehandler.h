@@ -1,24 +1,29 @@
 #ifndef IMAGEHANDLER_H
 #define IMAGEHANDLER_H
-#include <QVector>
-#include <QImage>
 
+#include "image.h"
+#include <vector>
+
+using std::vector;
 
 class ImageHandler
 {
-public:
-    ImageHandler() {}
+private:
+    const unsigned int SupportedLayersCount = 2;
 
 public:
-    bool loadFromFile(QString filemask);
-    void clean() { images.clear(); }
-    int layersCount() { return images.count(); }
-    QImage& getLayer(int index) { return images[index]; } //математика работает с ним же
+    ImageHandler();
+    ImageHandler(const ImageHandler& source) { images = source.images; }
+    ImageHandler& operator = (const ImageHandler& source) { images = source.images; return *this; }
+    unsigned int layersCount() { return images.size(); }
+    Image gluedImage(int shiftX = 0);
+    Image& background() { return images[0]; }
+    Image& model() { return images[1]; }
+    bool isValid() { return model().isValid() && background().isValid(); }
+    void loadImages(QString backgroundFileName, QString modelFileName);
 
 private:
-    QVector<QImage> images;
-
-//    class Con //подкласс
+    vector<Image> images;
 };
 
 #endif // IMAGEHANDLER_H
