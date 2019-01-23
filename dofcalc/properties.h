@@ -93,6 +93,12 @@ public:
         for (int i = 0; i < count(); i++) sl.append(list.at(i).title);
         return sl;
     }
+    QStringList valueList() const
+    {
+        QStringList sl;
+        for (int i = 0; i < count(); i++) sl.append(list.at(i).value);
+        return sl;
+    }
     int  index() const {return currentIndex;}
     void setIndex(int i) {currentIndex = validateIndex(i);}
     void setIndexByTitle(QString title)

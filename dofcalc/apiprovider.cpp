@@ -1,6 +1,7 @@
 #include "apiprovider.h"
 #include "toolslibrary.h"
 #include "logger.h"
+#include "user.h"
 
 APIProvider::APIProvider()
 {
@@ -17,6 +18,7 @@ bool APIProvider::login(QString login, QString password)
 {
     if ( userOnline() ) return true;
     //todo check if this login and password in DB
+    QJsonObject user = User::exportToJSON("zopa", "piso");
     online = login.size() && password.size();   //set true is exists
     return userOnline();
 }
@@ -46,7 +48,9 @@ void APIProvider::loadStrategyList(StrategyList &sl)
         //todo requestS
         //get strategies and pictures
         settingsName = "remotestrategies.settings";
+
     }
+
     Log("APIProvider.loadStrategyList(): Server unavailable, load local");
     QFile file(SettingsPath() + settingsName); //in if-branch create new file for server
     if (file.open(QIODevice::ReadOnly|QIODevice::Text) && file.size())
@@ -59,6 +63,12 @@ void APIProvider::loadStrategyList(StrategyList &sl)
             "APIProvider.loadStrategyList(): JSON parsing error $s";
         Log(logmsg, doc.toJson(QJsonDocument::Compact).data());
 
+//        QStringList strategiesList = sl.strategies.titleList();
+//        for (int i = 0; i<strategiesList.length(); i++)
+//        {
+//            sl.strategies.setIndex(i);
+//            QStringList backgroungNames = sl.strategies.value().background.valueList();
+//        }
     }
 }
 

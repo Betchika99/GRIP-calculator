@@ -39,15 +39,15 @@ bool StrategyList::importFromJSON(const QJsonObject &json)
     for (int i = 0; i < array.count(); i++)
     {
         QJsonObject obj = array[i].toObject();
-        QJsonValue title = obj["strategy"];
+        QJsonValue title = obj["strategy_name"];
         if (!title.isString()) continue;
         Strategy strategy;
         if (!strategy.background.importFromJSON(obj["background"].toObject())) continue;
         if (!strategy.model.importFromJSON(obj["model"].toObject())) continue;
-        if (!strategy.modelDistance.importFromJSON(obj["modelDistance"].toObject())) continue;
-        if (!strategy.backgroundDistance.importFromJSON(obj["backgroundDistance"].toObject())) continue;
-        if (!strategy.focalLength.importFromJSON(obj["focalLength"].toObject())) continue;
-        if (!strategy.diaphragm.importFromJSON(obj["diaphragm"].toObject())) continue;
+        if (!strategy.modelDistance.importFromJSON(obj["destination_to_model"].toObject())) continue;
+        if (!strategy.backgroundDistance.importFromJSON(obj["destination_to_background"].toObject())) continue;
+        if (!strategy.focalLength.importFromJSON(obj["focus_destination"].toObject())) continue;
+        if (!strategy.diaphragm.importFromJSON(obj["aperture"].toObject())) continue;
         strategies.addEntry(title.toString(), strategy);
         compatible = true;
     }
@@ -65,13 +65,13 @@ QJsonObject StrategyList::exportToJSON()
     {
         QJsonObject obj =
         {
-            {"strategy", strategies[i].title},
+            {"strategy_name", strategies[i].title},
             {"background", strategies[i].value.background.exportToJSON()},
             {"model", strategies[i].value.model.exportToJSON()},
-            {"modelDistance", strategies[i].value.modelDistance.exportToJSON()},
-            {"backgroundDistance", strategies[i].value.backgroundDistance.exportToJSON()},
-            {"focalLength", strategies[i].value.focalLength.exportToJSON()},
-            {"diaphragm", strategies[i].value.diaphragm.exportToJSON()}
+            {"destination_to_model", strategies[i].value.modelDistance.exportToJSON()},
+            {"destination_to_background", strategies[i].value.backgroundDistance.exportToJSON()},
+            {"focus_destination", strategies[i].value.focalLength.exportToJSON()},
+            {"aperture", strategies[i].value.diaphragm.exportToJSON()}
         };
         array.append(obj);
     }

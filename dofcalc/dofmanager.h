@@ -6,6 +6,7 @@
 #include "strategies.h"
 #include "imagehandler.h"
 #include "mathlibrary.h"
+#include "user.h"
 
 class DOFManager
 {
@@ -54,6 +55,8 @@ public:
     double getNearestPointOfSharpness();
     double getFarestPointOfSharpness();
 
+
+
 protected:
     void loadConstantProperties();
     void reloadImages();
@@ -67,6 +70,7 @@ private:
     MathLibrary ml;
     ImageHandler origin;
     ImageHandler result;
+    User user;
 };
 
 #endif // DOFMANAGER_H
